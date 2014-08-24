@@ -11,4 +11,4 @@ markdown: kramdown
 permalink: pretty
 
 # Exclusions
-exclude: [_assets, node_modules, bower, Gruntfile.js, bower.json, package.json, Gemfile]
+exclude: [_assets, node_modules, Gruntfile.js, bower.json, package.json, Gemfile]

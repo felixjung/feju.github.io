@@ -1,13 +1,14 @@
 {
   "name": "jung.fm",
   "version": "1.0.0",
-  "directory": "bower",
+  "directory": "_bower",
   "private": true,
   "dependencies": {
     "jquery": "latest",
     "animate.css": "latest",
     "bourbon": "latest",
     "neat": "latest",
-    "bitters": "latest"
+    "bitters": "latest",
+    "font-awesome": "latest"
   }
 }

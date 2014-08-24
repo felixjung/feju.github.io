@@ -2,41 +2,28 @@ module.exports = function(grunt) {
   grunt.initConfig({
     // Read the grunt file for variables
     pkg: grunt.file.readJSON('package.json'),
-    // Configure file concatination
-    concat: {
-      options: {
-        separator: '\n',
-      },
-      css: {
-        src: ['_assets/css/*.css', 'bower/animate.css/animate.css'],
-        dest: 'assets/css/<%= pkg.name %>.css'
-      },
-      js: {
-        src: ['_assets/js/*.js', 'bower/jquery/dist/jquery.js'],
-        dest: 'assets/js/<%= pkg.name %>.js'
-      }
-    },
     // Configure js uglify
     uglify: {
+      dev: {
+        options: {
+          banner: '/*! <%= pkg.name %> -  <%= grunt.template.today("dd-mm-yyyy") %> - dev build */\n',
+          mangle: true,
+          compress: true,
+          sourceMap: true,
+          sourceMapIncludeSources: true
+        },
+        files: {
+          'assets/js/<%= pkg.name %>.min.js': ['_src/js/*.js', '_bower/jquery/dist/jquery.js']
+        }
+      },
       deploy: {
           options: {
-          banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n',
+          banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> - deploy build */\n',
           mangle: true,
           compress: true
         },
         files: {
-          'assets/js/<%= pkg.name %>.min.js': ['<%= concat.js.dest %>']
-        }
-      }
-    },
-    // Configure css minification
-    cssmin: {
-      deploy: {
-        options: {
-          banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
-        },
-        files: {
-          'assets/css/<%= pkg.name %>.min.css': ['<%= concat.css.dest %>']
+          'assets/js/<%= pkg.name %>.min.js': ['_src/js/*.js']
         }
       }
     },
@@ -45,42 +32,31 @@ module.exports = function(grunt) {
       options: {
         // Add the various Bourbon sources to the sass load path
         loadPath: [
-          'bower/bourbon/dist',
-          'bower/neat/app/assets/stylesheets',
-          'bower/bitters/app/assets/stylesheets'
+          '_bower/bourbon/dist',
+          '_bower/neat/app/assets/stylesheets',
+          '_bower/bitters/app/assets/stylesheets',
+          '_bower/font-awesome/scss'
         ]
       },
       dev: {
         options: {
-          style: 'expanded',
-          trace: 'true',
-          sourcemap: 'file'
+          style: 'compressed',
+          sourcemap: 'inline'
         },
         files: {
-          '_assets/css/felixjung.io.css': '_assets/sass/main.scss'
+          'assets/css/felixjung.io.min.css': '_src/sass/main.scss'
         }
       },
       deploy: {
         options: {
-          style: 'nested',
-          trace: 'false'
+          style: 'compressed',
+          sourcemap: 'none'
         },
         files: {
-          '_assets/css/felixjung.io.css': '_assets/sass/main.scss'
+          'assets/css/felixjung.io.min.css': '_src/sass/main.scss'
         }
       }
     },
-    // Copy files
-    // copy: {
-      // sourcemap: {
-        // files: [{
-          // kkkk
-
-        // }]
-        // src: '_assets/css/*.map',
-        // dest: 'assets/css/'
-      // }
-    // },
     // Configure Jekyll
     jekyll: {
       serve: {
@@ -104,6 +80,17 @@ module.exports = function(grunt) {
         }
       }
     },
+    // Copy
+    copy: {
+      fontawesome: {
+        files: [{
+          expand: true,
+          cwd: '_bower/font-awesome/',
+          src: ['fonts/*'],
+          dest: 'assets/'
+        }]
+      }
+    },
     // Configure watch
     watch: {
       // Rebuild Jekyll site
@@ -119,36 +106,31 @@ module.exports = function(grunt) {
       },
       // Sass files
       sass: {
-        files: ['_assets/sass/*.scss'],
+        files: ['_src/sass/*.scss'],
         tasks: ['sass:dev']
       },
-      // Concatinate css and javascript
-      concat: {
-        files: [
-          '_assets/css/*.css',
-          '_assets/js/*js'
-        ],
-        tasks: ['concat']//, 'copy']
+      // Uglify
+      uglify: {
+        files: ['_src/js/*.js'],
+        tasks: ['uglify:dev']
       },
       options: {
-        // interrupt: true,
+        interrupt: true,
         atBegin: true,
         livereload: true
       }
     }
   });
 
-  grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-cssmin');
-  grunt.loadNpmTasks('grunt-contrib-copy');
   // grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-sass')
-  grunt.loadNpmTasks('grunt-jekyll')
+  grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-jekyll');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
   // Register tasks
-  grunt.registerTask('serve', ['sass:dev', 'concat', 'jekyll:serve']);
-  grunt.registerTask('default', 'serve')
-  grunt.registerTask('deploy', ['sass:deploy', 'concat', 'uglify:deploy', 'cssmin:deploy', 'jekyll:deploy'])
+  grunt.registerTask('serve', ['copy', 'sass:dev', 'uglify:dev', 'jekyll:serve']);
+  grunt.registerTask('default', 'serve');
+  grunt.registerTask('deploy', ['copy', 'sass:deploy', 'uglify:deploy', 'jekyll:deploy']);
 };
