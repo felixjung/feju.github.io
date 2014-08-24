@@ -1,7 +1,7 @@
 _site/
-develop/
-deploy/
 assets/
 node_modules/
-bower/
+_bower/
 .sass-cache/
+.DS_Store
+.bowerrc
