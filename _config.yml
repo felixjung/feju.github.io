@@ -1,0 +1,14 @@
+# Site settings
+title: Almost Surely
+email: felix@jung.fm
+description: "Personal webpage of Felix Jung."
+url: "http://felixjung.io"
+twitter_username: feju
+github_username:  feju
+
+# Build settings
+markdown: kramdown
+permalink: pretty
+
+# Exclusions
+exclude: [_assets, node_modules, bower, Gruntfile.js, bower.json, package.json, Gemfile]

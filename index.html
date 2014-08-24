@@ -1,0 +1,14 @@
+---
+layout: about
+---
+{% for post in site.posts limit: 10 %}
+<div class="row" id="test">
+  <div class="col-sm-8 col-sm-offset-3 post">
+    <h2><a href="{{ post.url }}" target="_blank">{{ post.title | truncatewords: 7 }}</a></h2>
+    <h5>{{ post.date | date: "%Y-%m-%d" }}</h5>
+    <div class="post-text">
+      {{ post.excerpt }} <div class="continue-reading">continue...</div>
+    </div>
+  </div>
+</div>
+{% endfor %}
