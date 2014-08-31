@@ -5,10 +5,6 @@
   "private": true,
   "dependencies": {
     "jquery": "latest",
-    "animate.css": "latest",
-    "bourbon": "latest",
-    "neat": "latest",
-    "bitters": "latest",
     "font-awesome": "latest"
   }
 }

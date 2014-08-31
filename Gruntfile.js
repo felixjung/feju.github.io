@@ -7,7 +7,7 @@ module.exports = function(grunt) {
       dev: {
         options: {
           banner: '/*! <%= pkg.name %> -  <%= grunt.template.today("dd-mm-yyyy") %> - dev build */\n',
-          mangle: true,
+          mangle: false,
           compress: true,
           sourceMap: true,
           sourceMapIncludeSources: true
@@ -30,13 +30,8 @@ module.exports = function(grunt) {
     // Configure Sass compilation
     sass: {
       options: {
-        // Add the various Bourbon sources to the sass load path
-        loadPath: [
-          '_bower/bourbon/dist',
-          '_bower/neat/app/assets/stylesheets',
-          '_bower/bitters/app/assets/stylesheets',
-          '_bower/font-awesome/scss'
-        ]
+        // Add bower stuff to loadpath
+        loadPath: ['_bower/font-awesome/scss']
       },
       dev: {
         options: {
@@ -100,13 +95,14 @@ module.exports = function(grunt) {
           '_layouts/*.html',
           'index.html',
           '_posts/*.md',
-          '_config.yml'
+          '_config.yml',
+          'assets/**/*'
         ],
         tasks: ['jekyll:dev']
       },
       // Sass files
       sass: {
-        files: ['_src/sass/*.scss'],
+        files: ['_src/sass/**/*.scss'],
         tasks: ['sass:dev']
       },
       // Uglify
@@ -114,11 +110,20 @@ module.exports = function(grunt) {
         files: ['_src/js/*.js'],
         tasks: ['uglify:dev']
       },
-      options: {
-        interrupt: true,
-        atBegin: true,
-        livereload: true
+      triggerLiveReload: {
+        options: {
+          livereload: true
+        },
+        files: [
+          '_site/**/*.js',
+          '_site/**/*.css',
+          '_site/**/*.html'
+        ]
       }
+      // options: {
+        // interrupt: true,
+        // atBegin: true
+      // }
     }
   });
 
