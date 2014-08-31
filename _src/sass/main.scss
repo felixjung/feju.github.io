@@ -1,22 +1,158 @@
-@import "bourbon";
-@import "neat";
-@import "base";
+@import "bourbon/bourbon";
+@import "base/base";
+@import "neat/neat";
 @import "font-awesome";
 
-$visual-grid: true;
-$visual-grid-color: blue;
-$visual-grid-index: back;
-$visual-grid-opacity: 0.1;
+// Breakpoints
+$mobile: new-breakpoint(max-width 480px 4);
+$not-mobile: new-breakpoint(min-width 481px);
 
-.site-wrapper {
+// Navigation
+$nav-height: 80px;
+$nav-v-padding: 25px;
+
+// Content blocks
+$sec-v-padding: 40px;
+
+// Header
+$hm-top-padding: $nav-height + $sec-v-padding;
+$avatar-diam-mobile: 160px;
+$intro-v-padding: 50px;
+$intro-h-padding: 30px;
+
+// Footer
+$footer-height: 80px;
+$footer-padding: 20px;
+
+body {
+  margin: 0;
 }
 
-.banner {
-  @include outer-container;
+.top-navigation {
+  @include display(flex);
+  @include align-items(center);
+  @include justify-content(flex-end);
 
-  .banner-content {
-    @include span-columns(8);
-    @include shift(2);
+  height: $nav-height;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  padding-right: 50px;
+
+  background: rgba(255, 255, 255, 0.5);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.28);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+
+  ul li {
+    display: inline;
+    text-align: center;
+    margin: 30px 10px;
   }
 }
 
+header,
+section {
+  width: 100%;
+
+  .container {
+    @include outer-container;
+    @include media($not-mobile) {
+      @include display(flex);
+      @include align-items(center);
+      @include justify-content(center);
+    }
+
+    .content {
+      @include span-columns(10);
+      @include shift(1);
+      @include padding($sec-v-padding null $sec-v-padding null);
+    }
+  }
+}
+
+#headmast {
+  @include padding($hm-top-padding null $sec-v-padding null);
+  background: #2db8a2;
+  z-index: 1;
+  text-align: center;
+
+  #avatar-wrapper {
+    @include media($not-mobile) {
+      @include span-columns(3);
+      @include shift(1);
+    }
+
+    @include media($mobile) {
+      @include fill-parent();
+      @include display(flex);
+      @include align-items(center);
+      @include justify-content(center);
+    }
+  }
+
+  #avatar {
+    width: 100%;
+    border-radius: 50%;
+    padding-top: 95%;
+    @include media($mobile) {
+      height: $avatar-diam-mobile;
+      width: $avatar-diam-mobile;
+      border-radius: $avatar-diam-mobile / 2;
+      padding: 0;
+    }
+    background: url("../images/fj.png") no-repeat center;
+    background-size: cover;
+    border: 5px solid #fff;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
+  }
+
+  #intro {
+    @include span-columns(10);
+    @include shift(1);
+
+    @include media($mobile) {
+      margin-top: 1em;
+    }
+
+    text-align: left;
+
+    h1 {
+      color: #fff;
+      font-weight: 800;
+      font-style: normal;
+    }
+
+    h2 {
+      color: #fff;
+      font-weight: 200;
+      font-style: normal;
+    }
+  }
+}
+
+#who-am-i {
+  background: #f7f8f9;
+  z-index: 2;
+}
+
+#quantified {
+  margin-bottom: $footer-height;
+  background: #f3f4f5;
+  z-index: 3;
+}
+
+.site-footer {
+  @include position(fixed, null null 0 null);
+  @include display(flex);
+  @include align-items(center);
+  @include justify-content(center);
+  background: #484848;
+  color: #f1f1f1;
+  width: 100%;
+  height: $footer-height;
+  z-index: -1;
+
+  & > span {
+    text-align: center;
+  }
+}
