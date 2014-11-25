@@ -2,20 +2,20 @@
 @import "base/base";
 @import "neat/neat";
 @import "font-awesome";
+@import 'syntax';
 
 // Breakpoints
-$mobile: new-breakpoint(max-width 480px 4);
+$mobile: new-breakpoint(max-width 480px);
 $not-mobile: new-breakpoint(min-width 481px);
 
 // Navigation
-$nav-height: 80px;
-$nav-v-padding: 25px;
+$nav-v-padding: 20px;
+$nav-background: #2db8a2;
 
 // Content blocks
 $sec-v-padding: 40px;
 
 // Header
-$hm-top-padding: $nav-height + $sec-v-padding;
 $avatar-diam-mobile: 160px;
 $intro-v-padding: 50px;
 $intro-h-padding: 30px;
@@ -25,44 +25,33 @@ $footer-height: 80px;
 $footer-padding: 20px;
 
 body {
+  background: #484848;
   margin: 0;
-}
 
-.top-navigation {
-  @include display(flex);
-  @include align-items(center);
-  @include justify-content(flex-end);
+  & a,
+  a:link,
+  a:visited,
+  a:active {
+    color: #ff406e;
+  }
 
-  height: $nav-height;
-  width: 100%;
-  position: fixed;
-  top: 0;
-  padding-right: 50px;
-
-  background: rgba(255, 255, 255, 0.5);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.28);
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-
-  ul li {
-    display: inline;
-    text-align: center;
-    margin: 30px 10px;
+  & a:hover {
+    color: #fff;
+    background-color: #ff406e;
   }
 }
 
-header,
-section {
-  width: 100%;
+.container {
+  @include outer-container;
 
-  .container {
-    @include outer-container;
+  .content {
     @include media($not-mobile) {
-      @include display(flex);
-      @include align-items(center);
-      @include justify-content(center);
+      @include span-columns(8);
+      @include shift(2);
+      @include padding($sec-v-padding null $sec-v-padding null);
     }
 
-    .content {
+    @include media($mobile) {
       @include span-columns(10);
       @include shift(1);
       @include padding($sec-v-padding null $sec-v-padding null);
@@ -70,30 +59,91 @@ section {
   }
 }
 
-#headmast {
-  @include padding($hm-top-padding null $sec-v-padding null);
-  background: #2db8a2;
+// Navigation
+nav.main {
+  .container .content {
+    @include padding($nav-v-padding null $nav-v-padding null);
+  }
+
+  background: $nav-background;
+  text-align: right;
+
+  @include media($mobile) {
+    text-align: center;
+  }
+
+  & ul li {
+    display: inline;
+    text-align: center;
+    text-transform: uppercase;
+    margin: 30px 10px;
+  }
+
+  & a,
+  a:link,
+  a:visited,
+  a:active {
+    @include padding(4px 6px 2px 6px);
+    font-weight: 400;
+    border: 1px solid #2db8a2;
+    border-radius: 3px;
+    color: #fff;
+  }
+
+  & a:hover {
+    background-color: #2db8a2;
+    font-weight: 400;
+    border: 1px solid #fff;
+  }
+
+  & a:active {
+    background-color: #fff;
+    color: #2db8a2;
+    border: 1px solid #fff;
+  }
+
+  & a.active {
+    background-color: #fff;
+    color: #2db8a2;
+    border: 1px solid #fff;
+  }
+}
+
+// About page
+#welcome {
+  background: $nav-background;
   z-index: 1;
-  text-align: center;
+
+  .container-head {
+    @include padding($sec-v-padding null $sec-v-padding null);
+  }
 
   #avatar-wrapper {
     @include media($not-mobile) {
       @include span-columns(3);
-      @include shift(1);
+      @include shift(2);
     }
 
     @include media($mobile) {
       @include fill-parent();
+      @include omega();
       @include display(flex);
       @include align-items(center);
       @include justify-content(center);
     }
   }
 
+  #avatar-border {
+    display: block;
+    overflow: hidden;
+    border: 5px solid #fff;
+    border-radius: 50%;
+  }
+
   #avatar {
     width: 100%;
-    border-radius: 50%;
-    padding-top: 95%;
+    height: auto;
+    padding-top: 100%;
     @include media($mobile) {
       height: $avatar-diam-mobile;
       width: $avatar-diam-mobile;
@@ -102,43 +152,179 @@ section {
     }
     background: url("../images/fj.png") no-repeat center;
     background-size: cover;
-    border: 5px solid #fff;
-    box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
   }
 
   #intro {
-    @include span-columns(10);
-    @include shift(1);
+    @include media($not-mobile) {
+      @include span-columns(5);
+      @include padding(null null null 10%)
+    }
 
     @include media($mobile) {
+      @include span-columns(10);
+      @include shift(1);
       margin-top: 1em;
     }
+  }
 
-    text-align: left;
+  #social-icons {
+    margin-top: .65em;
 
-    h1 {
-      color: #fff;
-      font-weight: 800;
-      font-style: normal;
+    & a,
+    a:link,
+    a:visited,
+    a:active {
+      color: rgba(255, 255, 255, 0.6);
     }
 
-    h2 {
+    & a:hover {
       color: #fff;
-      font-weight: 200;
-      font-style: normal;
+      background: none;
     }
+
+    & i {
+      margin: 0 2px;
+    }
+  }
+
+  h1 {
+    color: #fff;
+    font-weight: 800;
+    font-style: normal;
+  }
+
+  h2 {
+    color: #fff;
+    font-weight: 200;
+    font-style: normal;
   }
 }
 
-#who-am-i {
-  background: #f7f8f9;
-  z-index: 2;
+#about-me {
+  background: #fff;
 }
 
 #quantified {
+  background: #fafbfc;
+}
+
+#podcasts {
+  background: #f6f7f8;
+}
+
+#cycling {
+  background: #f2f3f4;
+}
+
+#photography {
+  background: #edeeef;
   margin-bottom: $footer-height;
-  background: #f3f4f5;
-  z-index: 3;
+}
+
+// Blog
+.blog-post {
+  background: #fafbfc;
+  padding-top: 2em;
+
+  & .post-title {
+    color: #000;
+  }
+
+  & ul {
+    display: inline;
+    margin-left: 20px;
+
+    li {
+      @include padding(0 6px);
+      display: inline;
+    }
+  }
+
+  & .post-date,
+    .post-category,
+    .post-tag {
+      font-weight: 400;
+  }
+
+  & .post-bubbles {
+    float: left;
+    vertical-align: center;
+  }
+
+  & .post-category,
+    .post-tag {
+      margin-left: 2px;
+      color: #fff;
+      line-height: 1em;
+      font-size: 0.8em;
+      text-align: center;
+  }
+
+  & .post-date {
+    float: left;
+    line-height: 1.38em;
+    font-size: 1.28em;
+    padding-left: 0;
+    /* font-weight: 200; */
+    color: #999;
+  }
+
+  & .post-category {
+    text-transform: uppercase;
+    background: #c4b6e8;
+    border-radius: 0.2em;
+    text-align: center;
+  }
+
+  & .post-tag {
+    text-transform: lowercase;
+    background: #b2d2e5;
+    border-radius: 1em;
+  }
+
+  & .post-excerpt {
+    clear: both;
+    padding-top: 20px;
+  }
+}
+
+#single-post {
+  margin-bottom: $footer-height;
+  min-height: 100vh;
+}
+
+nav.pagination {
+  @include align-items(center);
+  @include justify-content(center);
+  @include padding(2em null);
+  width: 100%;
+  background: #fafbfc;
+  text-align:center;
+  margin-bottom: $footer-height;
+
+  & span {
+    @include padding(null 8px);
+  }
+
+  & .pag-inactive {
+    color: #ddd;
+  }
+
+  & span.pag-text {
+    font-size: 3em;
+  }
+
+  & a,
+  a:link,
+  a:visited,
+  a:active {
+    color: #aaa;
+  }
+
+  & a:hover {
+    color: #ff406e;
+    background: none;
+  }
 }
 
 .site-footer {

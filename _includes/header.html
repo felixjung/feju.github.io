@@ -1,54 +1,28 @@
-<!DOCTYPE html>
+{% assign lvl = page.url | append:'X' | split:'/' | size %}
+{% capture relative %}{% for i in (2..lvl) %}../{% endfor %}{% endcapture %}
+
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Almost Surely</title>
-
-    <!-- Javascript -->
-    <script src="assets/js/felixjung.io.min.js"></script>
-    <script type="text/javascript" src="//use.typekit.net/bsp6dcn.js"></script>
-    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    <title>{{ site.title }}: {{ page.title }}</title>
 
     <!-- Style sheets -->
-    <link href="assets/css/felixjung.io.min.css" rel="stylesheet"><!-- Main stylesheet -->
+    <link href="{{ relative }}assets/css/felixjung.io.min.css" rel="stylesheet"><!-- Main stylesheet -->
+    <!-- Javascript -->
+    <script src="//use.typekit.net/ztt5dqe.js"></script>
+    <script>try{Typekit.load();}catch(e){}</script>
+    <script src="{{ relative }}assets/js/felixjung.io.min.js"></script>
   </head>
   <body>
-    <header id="headmast">
-      <nav class="top-navigation" role="navigation">
-        <ul>
-          <li><a href="#">Blog</a></li>
-          <li><a href="#">About</a></li>
+    <nav class="main" role="navigation">
+      <div class="container">
+        {% capture location %}{{ page.url | remove_first:'/' | split:'/' | first }}{% endcapture %}
+        <ul class="content">
+          <li><a {% if location == '' %}class="active" {% endif %} href="/">Blog</a></li>
+          <!-- <li><a {% if location == 'research' %}class="active" {% endif %} href="/research/">Research</a></li> -->
+          <li><a {% if location == 'about' %}class="active" {% endif %} href="/about/">About</a></li>
         </ul>
-      </nav>
-      <div class="container">
-        <div id="avatar-wrapper">
-          <div id="avatar"></div>
-        </div>
-        <div id="intro">
-          <h1>I'm Felix.</h1>
-          <h2>Welcome to my blog.</h2>
-        </div>
       </div>
-    </header>
-    <section id="who-am-i">
-      <div class="container">
-        <div class="content">
-          <h1>Who am I?</h1>
-        </div>
-      </div>
-    </section>
-    <section id="quantified">
-      <div class='container'>
-        <div class="content">
-          <h1>Quantified</h1>
-        </div>
-      </div>
-    </section>
-    <footer class="site-footer">
-      <span>Built on a <i class="fa fa-apple"></i> using <a href="http://jekyllrb.com" target="_blank">Jekyll</a> and <a href="http://bourbon.io" target="_blank">Bourbon</a>.</br>
-      &#0169; 2014, Felix Jung</span>
-    </footer>
-  </body>
-</html>
+    </nav>

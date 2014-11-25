@@ -5,10 +5,22 @@ description: "Personal webpage of Felix Jung."
 url: "http://felixjung.io"
 twitter_username: feju
 github_username:  feju
+timezone: Europe/Berlin
+encoding: utf-8
+
+# Pagination
+paginate: 8
 
 # Build settings
 markdown: kramdown
-permalink: pretty
+permalink: /blog/:year/:month/:day/:title
+
+# Code Highlighting
+highlighter: pygments
+# css: _src/sass/_syntax.scss
+
+# Setup pages
+relative_permalinks: false
 
 # Exclusions
 exclude: [_assets, node_modules, Gruntfile.js, bower.json, package.json, Gemfile]

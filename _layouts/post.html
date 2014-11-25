@@ -1,0 +1,23 @@
+{% include header.html %}
+<section class="blog-post" id="single-post">
+<div class="container">
+  <div class="content">
+    <h2 class="post-title"><a href="{{ page.url }}">{{ page.title | truncatewords: 7 }}</a></h2>
+    <div class="post-date">{{ page.date | date: "%B %d, %Y" }}</div>
+    <div class="post-bubbles">
+      <ul>
+        {% if page.category %}
+          <li class="post-category">{{ page.category }}</li>
+        {% endif %}
+        {% for tag in page.tags %}
+        <li class="post-tag">{{ tag }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="post-excerpt">
+      {{ content }}
+    </div>
+  </div>
+</div>
+</section>
+{% include footer.html %}
