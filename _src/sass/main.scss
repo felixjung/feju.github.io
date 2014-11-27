@@ -2,7 +2,7 @@
 @import "base/base";
 @import "neat/neat";
 @import "font-awesome";
-@import 'syntax';
+@import "syntax";
 
 // Breakpoints
 $mobile: new-breakpoint(max-width 480px);
@@ -325,6 +325,15 @@ nav.pagination {
     color: #ff406e;
     background: none;
   }
+}
+
+// Podcast covers
+div .podcast {
+  @include margin(null 2% 2% null);
+  width: 20%;
+  border-radius: 5%;
+  overflow: hidden;
+  float: left;
 }
 
 .site-footer {
