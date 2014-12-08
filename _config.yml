@@ -22,4 +22,11 @@ highlighter: pygments
 relative_permalinks: false
 
 # Exclusions
-exclude: [_assets, _bower, node_modules, Gruntfile.js, bower.json, package.json, Gemfile]
+exclude: [node_modules, Gruntfile.js, bower.json, package.json, Gemfile]
+
+# Plugins
+gems:
+- jekyll-mentions
+- jemoji
+# - jekyll-redirect-from
+# - jekyll-sitemap
