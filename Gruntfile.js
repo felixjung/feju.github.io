@@ -24,7 +24,8 @@ module.exports = function(grunt) {
           options: {
           banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> - deploy build */\n',
           mangle: true,
-          compress: true
+          compress: true,
+          sourceMap: false
         },
         files: {
           'assets/js/<%= pkg.name %>.min.js': [
@@ -127,15 +128,10 @@ module.exports = function(grunt) {
           '_site/**/*.html'
         ]
       }
-      // options: {
-        // interrupt: true,
-        // atBegin: true
-      // }
     }
   });
 
   grunt.loadNpmTasks('grunt-contrib-uglify');
-  // grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-jekyll');
