@@ -17,10 +17,9 @@ permalink: /blog/:year/:month/:day/:title
 
 # Code Highlighting
 highlighter: pygments
-# css: _src/sass/_syntax.scss
 
 # Setup pages
 relative_permalinks: false
 
 # Exclusions
-exclude: [_assets, node_modules, Gruntfile.js, bower.json, package.json, Gemfile]
+exclude: [_assets, _bower, node_modules, Gruntfile.js, bower.json, package.json, Gemfile]
