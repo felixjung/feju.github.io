@@ -1,10 +1,10 @@
 {
-  "name": "jung.fm",
-  "version": "1.0.0",
+  "name": "felixjung.io",
   "directory": "_bower",
   "private": true,
   "dependencies": {
     "jquery": "latest",
-    "font-awesome": "latest"
+    "font-awesome": "latest",
+    "jcarousel": "latest"
   }
 }
