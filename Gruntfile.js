@@ -13,7 +13,11 @@ module.exports = function(grunt) {
           sourceMapIncludeSources: true
         },
         files: {
-          'assets/js/<%= pkg.name %>.min.js': ['_src/js/*.js', '_bower/jquery/dist/jquery.js']
+          'assets/js/<%= pkg.name %>.min.js': [
+            '_bower/jquery/dist/jquery.js',
+            '_bower/jcarousel/dist/jquery.jcarousel.js',
+            '_src/js/*.js'
+          ]
         }
       },
       deploy: {
@@ -23,7 +27,11 @@ module.exports = function(grunt) {
           compress: true
         },
         files: {
-          'assets/js/<%= pkg.name %>.min.js': ['_src/js/*.js']
+          'assets/js/<%= pkg.name %>.min.js': [
+            '_bower/jquery/dist/jquery.js',
+            '_bower/jcarousel/dist/jquery.jcarousel.js',
+            '_src/js/*.js'
+          ]
         }
       }
     },
@@ -91,9 +99,8 @@ module.exports = function(grunt) {
       // Rebuild Jekyll site
       jekyll: {
         files: [
-          '_includes/*.html',
-          '_layouts/*.html',
-          'index.html',
+          './**/*.html',
+          '*.html',
           '_posts/*.md',
           '_config.yml',
           'assets/**/*'
