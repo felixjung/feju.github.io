@@ -1,7 +1,7 @@
 _site/
-assets/
 node_modules/
 _bower/
 .sass-cache/
 .DS_Store
 .bowerrc
+Gemfile.lock
