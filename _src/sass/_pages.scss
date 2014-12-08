@@ -171,8 +171,8 @@
 
 // Podcast covers
 div .podcast {
-  @include margin(null 2% 2% null);
-  width: 20%;
+  @include margin(null 1.5% 2.5% 1.5%);
+  width: 22%;
   border-radius: 5%;
   overflow: hidden;
   float: left;
