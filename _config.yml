@@ -22,7 +22,7 @@ highlighter: pygments
 relative_permalinks: false
 
 # Exclusions
-exclude: [node_modules, Gruntfile.js, bower.json, package.json, Gemfile, Gemfile.lock]
+exclude: [node_modules, Gruntfile.js, bower.json, package.json, Gemfile, Gemfile.lock, Readme.md]
 
 # Plugins
 gems:
