@@ -1,0 +1,132 @@
+// Blog
+.blog-post {
+  background: #fafbfc;
+  padding-top: 2em;
+
+  .post-date,
+  .meta-separator {
+    float: left;
+    line-height: 1.38em;
+    font-size: 1.28em;
+    font-weight: 400;
+    padding-left: 0;
+    color: #999;
+  }
+
+  .meta-separator {
+    @include padding(null 10px);
+  }
+
+  .post-bubbles {
+    $bubble-font-size: $base-font-size * 0.75;
+    $bubble-category-color: #c4b6e8;
+    $bubble-category-radius: 0.2em;
+    $bubble-tag-color: #b2d2e5;
+    $bubble-tag-radius: 2em;
+
+    .bubble {
+      display: inline-block;
+      background: #333;
+      color: #fff;
+      font-size: $bubble-font-size;
+      font-weight: 600;
+      line-height: 0.75;
+      padding: .25em 1em;
+      text-align: center;
+      vertical-align: 30%;
+    }
+
+    & .category {
+      text-transform: uppercase;
+      background: $bubble-category-color;
+      color: darken($bubble-category-color, 50%);
+      border-radius: $bubble-category-radius;
+      padding: 0.25em 0.25em;
+    }
+
+    & .tag {
+      text-transform: lowercase;
+      background: $bubble-tag-color;
+      color: darken($bubble-tag-color, 50%);
+      border-radius: $bubble-tag-radius;
+    }
+  }
+
+  .post-title {
+    color: #000;
+
+    & a,
+    a:link,
+    a:visited,
+    a:active {
+      color: $base-font-color;
+    }
+
+    & a:hover {
+      color: #fff;
+      background: $base-font-color;
+    }
+  }
+
+  .post-text {
+    clear: both;
+    padding-top: 20px;
+
+    .read-more {
+      display: inline;
+      text-transform: uppercase;
+      font-size: 0.75em;
+    }
+  }
+
+  & code {
+    background-color: $code-background;
+    border: $code-border;
+    font-family: $code-font;
+    border-radius: $code-radius;
+    padding: .1em .4em;
+    font-size: .7em;
+    vertical-align: 8%;
+  }
+}
+
+#single-post {
+  margin-bottom: $footer-height;
+  min-height: 100vh;
+}
+
+nav.pagination {
+  @include align-items(center);
+  @include justify-content(center);
+  @include padding(2em null);
+  width: 100%;
+  background: #fafbfc;
+  text-align:center;
+  margin-bottom: $footer-height;
+
+  & span {
+    @include padding(null 8px);
+  }
+
+  & .pag-inactive {
+    color: #ddd;
+  }
+
+  & span.pag-text {
+    font-size: 3em;
+  }
+
+  & a,
+  a:link,
+  a:visited,
+  a:active {
+    color: #aaa;
+  }
+
+  & a:hover {
+    color: #ff406e;
+    background: none;
+  }
+}
+
+

@@ -1,8 +1,8 @@
+// Import frameworks and 3rd party code
 @import "bourbon/bourbon";
 @import "base/base";
 @import "neat/neat";
 @import "font-awesome";
-@import "syntax";
 
 // Breakpoints
 $mobile: new-breakpoint(max-width 480px);
@@ -24,19 +24,24 @@ $intro-h-padding: 30px;
 $footer-height: 80px;
 $footer-padding: 20px;
 
+// Code
+$code-background: #f8f8f8;
+$code-border: 1px solid #ccc;
+$code-radius: 3px;
+$code-font: source-code-pro, monospace;
+$code-font-size: 0.75em;
+
+// Import specific styles
+@import "navigation";
+@import "blog";
+@import "pages";
+@import "syntax";
+
 body {
   background: #484848;
   margin: 0;
 
-  /* & a,
-  a:link,
-  a:visited,
-  a:active {
-    color: #ff406e;
-  } */
-
   & a:hover {
-    /* color: #fff; */
     background-color: #ff406e;
   }
 }
@@ -57,308 +62,6 @@ body {
       @include padding($sec-v-padding null $sec-v-padding null);
     }
   }
-}
-
-// Navigation
-nav.main {
-  .container .content {
-    @include padding($nav-v-padding null $nav-v-padding null);
-  }
-
-  background: $nav-background;
-  text-align: right;
-
-  @include media($mobile) {
-    text-align: center;
-  }
-
-  & ul li {
-    display: inline;
-    text-align: center;
-    text-transform: uppercase;
-    margin: 30px 10px;
-  }
-
-  & a,
-  a:link,
-  a:visited,
-  a:active {
-    @include padding(4px 6px 2px 6px);
-    font-weight: 400;
-    border: 1px solid #2db8a2;
-    border-radius: 3px;
-    color: #fff;
-  }
-
-  & a:hover {
-    background-color: #2db8a2;
-    font-weight: 400;
-    border: 1px solid #fff;
-  }
-
-  & a:active {
-    background-color: #fff;
-    color: #2db8a2;
-    border: 1px solid #fff;
-  }
-
-  & a.active {
-    background-color: #fff;
-    color: #2db8a2;
-    border: 1px solid #fff;
-  }
-}
-
-// About page
-#welcome {
-  background: $nav-background;
-  z-index: 1;
-
-  .container-head {
-    @include padding($sec-v-padding null $sec-v-padding null);
-  }
-
-  #avatar-wrapper {
-    @include media($not-mobile) {
-      @include span-columns(3);
-      @include shift(2);
-    }
-
-    @include media($mobile) {
-      @include fill-parent();
-      @include omega();
-      @include display(flex);
-      @include align-items(center);
-      @include justify-content(center);
-    }
-  }
-
-  #avatar-border {
-    display: block;
-    overflow: hidden;
-    border: 5px solid #fff;
-    border-radius: 50%;
-  }
-
-  #avatar {
-    width: 100%;
-    height: auto;
-    padding-top: 100%;
-    @include media($mobile) {
-      height: $avatar-diam-mobile;
-      width: $avatar-diam-mobile;
-      border-radius: $avatar-diam-mobile / 2;
-      padding: 0;
-    }
-    background: url("../images/fj.png") no-repeat center;
-    background-size: cover;
-  }
-
-  #intro {
-    @include media($not-mobile) {
-      @include span-columns(5);
-      @include padding(null null null 10%)
-    }
-
-    @include media($mobile) {
-      @include span-columns(10);
-      @include shift(1);
-      margin-top: 1em;
-    }
-  }
-
-  #social-icons {
-    margin-top: .65em;
-
-    & a,
-    a:link,
-    a:visited,
-    a:active {
-      color: rgba(255, 255, 255, 0.6);
-    }
-
-    & a:hover {
-      color: #fff;
-      background: none;
-    }
-
-    & i {
-      margin: 0 2px;
-    }
-  }
-
-  h1 {
-    color: #fff;
-    font-weight: 800;
-    font-style: normal;
-  }
-
-  h2 {
-    color: #fff;
-    font-weight: 200;
-    font-style: normal;
-  }
-}
-
-#about-me {
-  background: #fff;
-}
-
-#quantified {
-  background: #fafbfc;
-}
-
-#podcasts {
-  background: #f6f7f8;
-}
-
-#cycling {
-  background: #f2f3f4;
-}
-
-#photography {
-  background: #edeeef;
-  margin-bottom: $footer-height;
-}
-
-// Blog
-.blog-post {
-  background: #fafbfc;
-  padding-top: 2em;
-
-  .post-date,
-  .meta-separator {
-    float: left;
-    line-height: 1.38em;
-    font-size: 1.28em;
-    font-weight: 400;
-    padding-left: 0;
-    color: #999;
-  }
-
-  .meta-separator {
-    @include padding(null 10px);
-  }
-
-  .post-bubbles {
-    $bubble-font-size: $base-font-size * 0.75;
-    $bubble-category-color: #c4b6e8;
-    $bubble-category-radius: 0.2em;
-    $bubble-tag-color: #b2d2e5;
-    $bubble-tag-radius: 2em;
-
-    .bubble {
-      display: inline-block;
-      background: #333;
-      color: #fff;
-      font-size: $bubble-font-size;
-      font-weight: 600;
-      line-height: 0.75;
-      padding: .25em 1em;
-      text-align: center;
-      vertical-align: 30%;
-    }
-
-    & .category {
-      text-transform: uppercase;
-      background: $bubble-category-color;
-      color: darken($bubble-category-color, 50%);
-      border-radius: $bubble-category-radius;
-      padding: 0.25em 0.25em;
-    }
-
-    & .tag {
-      text-transform: lowercase;
-      background: $bubble-tag-color;
-      color: darken($bubble-tag-color, 50%);
-      border-radius: $bubble-tag-radius;
-    }
-  }
-
-  .post-title {
-    color: #000;
-
-    & a,
-    a:link,
-    a:visited,
-    a:active {
-      color: $base-font-color;
-    }
-
-    & a:hover {
-      color: #fff;
-      background: $base-font-color;
-    }
-  }
-
-  .post-text {
-    clear: both;
-    padding-top: 20px;
-
-    .read-more {
-      display: inline;
-      text-transform: uppercase;
-      font-size: 0.75em;
-    }
-  }
-
-  & code {
-    background-color: #f8f8f8;
-    border: 1px solid #ccc;
-    font-family: source-code-pro, monospace;
-    border-radius: 3px;
-    padding: .1em .4em;
-    font-size: .7em;
-    vertical-align: 8%;
-  }
-}
-
-#single-post {
-  margin-bottom: $footer-height;
-  min-height: 100vh;
-}
-
-nav.pagination {
-  @include align-items(center);
-  @include justify-content(center);
-  @include padding(2em null);
-  width: 100%;
-  background: #fafbfc;
-  text-align:center;
-  margin-bottom: $footer-height;
-
-  & span {
-    @include padding(null 8px);
-  }
-
-  & .pag-inactive {
-    color: #ddd;
-  }
-
-  & span.pag-text {
-    font-size: 3em;
-  }
-
-  & a,
-  a:link,
-  a:visited,
-  a:active {
-    color: #aaa;
-  }
-
-  & a:hover {
-    color: #ff406e;
-    background: none;
-  }
-}
-
-// Podcast covers
-div .podcast {
-  @include margin(null 2% 2% null);
-  width: 20%;
-  border-radius: 5%;
-  overflow: hidden;
-  float: left;
 }
 
 .site-footer {

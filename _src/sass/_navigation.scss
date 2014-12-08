@@ -1,0 +1,49 @@
+// Navigation
+nav.main {
+  .container .content {
+    @include padding($nav-v-padding null $nav-v-padding null);
+  }
+
+  background: $nav-background;
+  text-align: right;
+
+  @include media($mobile) {
+    text-align: center;
+  }
+
+  & ul li {
+    display: inline;
+    text-align: center;
+    text-transform: uppercase;
+    margin: 30px 10px;
+  }
+
+  & a,
+  a:link,
+  a:visited,
+  a:active {
+    @include padding(4px 6px 2px 6px);
+    font-weight: 400;
+    border: 1px solid #2db8a2;
+    border-radius: 3px;
+    color: #fff;
+  }
+
+  & a:hover {
+    background-color: #2db8a2;
+    font-weight: 400;
+    border: 1px solid #fff;
+  }
+
+  & a:active {
+    background-color: #fff;
+    color: #2db8a2;
+    border: 1px solid #fff;
+  }
+
+  & a.active {
+    background-color: #fff;
+    color: #2db8a2;
+    border: 1px solid #fff;
+  }
+}
