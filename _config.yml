@@ -8,6 +8,9 @@ github_username:  feju
 timezone: Europe/Berlin
 encoding: utf-8
 
+# Additional variable for RSS
+name: Almost Surely
+
 # Pagination
 paginate: 8
 
