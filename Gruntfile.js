@@ -63,11 +63,6 @@ module.exports = function(grunt) {
     },
     // Configure Jekyll
     jekyll: {
-      serve: {
-        options: {
-          serve: true
-        }
-      },
       dev: {
         options: {
           serve: false,
@@ -95,6 +90,24 @@ module.exports = function(grunt) {
         }]
       }
     },
+    // BrowserSync
+    browserSync: {
+      bsFiles: {
+        src : [
+          '_site/**/*.js',
+          '_site/**/*.css',
+          '_site/**/*.html'
+        ]
+      },
+      options: {
+        watchTask: true,
+        server: {
+          baseDir: "_site"
+        },
+        logFileChanges: true,
+        port: 5757
+      }
+    },
     // Configure watch
     watch: {
       // Rebuild Jekyll site
@@ -118,16 +131,6 @@ module.exports = function(grunt) {
         files: ['_src/js/*.js'],
         tasks: ['uglify:dev']
       },
-      triggerLiveReload: {
-        options: {
-          livereload: true
-        },
-        files: [
-          '_site/**/*.js',
-          '_site/**/*.css',
-          '_site/**/*.html'
-        ]
-      }
     }
   });
 
@@ -136,9 +139,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-jekyll');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-browser-sync');
 
   // Register tasks
-  grunt.registerTask('serve', ['copy', 'sass:dev', 'uglify:dev', 'jekyll:serve']);
-  grunt.registerTask('default', 'serve');
+  grunt.registerTask('dev', ['copy', 'browserSync', 'watch']);
+  grunt.registerTask('default', 'dev');
   grunt.registerTask('deploy', ['copy', 'sass:deploy', 'uglify:deploy', 'jekyll:deploy']);
 };
