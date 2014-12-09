@@ -64,6 +64,14 @@ body {
   }
 }
 
+a.footnote:before {
+  content: "[";
+}
+
+a.footnote:after {
+  content: "]";
+}
+
 .site-footer {
   @include position(fixed, null null 0 null);
   @include display(flex);
