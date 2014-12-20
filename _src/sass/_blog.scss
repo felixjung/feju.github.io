@@ -1,7 +1,6 @@
 // Blog
 .blog-post {
   background: #fafbfc;
-  padding-top: 2em;
 
   .post-date,
   .meta-separator {
@@ -80,7 +79,6 @@
 
   & code {
     background-color: $code-background;
-    border: $code-border;
     font-family: $code-font;
     border-radius: $code-radius;
     padding: .1em .4em;

@@ -23,7 +23,7 @@
 /* github style pygments theme for jekyll */
 /* from https://github.com/aahan/pygments-github-style */
 
-.highlight pre, pre, .highlight .hll { background-color: $code-background; border: 1px solid #ccc; padding: 6px 10px; border-radius: $code-radius; }
+.highlight pre, pre, .highlight .hll { background-color: $code-background; padding: 6px 10px; border-radius: $code-radius; }
 .highlight .c { color: #999988; font-style: italic; }
 .highlight .err { color: #a61717; background-color: #e3d2d2; }
 .highlight .k { font-weight: bold; }
