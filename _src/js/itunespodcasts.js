@@ -9,7 +9,7 @@ function processPodcast(data) {
   ];
 
   targetDiv.append(htmlOutput.join('\n'));
-};
+}
 
 $(document).ready(function() {
   // Search terms
