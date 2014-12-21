@@ -12,6 +12,9 @@ $not-mobile: new-breakpoint(min-width 481px);
 $nav-v-padding: 20px;
 $nav-background: #2db8a2;
 
+// Link colors
+$link-background-reg: #ff406e;
+
 // Content blocks
 $sec-v-padding: 40px;
 
@@ -42,7 +45,7 @@ body {
   margin: 0;
 
   & a:hover {
-    background-color: #ff406e;
+    background-color: $link-background-reg;
   }
 }
 

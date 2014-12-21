@@ -15,10 +15,10 @@ In Vim I've bound ``jj`` to ``esc`` in insert-mode. For some reason unknown to m
 ##### Holy matrimony
 Obviously, I would like to get my ``jj`` Vim behavior back. Adding the following two lines of code to Atom's ``keymap.cson`` configuration file will do the job for you.
 
-``` cson
+{% highlight js lineanchors %}
 '.autocomplete-plus input.hidden-input':
   'escape': 'vim-mode:activate-command-mode'
-```
+{% endhighlight %}
 
 ##### Until death do us part?
 I'm curious to see what the future holds for Atom. I still switch back to Vim on a regular basis. But maybe this will change soon. I'll definitely write about my progress. If you're like me and obsess about finding the perfect text editor, you might also be interested in [Neovim](http://neovim.org); an attempt to bring Vim to the 21st century and expose all of its capabilities through modern APIs with full support for asynchronous sub-processes. Eventually, this will allow for modern OS specific GUIs to Vim; think a nice Mac OS X text editor like Textmate or an IDE like Xcode having Vim running underneath.
