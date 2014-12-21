@@ -125,7 +125,7 @@ module.exports = function(grunt) {
           '_posts/*.md',
           '_config.yml'
         ],
-        tasks: ['jekyll:dev']
+        tasks: ['jekyll:dev', 'sass:dev', 'uglify:dev']
       },
       // Sass files
       sass: {
@@ -148,7 +148,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-browser-sync');
 
   // Register tasks
-  grunt.registerTask('dev', ['copy', 'browserSync', 'watch']);
+  grunt.registerTask('dev', ['copy', 'sass:deploy', 'uglify:deploy', 'browserSync', 'watch']);
   grunt.registerTask('default', 'dev');
   grunt.registerTask('deploy', ['copy', 'sass:deploy', 'uglify:deploy', 'jekyll:deploy']);
 };
