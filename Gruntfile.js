@@ -13,7 +13,7 @@ module.exports = function(grunt) {
           sourceMapIncludeSources: true
         },
         files: {
-          'assets/js/<%= pkg.name %>.min.js': [
+          '_site/assets/js/<%= pkg.name %>.min.js': [
             '_bower/jquery/dist/jquery.js',
             '_bower/jcarousel/dist/jquery.jcarousel.js',
             '_src/js/*.js'
@@ -48,7 +48,7 @@ module.exports = function(grunt) {
           sourcemap: 'inline'
         },
         files: {
-          'assets/css/felixjung.io.min.css': '_src/sass/main.scss'
+          '_site/assets/css/felixjung.io.min.css': '_src/sass/main.scss'
         }
       },
       deploy: {
@@ -102,8 +102,14 @@ module.exports = function(grunt) {
       options: {
         watchTask: true,
         server: {
-          baseDir: "_site"
+          baseDir: '_site'
         },
+        ghostMode: {
+          scroll: true,
+          links: true,
+          forms: true
+        },
+        host: 'tydirium.local',
         logFileChanges: true,
         port: 5757
       }
@@ -117,8 +123,7 @@ module.exports = function(grunt) {
           '!./_site/**',
           '*.html',
           '_posts/*.md',
-          '_config.yml',
-          'assets/**/*'
+          '_config.yml'
         ],
         tasks: ['jekyll:dev']
       },
