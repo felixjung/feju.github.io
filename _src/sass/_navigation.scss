@@ -4,7 +4,6 @@ nav.main {
     @include padding($nav-v-padding null $nav-v-padding null);
   }
 
-  background: $nav-background;
   text-align: right;
 
   @include media($mobile) {
@@ -30,26 +29,70 @@ nav.main {
   a:active {
     @include padding(4px 6px 2px 6px);
     font-weight: 400;
-    border: 1px solid #2db8a2;
     border-radius: 3px;
-    color: #fff;
   }
 
   & a:hover {
-    background-color: #2db8a2;
     font-weight: 400;
-    border: 1px solid #fff;
+  }
+}
+
+nav.blog {
+  @extend nav.main;
+  background: $nav-background-blog;
+
+  & a,
+  a:link,
+  a:visited,
+  a:active {
+    border: 1px solid $nav-background-blog;
+    color: $nav-accent-blog;
+  }
+
+  & a:hover {
+    background-color: $nav-background-blog;
+    border: 1px solid $nav-accent-blog;
   }
 
   & a:active {
-    background-color: #fff;
-    color: #2db8a2;
-    border: 1px solid #fff;
+    background-color: $nav-accent-blog;
+    color: $nav-background-blog;
+    border: 1px solid $nav-accent-blog;
   }
 
   & a.active {
-    background-color: #fff;
-    color: #2db8a2;
-    border: 1px solid #fff;
+    background-color: $nav-accent-blog;
+    color: $nav-background-blog;
+    border: 1px solid $nav-accent-blog;
+  }
+}
+
+nav.about {
+  @extend nav.main;
+  background: $nav-background-about;
+
+  & a,
+  a:link,
+  a:visited,
+  a:active {
+    border: 1px solid $nav-background-about;
+    color: $nav-accent-about;
+  }
+
+  & a:hover {
+    background-color: $nav-background-about;
+    border: 1px solid $nav-accent-about;
+  }
+
+  & a:active {
+    background-color: $nav-accent-about;
+    color: $nav-background-about;
+    border: 1px solid $nav-accent-about;
+  }
+
+  & a.active {
+    background-color: $nav-accent-about;
+    color: $nav-background-about;
+    border: 1px solid $nav-accent-about;
   }
 }

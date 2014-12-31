@@ -1,6 +1,6 @@
 {% assign lvl = page.url | append:'X' | split:'/' | size %}
 {% capture relative %}{% for i in (2..lvl) %}../{% endfor %}{% endcapture %}
-
+{% capture location %}{{ page.url | remove_first:'/' | split:'/' | first }}{% endcapture %}
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -16,11 +16,10 @@
     <script>try{Typekit.load();}catch(e){}</script>
   </head>
   <body>
-    <nav class="main" role="navigation">
+  <nav {% if location == 'index.html' %}class="blog"{% else %}class="{{ location }}"{% endif %} role="navigation">
       <div class="container">
-        {% capture location %}{{ page.url | remove_first:'/' | split:'/' | first }}{% endcapture %}
         <ul class="content">
-          <li><a {% if location == '' %}class="active" {% endif %} href="/">Blog</a></li>
+          <li><a {% if location == 'index.html' %}class="active" {% endif %} href="/">Blog</a></li>
           <!-- <li><a {% if location == 'research' %}class="active" {% endif %} href="/research/">Research</a></li> -->
           <li><a {% if location == 'about' %}class="active" {% endif %} href="/about/">About</a></li>
         </ul>

@@ -10,7 +10,10 @@ $not-mobile: new-breakpoint(min-width 481px);
 
 // Navigation
 $nav-v-padding: 20px;
-$nav-background: #2db8a2;
+$nav-background-about: #2db8a2;
+$nav-accent-about: #fff;
+$nav-background-blog: #fafbfc;
+$nav-accent-blog: #ff406e;
 
 // Link colors
 $link-background-reg: #ff406e;
