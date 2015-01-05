@@ -2,6 +2,7 @@
 nav.main {
   .container .content {
     @include padding($nav-v-padding null $nav-v-padding null);
+    height: $nav-height;
   }
 
   text-align: right;
@@ -94,5 +95,35 @@ nav.about {
     background-color: $nav-accent-about;
     color: $nav-background-about;
     border: 1px solid $nav-accent-about;
+  }
+}
+
+nav.error-not-found {
+  @extend nav.main;
+  background: $nav-background-404;
+
+  & a,
+  a:link,
+  a:visited,
+  a:active {
+    border: 1px solid $nav-background-404;
+    color: $nav-accent-404;
+  }
+
+  & a:hover {
+    background-color: $nav-background-404;
+    border: 1px solid $nav-accent-404;
+  }
+
+  & a:active {
+    background-color: $nav-accent-404;
+    color: $nav-background-404;
+    border: 1px solid $nav-accent-404;
+  }
+
+  & a.active {
+    background-color: $nav-accent-404;
+    color: $nav-background-404;
+    border: 1px solid $nav-accent-404;
   }
 }
