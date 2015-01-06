@@ -6,7 +6,6 @@ module.exports = function(grunt) {
     uglify: {
       dev: {
         options: {
-          banner: '/*! <%= pkg.name %> -  <%= grunt.template.today("dd-mm-yyyy") %> - dev build */\n',
           mangle: false,
           compress: true,
           sourceMap: true,
@@ -22,7 +21,6 @@ module.exports = function(grunt) {
       },
       deploy: {
           options: {
-          banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> - deploy build */\n',
           mangle: true,
           compress: true,
           sourceMap: false
