@@ -3,18 +3,17 @@
 <div class="container">
   <div class="content">
     <h2 class="post-title"><a href="{{ page.url }}">{{ page.title | truncatewords: 7 }}</a></h2>
-    <div class="post-date">{{ page.date | date: "%B %d, %Y" }}</div>
-    {% if page.category or page.tags.size > 0 %}
-      <span class="meta-separator"> | </span>
-      <div class="post-bubbles">
-        {% if page.category %}
-        <span class="bubble category">{{ page.category }}</span>
-        {% endif %}
-        {% for tag in page.tags %}
-        <span class="bubble tag">{{ tag }}</span>
-        {% endfor %}
-      </div>
-    {% endif %}
+    <div class="post-meta">
+      <span class="post-date"><i class="fa fa-clock-o"></i>{{ page.date | date: "%F" }}</span>
+      {% if page.category or page.tags.size > 0 %}
+          {% if page.category %}
+          <span class="bubble category"><i class="fa fa-folder-open"></i>{{ page.category }}</span>
+          {% endif %}
+          {% for tag in page.tags %}
+          <span class="bubble tag"><i class="fa fa-tag"></i>{{ tag }}</span>
+          {% endfor %}
+      {% endif %}
+    </div>
     <div class="post-text">
       {{ content }}
     </div>

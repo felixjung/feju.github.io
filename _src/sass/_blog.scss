@@ -2,54 +2,6 @@
 .blog-post {
   background: #fafbfc;
 
-  .post-date,
-  .meta-separator {
-    float: left;
-    line-height: 1.38em;
-    font-size: 1.28em;
-    font-weight: 400;
-    padding-left: 0;
-    color: #999;
-  }
-
-  .meta-separator {
-    @include padding(null 10px);
-  }
-
-  .post-bubbles {
-    $bubble-font-size: $base-font-size * 0.75;
-    $bubble-category-color: #c4b6e8;
-    $bubble-category-radius: 0.2em;
-    $bubble-tag-color: #b2d2e5;
-    $bubble-tag-radius: 2em;
-
-    .bubble {
-      display: inline-block;
-      background: #333;
-      color: #fff;
-      font-size: $bubble-font-size;
-      font-weight: 600;
-      line-height: 0.75em;
-      padding: .25em 1em;
-      text-align: center;
-    }
-
-    & .category {
-      text-transform: uppercase;
-      background: $bubble-category-color;
-      color: darken($bubble-category-color, 50%);
-      border-radius: $bubble-category-radius;
-      padding: 0.25em 0.25em;
-    }
-
-    & .tag {
-      text-transform: lowercase;
-      background: $bubble-tag-color;
-      color: darken($bubble-tag-color, 50%);
-      border-radius: $bubble-tag-radius;
-    }
-  }
-
   .post-title {
     color: #000;
 
@@ -60,14 +12,86 @@
       color: $base-font-color;
     }
 
-    & a:hover {
+    a:hover {
       color: #fff;
       background: $base-font-color;
     }
   }
 
+  .post-meta {
+    $bubble-font-size: $base-font-size * 0.75;
+    $bubble-category-color: #c4b6e8;
+    $bubble-category-radius: 0.2em;
+    $bubble-tag-color: #b2d2e5;
+    $bubble-tag-radius: 2em;
+
+    .post-date {
+      .fa {
+        font-size: .8em;
+        vertical-align: .048em;
+        margin-right: 3px;
+      }
+
+      line-height: 1.38em;
+      font-size: 1.28em;
+      font-weight: 400;
+      padding-left: 0;
+      color: #999;
+      margin-right: 10px;
+
+      @include media($mobile) {
+        /* clear: both; */
+      }
+    }
+
+    @include media($mobile) {
+      .post-date:after {
+        content: '\A';
+        white-space: pre;
+      }
+      .post-date {
+        margin-right: nothing;
+      }
+    }
+
+    .bubble {
+      @include padding(.25em .38em);
+      display: inline-block;
+      vertical-align: .25em;
+      background: #333;
+      color: #fff;
+      font-size: $bubble-font-size;
+      font-weight: 600;
+      line-height: .75em;
+      text-align: center;
+
+      .fa {
+        font-size: .7em;
+        margin-right: 2px;
+      }
+
+    }
+
+      .bubble {
+      }
+
+    .category {
+      @include padding(null 0.38em);
+      text-transform: uppercase;
+      background: $bubble-category-color;
+      color: darken($bubble-category-color, 50%);
+      border-radius: $bubble-category-radius;
+    }
+
+    .tag {
+      text-transform: lowercase;
+      background: $bubble-tag-color;
+      color: darken($bubble-tag-color, 50%);
+      border-radius: $bubble-tag-radius;
+    }
+  }
+
   .post-text {
-    clear: both;
     padding-top: 20px;
 
     .read-more {
