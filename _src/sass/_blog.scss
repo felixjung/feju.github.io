@@ -1,4 +1,15 @@
 // Blog
+header.blog {
+  background:
+    linear-gradient(transparentize($bg-blog, .55), transparentize($bg-blog, .55)),
+    url('../images/blog.png') no-repeat top center;
+  background-size: cover;
+
+  color: $accent-blog;
+
+  h1 { background-color: transparentize(darken($bg-blog, 35%), .25) }
+}
+
 .blog-post {
   background: #fafbfc;
 
@@ -18,11 +29,24 @@
     }
   }
 
+  .post-date { font-weight: 100 }
+
+  .read-more {
+    display: inline-block;
+    border-radius: 3px;
+    width: 1.5em;
+    line-height: 1.1em;
+    text-align: center;
+    color: #fff;
+    background-color: transparentize(#000, .7);
+  }
+
+
   .post-meta {
     $bubble-font-size: $base-font-size * 0.75;
-    $bubble-category-color: #c4b6e8;
-    $bubble-category-radius: 0.2em;
-    $bubble-tag-color: #b2d2e5;
+    $bubble-category-color: lighten(#000, 70%);
+    $bubble-category-radius: $base-border-radius;
+    $bubble-tag-color: lighten(#000, 85%);
     $bubble-tag-radius: 2em;
 
     .post-date {
@@ -59,11 +83,8 @@
       display: inline-block;
       vertical-align: .25em;
       background: #333;
-      color: #fff;
       font-size: $bubble-font-size;
-      font-weight: 600;
-      line-height: .75em;
-      text-align: center;
+      font-weight: 400;
 
       .fa {
         font-size: .7em;
@@ -71,9 +92,6 @@
       }
 
     }
-
-      .bubble {
-      }
 
     .category {
       @include padding(null 0.38em);
@@ -88,6 +106,8 @@
       background: $bubble-tag-color;
       color: darken($bubble-tag-color, 50%);
       border-radius: $bubble-tag-radius;
+      padding-left: 8px;
+      padding-right: 8px;
     }
   }
 
@@ -97,7 +117,6 @@
     .read-more {
       display: inline;
       text-transform: uppercase;
-      font-size: 0.75em;
     }
   }
 
@@ -109,6 +128,11 @@
     font-size: .7em;
     vertical-align: 8%;
   }
+
+}
+
+.page {
+  padding-top: 3em;
 }
 
 #single-post {

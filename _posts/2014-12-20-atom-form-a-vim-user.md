@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Atom for a Vim User
+subtitle: How to make yourself feel at home
 category: Geekery
 tags: development vim atom
 ---

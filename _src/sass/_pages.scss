@@ -1,179 +1,22 @@
-// About page
-#welcome {
-  background: $nav-background-about;
-  z-index: 1;
+// PROJECTS
+header.projects {
+  background:
+    linear-gradient(transparentize($bg-projects, .55), transparentize($bg-projects, .55)),
+    url('../images/projects.png') no-repeat center center;
+  background-size: cover;
+  color: $accent-projects;
 
-  .container-head {
-    @include padding($sec-v-padding null $sec-v-padding null);
-  }
-
-  #avatar-wrapper {
-    @include media($not-mobile) {
-      @include span-columns(3);
-      @include shift(2);
-    }
-
-    @include media($mobile) {
-      @include fill-parent();
-      @include omega();
-      @include display(flex);
-      @include align-items(center);
-      @include justify-content(center);
-    }
-  }
-
-  #avatar-border {
-    display: block;
-    overflow: hidden;
-    border: 5px solid #fff;
-    border-radius: 50%;
-  }
-
-  #avatar {
-    width: 100%;
-    height: auto;
-    padding-top: 100%;
-    @include media($mobile) {
-      height: $avatar-diam-mobile;
-      width: $avatar-diam-mobile;
-      border-radius: $avatar-diam-mobile / 2;
-      padding: 0;
-    }
-    background: url("../images/fj.png") no-repeat center;
-    background-size: cover;
-  }
-
-  #intro {
-    @include media($not-mobile) {
-      @include span-columns(5);
-      @include padding(null null null 10%)
-    }
-
-    @include media($mobile) {
-      @include span-columns(10);
-      @include shift(1);
-      margin-top: 1em;
-    }
-  }
-
-  #social-icons {
-    margin-top: .65em;
-
-    & a,
-    a:link,
-    a:visited,
-    a:active {
-      color: rgba(255, 255, 255, 0.6);
-    }
-
-    & a:hover {
-      color: #fff;
-      background: none;
-    }
-
-    & i {
-      margin: 0 2px;
-    }
-  }
-
-  h1 {
-    color: #fff;
-    font-weight: 800;
-    font-style: normal;
-  }
-
-  h2 {
-    color: #fff;
-    font-weight: 200;
-    font-style: normal;
-  }
+  h1 { background-color: transparentize(darken($bg-projects, 25%), .35) }
 }
 
-#about-me {
-  background: #fff;
-}
+// ABOUT
+header.about {
+  background:
+    linear-gradient(transparentize($bg-about, .55), transparentize($bg-about, .55)),
+    url('../images/about.png') no-repeat top center;
+  background-size: cover;
 
-#quantified {
-  background: #fafbfc;
-}
+  color: $accent-about;
 
-#podcasts {
-  background: #f6f7f8;
-}
-
-#cycling {
-  background: #f2f3f4;
-}
-
-#photography {
-  background: #edeeef;
-  margin-bottom: $footer-height;
-}
-
-// Carousel
-.jcarousel-wrapper {
-  position: relative;
-  overflow: hidden;
-}
-
-.jcarousel {
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  border-radius: 10px;
-}
-
-.jcarousel ul {
-  position: relative;
-  list-style: none;
-  width: 700%;
-  margin: 0;
-  padding: 0;
-}
-
-.jcarousel li {
-  float: left;
-  width: percentage(1/7);
-}
-
-.jcarousel img {
-  display: block;
-}
-
-.jcarousel-pagination {
-  @include padding(1em null 0.1em null);
-  text-align: center;
-
-  a,
-  a:hover {
-    text-decoration: none;
-    display: inline-block;
-
-    height: 10px;
-    width: 10px;
-    line-height: 1em;
-
-    background: #fff;
-    color: #4E443C;
-    border-radius: 10px;
-
-    margin-right: 7px;
-
-    box-shadow: 0 0 1px $base-font-color;
-  }
-
-  a.active {
-    background: $base-font-color;
-    color: #fff;
-    opacity: 1;
-  }
-}
-
-// Podcast covers
-div .podcast {
-  @include margin(null 1.5% 2.5% 1.5%);
-  width: 22%;
-  border-radius: 5%;
-  overflow: hidden;
-  float: left;
+  h1 { background-color: transparentize(darken($bg-about, 25%), .35) }
 }

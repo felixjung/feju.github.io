@@ -1,0 +1,23 @@
+---
+collection: projects
+title: Projects
+layout: default
+---
+<header class="projects">
+  <div class="container">
+    <div class="content">
+      <h1>Stuff I have built</h1>
+    </div>
+  </div>
+</header>
+{% for project in site.projects %}
+<article class="project">
+  <div class="container">
+    <div class="content">
+      <h1><a href="{{ project.github }}" target="_blank">{{ project.title }}</a></h1>
+      <h5>{{ project.tagline }}</h5>
+      <p>{{ project.content }}</p>
+    </div>
+  </div>
+</article>
+{% endfor %}

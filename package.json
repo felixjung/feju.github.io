@@ -1,7 +1,7 @@
 {
   "name": "felixjung.io",
   "version": "0.1.0",
-  "description": "My personal blog on Apple, LaTeX, R, Julia experiments.",
+  "description": "My personal blog on Apple and web development.",
   "author": "Felix Jung",
   "license": "MIT",
   "devDependencies": {

@@ -1,5 +1,5 @@
 // Typography
-$sans-serif: proxima-nova, "Helveita Neue", Helvetica, Roboto, Arial, sans-serif;
+$sans-serif: 'Lato', 'Helveita Neue', Helvetica, Roboto, Arial, sans-serif;
 $serif: $georgia;
 $base-font-family: $sans-serif;
 $header-font-family: $base-font-family;
@@ -39,7 +39,7 @@ $base-font-color: $dark-gray;
 $base-accent-color: $blue;
 
 // Link Colors
-$base-link-color: #ff406e;
+$base-link-color: #bf616a;
 $hover-link-color: #fff;
 $base-button-color: $base-link-color;
 $hover-button-color: $hover-link-color;

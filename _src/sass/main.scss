@@ -1,28 +1,50 @@
 // Import frameworks and 3rd party code
+@import 'fonts';
 @import 'bourbon/bourbon';
 @import 'base/base';
 @import 'neat/neat';
-@import 'font-awesome';
 
 // Breakpoints
 $mobile: new-breakpoint(max-width 560px);
 $not-mobile: new-breakpoint(min-width 561px);
 
+// Base16 colors
+$base00: #2b303b;
+$base01: #343d46;
+$base02: #4f5b66;
+$base03: #65737e;
+$base04: #a7adba;
+$base05: #c0c5ce;
+$base06: #dfe1e8;
+$base07: #ffffff;
+$base08: #bf616a;
+$base09: #d08770;
+$base0A: #ebcb8b;
+$base0B: #a3be8c;
+$base0C: #96b5b4;
+$base0D: #8fa1b3;
+$base0E: #b48ead;
+$base0F: #ab7967;
+
 // Navigation
 $nav-height: 1.5em;
-$nav-v-padding: 20px;
-$nav-background-about: #2db8a2;
-$nav-accent-about: #fff;
-$nav-background-blog: #fafbfc;
-$nav-accent-blog: #ff406e;
-$nav-background-404: #ff4e4c;
-$nav-accent-404: #fff;
+$nav-v-padding: 1em;
+$bg-about: $base0C;
+$accent-about: $base07;
+$bg-projects: $base00;
+$accent-projects: $base08;
+$bg-blog: $base0D;
+$accent-blog: $base0A;
+$bg-404: $base08;
+$accent-404: $base07;
 
 // Link colors
-$link-background-reg: #ff406e;
+$link-background-reg: $base08;
+$base-link-color: $base08;
 
 // Content blocks
-$sec-v-padding: 40px;
+$sec-v-padding: 3em;
+$head-v-padding: 9em;
 
 // Header
 $avatar-diam-mobile: 160px;
@@ -47,7 +69,7 @@ $code-font-size: .75em;
 @import 'syntax';
 
 body {
-  background: #484848;
+  background-color: $base02;
   margin: 0;
 
   a:hover {
@@ -81,20 +103,51 @@ a.footnote:after {
   content: ']';
 }
 
+// Typography
+h1 {
+  font-weight: 300;
+}
+
+h6 {
+  font-size: $h6-font-size * 0.6;
+  font-weight: 400;
+}
+
+// Page headers
+header {
+  @include padding($head-v-padding null $head-v-padding null);
+
+  z-index: 1;
+
+
+  h1 {
+    font-size: $h1-font-size * 2;
+    font-weight: 100;
+  }
+}
+
+// Altering article colors
+article:nth-of-type(2n) {
+  background: lighten($base06, 10%);
+}
+
+article:nth-of-type(2n+1) {
+  background: lighten($base06, 8%);
+}
+
+article:last-of-type {
+  margin-bottom: $footer-height;
+}
+
 .site-footer {
   @include position(fixed, null null 0 null);
   @include display(flex);
   @include align-items(center);
   @include justify-content(center);
-  background: #484848;
-  color: #f1f1f1;
+  color: $base06;
   width: 100%;
   height: $footer-height;
   z-index: -1;
-
-  > span {
-    text-align: center;
-  }
 }
 
 #error-page {
@@ -103,8 +156,8 @@ a.footnote:after {
   flex-direction: column;
   justify-content: center;
 
-  background: $nav-background-404;
-  color: $nav-accent-404;
+  background: $bg-404;
+  color: $accent-404;
 
   h1 {
     font-size: 6em;
@@ -114,7 +167,7 @@ a.footnote:after {
 
   p {
     font-size: 3em;
-    font-weight: 100;
+    font-weight: 300;
     text-align: center;
   }
 }

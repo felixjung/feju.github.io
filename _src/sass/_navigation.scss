@@ -1,8 +1,35 @@
+@mixin navigation-coloring($nav-background, $nav-accent) {
+  & a,
+  a:link,
+  a:visited,
+  a:active {
+    border: 1px solid transparent;
+    color: $nav-accent;
+  }
+
+  & a:hover {
+    background-color: transparent;
+    border: 1px solid $nav-accent;
+  }
+
+  & a:active {
+    background-color: $nav-accent;
+    color: $nav-background;
+    border: 1px solid $nav-accent;
+  }
+
+  & a.active {
+    background-color: $nav-accent;
+    color: $nav-background;
+    border: 1px solid $nav-accent;
+  }
+}
+
 // Navigation
 nav.main {
   .container .content {
     @include padding($nav-v-padding null $nav-v-padding null);
-    height: $nav-height;
+    margin-bottom: -100%;
   }
 
   text-align: right;
@@ -18,7 +45,6 @@ nav.main {
 
     li {
       display: inline;
-      text-align: center;
       text-transform: uppercase;
       margin: 30px 10px;
     }
@@ -28,102 +54,46 @@ nav.main {
   a:link,
   a:visited,
   a:active {
-    @include padding(4px 6px 2px 6px);
-    font-weight: 400;
+    @include padding(0 6px 1px 6px);
+    font-weight: 700;
     border-radius: 3px;
+    line-heiht: 1em;
   }
 
   & a:hover {
-    font-weight: 400;
+    font-weight: 700;
   }
 }
 
 nav.blog {
   @extend nav.main;
-  background: $nav-background-blog;
+  @include navigation-coloring(
+    $bg-blog,
+    $accent-blog
+  );
+}
 
-  & a,
-  a:link,
-  a:visited,
-  a:active {
-    border: 1px solid $nav-background-blog;
-    color: $nav-accent-blog;
-  }
+nav.projects {
+  @extend nav.main;
+  @include navigation-coloring(
+    $bg-projects,
+    $accent-projects
+  );
 
-  & a:hover {
-    background-color: $nav-background-blog;
-    border: 1px solid $nav-accent-blog;
-  }
-
-  & a:active {
-    background-color: $nav-accent-blog;
-    color: $nav-background-blog;
-    border: 1px solid $nav-accent-blog;
-  }
-
-  & a.active {
-    background-color: $nav-accent-blog;
-    color: $nav-background-blog;
-    border: 1px solid $nav-accent-blog;
-  }
 }
 
 nav.about {
   @extend nav.main;
-  background: $nav-background-about;
-
-  & a,
-  a:link,
-  a:visited,
-  a:active {
-    border: 1px solid $nav-background-about;
-    color: $nav-accent-about;
-  }
-
-  & a:hover {
-    background-color: $nav-background-about;
-    border: 1px solid $nav-accent-about;
-  }
-
-  & a:active {
-    background-color: $nav-accent-about;
-    color: $nav-background-about;
-    border: 1px solid $nav-accent-about;
-  }
-
-  & a.active {
-    background-color: $nav-accent-about;
-    color: $nav-background-about;
-    border: 1px solid $nav-accent-about;
-  }
+  @include navigation-coloring(
+    $bg-about,
+    $accent-about
+  );
 }
 
 nav.error-not-found {
   @extend nav.main;
-  background: $nav-background-404;
-
-  & a,
-  a:link,
-  a:visited,
-  a:active {
-    border: 1px solid $nav-background-404;
-    color: $nav-accent-404;
-  }
-
-  & a:hover {
-    background-color: $nav-background-404;
-    border: 1px solid $nav-accent-404;
-  }
-
-  & a:active {
-    background-color: $nav-accent-404;
-    color: $nav-background-404;
-    border: 1px solid $nav-accent-404;
-  }
-
-  & a.active {
-    background-color: $nav-accent-404;
-    color: $nav-background-404;
-    border: 1px solid $nav-accent-404;
-  }
+  @include navigation-coloring(
+    $bg-404,
+    $accent-404
+  );
 }

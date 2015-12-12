@@ -12,15 +12,15 @@
     <!-- Style sheets -->
     <link href="{{ relative }}assets/css/felixjung.io.min.css" rel="stylesheet"><!-- Main stylesheet -->
     <!-- Javascript -->
-    <script src="//use.typekit.net/ztt5dqe.js"></script>
-    <script>try{Typekit.load();}catch(e){}</script>
+    <!-- <script src="//use.typekit.net/ztt5dqe.js"></script> -->
+    <!-- <script>try{Typekit.load();}catch(e){}</script> -->
   </head>
   <body>
   <nav {% if location == 'index.html' %}class="blog"{% elsif location == '404.html' %}class="error-not-found"{% else %}class="{{ location }}"{% endif %} role="navigation">
       <div class="container">
         <ul class="content">
           <li><a {% if location == 'index.html' %}class="active" {% endif %} href="/">Blog</a></li>
-          <!-- <li><a {% if location == 'research' %}class="active" {% endif %} href="/research/">Research</a></li> -->
+          <li><a {% if location == 'projects' %}class="active" {% endif %} href="/projects/">Projects</a></li>
           <li><a {% if location == 'about' %}class="active" {% endif %} href="/about/">About</a></li>
         </ul>
       </div>
