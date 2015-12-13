@@ -1,4 +1,4 @@
 Almost Surely
 ==============
 
-This is my personal web apge built with Jekyll.
+This is my personal web page built with Jekyll.
