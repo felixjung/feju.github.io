@@ -6,7 +6,7 @@ header.projects {
   background-size: cover;
   color: $accent-projects;
 
-  h1 { background-color: transparentize(darken($bg-projects, 25%), .35) }
+  h1, h2, h3, h4, h5, h6 { background-color: transparentize(darken($bg-projects, 25%), .35) }
 }
 
 // ABOUT
@@ -18,5 +18,5 @@ header.about {
 
   color: $accent-about;
 
-  h1 { background-color: transparentize(darken($bg-about, 25%), .35) }
+  h1, h2, h3, h4, h5, h6 { background-color: transparentize(darken($bg-about, 25%), .35) }
 }
