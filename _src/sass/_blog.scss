@@ -7,7 +7,7 @@ header.blog {
 
   color: $accent-blog;
 
-  h1 { background-color: transparentize(darken($bg-blog, 35%), .25) }
+  h1, h2, h3, h4, h5, h6 { background-color: transparentize(darken($bg-blog, 35%), .25) }
 }
 
 .blog-post {
