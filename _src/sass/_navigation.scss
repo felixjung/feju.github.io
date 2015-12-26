@@ -54,7 +54,8 @@ nav.main {
   a:link,
   a:visited,
   a:active {
-    @include padding(0 6px 1px 6px);
+    padding: .4em .8em;
+    font-size: .8em;
     font-weight: 700;
     border-radius: 3px;
     line-heiht: 1em;

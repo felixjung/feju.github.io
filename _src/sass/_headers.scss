@@ -1,0 +1,61 @@
+@mixin header-style($bg-color, $accent-color, $image-mobile, $image) {
+
+  background:
+    linear-gradient(transparentize($bg-color, .55), transparentize($bg-color, .55)),
+    url($image-mobile) no-repeat top center;
+  background-size: cover;
+
+  @include media($not-mobile) {
+    background:
+      linear-gradient(transparentize($bg-color, .55), transparentize($bg-color, .55)),
+      url($image) no-repeat top center;
+    background-size: cover;
+  }
+
+  color: $accent-color;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 { background-color: transparentize(darken($bg-color, 35%), .25) }
+}
+
+// Headers
+header {
+  @include padding($head-v-padding null $head-v-padding null);
+
+  z-index: 1;
+  overflow: hidden;
+
+
+  h1 {
+    @include media($not-mobile) {
+      font-size: $h1-font-size * 2;
+    }
+    @include media($mobile) {
+      font-size: $h1-font-size * 1.5;
+    }
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 100;
+  }
+}
+
+// BLOG HEADER STYLING
+header.blog {
+  @include header-style($bg-blog, $accent-blog, '../images/blog_mobile.png', '../images/blog.png');
+}
+
+// PROJECTS HEADER STYLING
+header.projects {
+  @include header-style($bg-projects, $accent-projects,
+  '../images/projects_mobile.png', '../images/projects.png');
+}
+
+// ABOUT HEADER STYLING
+header.about {
+  @include header-style($bg-about, $accent-about, '../images/about_mobile.png', '../images/about.png');
+}

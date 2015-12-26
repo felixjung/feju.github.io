@@ -1,0 +1,41 @@
+// Breakpoints
+$mobile: new-breakpoint(max-width 560px);
+$not-mobile: new-breakpoint(min-width 561px);
+
+// Navigation
+$nav-height: 1.5em;
+$nav-v-padding: 1em;
+$bg-about: $base0C;
+$accent-about: $base07;
+$bg-projects: $base00;
+$accent-projects: $base08;
+$bg-blog: $base0D;
+$accent-blog: $base0A;
+$bg-404: $base08;
+$accent-404: $base07;
+
+// Link colors
+$link-background-reg: $base08;
+$base-link-color: $base08;
+
+// Content blocks
+$sec-v-padding: 3em;
+$head-v-padding: 9em;
+
+// Header
+$avatar-diam-mobile: 160px;
+$intro-v-padding: 50px;
+$intro-h-padding: 30px;
+
+// Footer
+$footer-height: 80px;
+$footer-padding: 20px;
+
+// Code
+$code-background: #f5f5f5;
+$code-border: 1px solid #ccc;
+$code-radius: 3px;
+$code-font: source-code-pro, monospace;
+$code-font-size: .75em;
+
+
