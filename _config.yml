@@ -23,7 +23,7 @@ markdown: kramdown
 permalink: /blog/:year/:month/:day/:title
 
 # Code Highlighting
-highlighter: pygments
+# highlighter: rouge
 
 # Setup pages
 relative_permalinks: false
