@@ -8,7 +8,7 @@ tags: development vim atom
 
 Over the past year, I've made [Vim](http://www.vim.org) my text editor of
 choice. It was a steep learning curve, but by now I have a fully tricked out
-``.vimrc`` and feel right at home. Still, I never got over the fact that Vim
+`.vimrc` and feel right at home. Still, I never got over the fact that Vim
 does not have a nice modern GUI and is limited by things like its low
 interaction capabilities with asynchronous sub-processes. Hence, I'm still on
 the hunt for the perfect text editor. Recently, I've regained interest in
@@ -36,10 +36,10 @@ functionality very similar to Vim's YCM in Atom.
 
 ##### Pre-wedding jitters
 
-In Vim I've bound ``jj`` to ``esc`` in insert-mode. For some reason unknown to
-me, this ``jj`` mapping immediately takes me to command-mode. Regular `esc`
+In Vim I've bound `jj` to `esc` in insert-mode. For some reason unknown to
+me, this `jj` mapping immediately takes me to command-mode. Regular `esc`
 behaviour with YCM installed is to close any open completion menu. A second
-press of ``esc`` is required to get into command-mode. Personally, I prefer
+press of `esc` is required to get into command-mode. Personally, I prefer
 getting right into command-mode. The completion menu automatically disappears,
 if I continue typing. Unfortunately, the default experience of using Vim Mode
 and Autocomplete Plus is equivalent to the default Vim + YCM behaviour.
@@ -50,10 +50,10 @@ Obviously, I would like to get my `jj` Vim behavior
 back. Adding the following two lines of code to Atom's `keymap.cson`
 configuration file will do the job for you.
 
-{% highlight js linenos=table %}
+```javascript
 '.autocomplete-plus input.hidden-input':
   'escape': 'vim-mode:activate-command-mode'
-{% endhighlight %}
+```
 
 ##### Until death do us part? I'm curious to see what the future holds for
 Atom. I still switch back to Vim on a regular basis. But maybe this will change
@@ -65,6 +65,6 @@ asynchronous sub-processes. Eventually, this will allow for modern OS specific
 GUIs to Vim; think a nice Mac OS X text editor like Textmate or an IDE like
 Xcode having Vim running underneath.
 
-[^1]: Without autocomplete-plus you have to press ``ctrl space`` to trigger the completion menu.
+[^1]: Without autocomplete-plus you have to press `ctrl space` to trigger the completion menu.
 [vimproblem]: http://haldean.org/vim-problems/ "Haldean Brown - The problem with Vim"
 [modal]: http://unix.stackexchange.com/questions/57705/modeless-vs-modal-editors
