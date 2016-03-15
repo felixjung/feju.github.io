@@ -16,7 +16,7 @@
     <!-- <script>try{Typekit.load();}catch(e){}</script> -->
   </head>
   <body>
-  <nav {% if location == 'index.html' %}class="blog"{% elsif location == '404.html' %}class="error-not-found"{% else %}class="{{ location }}"{% endif %} role="navigation">
+  <nav {% if page.url == '/' %}class="blog"{% elsif location == '404.html' %}class="error-not-found"{% else %}class="{{ location }}"{% endif %} role="navigation">
       <div class="container">
         <ul class="content">
           <li><a {% if location == 'index.html' %}class="active" {% endif %} href="/">Blog</a></li>
