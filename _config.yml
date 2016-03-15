@@ -37,7 +37,8 @@ exclude: [node_modules, Gruntfile.js, bower.json, package.json, Gemfile, Gemfile
 
 # Plugins
 gems:
-- jekyll-mentions
-- jemoji
+  - jekyll-mentions
+  - jemoji
+  - jekyll-paginate
 # - jekyll-redirect-from
 # - jekyll-sitemap
