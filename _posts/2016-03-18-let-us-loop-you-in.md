@@ -31,19 +31,19 @@ what could remain pro features for a 9.7" version:
 ##### Cleaning up the product lines
 
 Why do I think Apple is going to do this? Think about it, the Macbook Air was a
-radical machine when it first got introduced. No other laptop was as thin and
+radical machine when it was first introduced. No other laptop was as thin, and
 owning the first generation Macbook Air cost a premium. Over time this changed
 and the Air became Apple's default consumer laptop. Last year, the company
 introduced a new 12" Macbook that is lighter and thinner than the 11" Macbook
-Air. I am convinced, the only reason Apple kept the Air around was that the
-Macbook was too much of a compromise in terms of performance an connectivity
-and too expensive at the time. Just like the original Air it was too much of a
+Air. I am convinced the only reason Apple kept the Air around was that the
+Macbook was too much of a compromise in terms of performance and connectivity
+and too expensive at the time. Just like the original Air, it was too much of a
 technological advancement for the broader market. That could very well change
-this year rendering the Macbook Air obsolete.
+this year -- rendering the Macbook Air obsolete.
 
 The case for dropping the iPad Air is similar. It was introduced at a time when
 the iPad 2 was still being sold as a cheap entry device. The iPad Air was also
-a lot thinner and lighter than any other existing iPad. It made sense to give
+a lot lighter and thinner than any other existing iPad. It made sense to give
 it a more distinct name. Maybe Apple even wanted to associate it with the
 Macbook Air. In any case, Apple is no longer selling the iPad 2. Their iPad
 lineup consists of the current iPad Pro, the iPad Air 2 and iPad Air, and two
@@ -61,9 +61,9 @@ Fall as well.
 
 What that would leave us with is a clean lineup for Mac laptops and iPads. All
 machines come with Retina screens and there are distinct products for consumers
-and professionals. All coming in the same three color options of silver, black,
+and professionals. All come in the same three color options of silver, black,
 and gold. Having a dedicated iPad line for professional use -- that is more
-than one single device -- could also help Apple establish iPads as serious
+than a single device -- could also help Apple establish iPads as serious
 creation devices, something that has been difficult in the past.
 
 [^1]: Yes, that means at least one more year of iPad Air.
