@@ -13,9 +13,47 @@ SE](http://9to5mac.com/2016/02/26/apple-iphone-se-4-inch-2016/), a [9.7" iPad
 Pro](http://9to5mac.com/2016/02/25/smaller-ipad-pro-march/), and probably some
 new [Apple Watch
 bands](http://9to5mac.com/2016/02/02/march-15-event-4-inch-phone-new-ipad-apple-watch/).
-That new iPad Pro got me thinking about Apple's broader plans for the iPad and Macbook ecosystem.<!--more-->
+That new iPad Pro got me thinking about Apple's broader plans for the iPad and
+Macbook ecosystem.<!--more-->
 
-Before the fall of 2015, Apple was no longer selling a laptop under the *Macbook* brand, i.e. no Air or Pro additions to the name. The Macbook Air was introduced as a new kind of ultra protable laptop. Over time it took the place of the original Macbook in the company's lineup. The Air offered the same level of performance in a lighter package at a price point similar to the Macbook, making the former redundant. Apple took the logical step and discontinued the Macbook. But what was going to happen to that classic brand name?
+I am hoping Apple will eliminate the Macbook Air and iPad Air from their
+product lineup in the long term. Instead, what they should offer in the future
+are a Macbook and a Macbook Pro, as well as an iPad and an iPad Pro. The pro
+products will be available in two screen sizes and offer better performance
+paired with "professional features". The current 12.9" iPad Pro gives an indication as to
+what could remain pro features for a 9.7" version:
 
-Late last year Apple answered that question by introducing the all new Macbook with retina display. At 2.03 pounds the 12" laptop is even lighter than the 11" Macbook Air, coming in at 2.38 punds. With the retina display it's display is clearly superior, too. But of course there are things like performance and the fact that the Macbook comes with only a single USB-C port.
+* Smart connector for attaching keyboard accessories
+* Four-speaker design
+* Advanced storage controller for better memory performance
+* Apple Pencil support
 
+But why terminate the Air products? Think about it. The Macbook Air was a
+radical machine when it got introduced. No other laptop was as thin and owning
+the first generation Macbook Air cost a premium. Over time this changed and the
+Air became Apple's default consumer laptop. Last year, the company introduced a
+new 12" Macbook that is lighter and thinner than the 11" Macbook Air. I am
+convinced, the only reason Apple kept the Air around was that the Macbook was
+too much of a compromise in terms of performance an connectivity and too
+expensive at the time. That could very well change this year and it would not
+make sense to keep the Macbook Air around anymore.
+
+The case for dropping the iPad Air is similar. It was introduced at a time when
+the iPad 2 was still being sold as a cheap entry device. The iPad Air was also
+a lot thinner and lighter than any other existing iPad. It made sense to give
+it a more distinct name. Maybe Apple even wanted to associate it with the
+Macbook Air. In any case, Apple is no longer selling the iPad 2. Their iPad
+lineup consists of the current iPad Pro, the iPad Air 2 and iPad Air, and two
+generations of iPad Minis. The Air suffix no longer provides any additional
+distinction and being *as thin as Air* is the new default.
+
+I do not know when the Air products are going to be phased out. If I would have
+to bet, then Apple is going to introduce new Macbook Pros with the same color
+options and probably a new design at WWDC in June. The new iPad could be
+introduced in the Fall, with the iPad Air 2 taking the place of the entry level
+device[^1]. I would expect a new Macbook at screen sizes different than 12" around
+Fall as well.
+
+What that would leave us with is a clean lineup for Mac laptops and iPads. All machines come with Retina screens and there are distinct products for consumers and professionals.
+
+[^1]: Yes, that means at least one more year of iPad Air.
