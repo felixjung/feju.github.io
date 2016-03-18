@@ -14,13 +14,13 @@ Pro](http://9to5mac.com/2016/02/25/smaller-ipad-pro-march/), and probably some
 new [Apple Watch
 bands](http://9to5mac.com/2016/02/02/march-15-event-4-inch-phone-new-ipad-apple-watch/).
 That new iPad Pro got me thinking about Apple's broader plans for the iPad and
-Macbook ecosystem.<!--more-->
+Macbook product lines.<!--more-->
 
-I am hoping Apple will eliminate the Macbook Air and iPad Air from their
-product lineup in the long term. Instead, what they should offer in the future
-are a Macbook and a Macbook Pro, as well as an iPad and an iPad Pro. The pro
-products will be available in two screen sizes and offer better performance
-paired with "professional features". The current 12.9" iPad Pro gives an indication as to
+I expect Apple to eliminate the Macbook Air and iPad Air from their lineup over
+this and next year. Instead, they will offer a Macbook and a Macbook Pro in the
+laptop and an iPad and an iPad Pro in the tablet category. The pro products
+will be available in two screen sizes and offer better performance paired with
+"professional features". The current 12.9" iPad Pro gives an indication as to
 what could remain pro features for a 9.7" version:
 
 * Smart connector for attaching keyboard accessories
@@ -28,15 +28,18 @@ what could remain pro features for a 9.7" version:
 * Advanced storage controller for better memory performance
 * Apple Pencil support
 
-But why terminate the Air products? Think about it. The Macbook Air was a
-radical machine when it got introduced. No other laptop was as thin and owning
-the first generation Macbook Air cost a premium. Over time this changed and the
-Air became Apple's default consumer laptop. Last year, the company introduced a
-new 12" Macbook that is lighter and thinner than the 11" Macbook Air. I am
-convinced, the only reason Apple kept the Air around was that the Macbook was
-too much of a compromise in terms of performance an connectivity and too
-expensive at the time. That could very well change this year and it would not
-make sense to keep the Macbook Air around anymore.
+##### Cleaning up the product lines
+
+Why do I think Apple is going to do this? Think about it, the Macbook Air was a
+radical machine when it first got introduced. No other laptop was as thin and
+owning the first generation Macbook Air cost a premium. Over time this changed
+and the Air became Apple's default consumer laptop. Last year, the company
+introduced a new 12" Macbook that is lighter and thinner than the 11" Macbook
+Air. I am convinced, the only reason Apple kept the Air around was that the
+Macbook was too much of a compromise in terms of performance an connectivity
+and too expensive at the time. Just like the original Air it was too much of a
+technological advancement for the broader market. That could very well change
+this year rendering the Macbook Air obsolete.
 
 The case for dropping the iPad Air is similar. It was introduced at a time when
 the iPad 2 was still being sold as a cheap entry device. The iPad Air was also
@@ -49,11 +52,18 @@ distinction and being *as thin as Air* is the new default.
 
 I do not know when the Air products are going to be phased out. If I would have
 to bet, then Apple is going to introduce new Macbook Pros with the same color
-options and probably a new design at WWDC in June. The new iPad could be
+options and probably a new design at WWDC in June. The new consumer iPad could be
 introduced in the Fall, with the iPad Air 2 taking the place of the entry level
 device[^1]. I would expect a new Macbook at screen sizes different than 12" around
 Fall as well.
 
-What that would leave us with is a clean lineup for Mac laptops and iPads. All machines come with Retina screens and there are distinct products for consumers and professionals.
+##### Long-term outcome
+
+What that would leave us with is a clean lineup for Mac laptops and iPads. All
+machines come with Retina screens and there are distinct products for consumers
+and professionals. All coming in the same three color options of silver, black,
+and gold. Having a dedicated iPad line for professional use -- that is more
+than one single device -- could also help Apple establish iPads as serious
+creation devices, something that has been difficult in the past.
 
 [^1]: Yes, that means at least one more year of iPad Air.
