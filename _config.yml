@@ -21,8 +21,10 @@ paginate: 8
 markdown: kramdown
 permalink: /blog/:year/:month/:day/:title
 
-# Code Highlighting
-# highlighter: rouge
+# Sass
+sass:
+  sass_dir: _sass
+  style: compressed
 
 # Setup pages
 relative_permalinks: false
@@ -32,12 +34,4 @@ collections:
   - projects
 
 # Exclusions
-exclude: [node_modules, Gruntfile.js, bower.json, package.json, Gemfile, Gemfile.lock, Readme.md]
-
-# Plugins
-gems:
-  - jekyll-mentions
-  - jemoji
-  - jekyll-paginate
-# - jekyll-redirect-from
-# - jekyll-sitemap
+exclude: [Readme.md]

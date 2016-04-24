@@ -46,16 +46,16 @@ header {
 
 // BLOG HEADER STYLING
 header.blog {
-  @include header-style($bg-blog, $accent-blog, '../images/blog_mobile.png', '../images/blog.png');
+  @include header-style($bg-blog, $accent-blog, '/images/blog_mobile.png', '/images/blog.png');
 }
 
 // PROJECTS HEADER STYLING
 header.projects {
   @include header-style($bg-projects, $accent-projects,
-  '../images/projects_mobile.png', '../images/projects.png');
+  '/images/projects_mobile.png', '/images/projects.png');
 }
 
 // ABOUT HEADER STYLING
 header.about {
-  @include header-style($bg-about, $accent-about, '../images/about_mobile.png', '../images/about.png');
+  @include header-style($bg-about, $accent-about, '/images/about_mobile.png', '/images/about.png');
 }
