@@ -3,7 +3,10 @@ layout: post
 title: Caring about your code
 subtitle: Why you should always question yourself
 category: Development
-tags: opinion, advice, coding
+tags:
+  - opinion
+  - advice
+  - coding
 ---
 When you are a developer and hacking together some scripts for yourself, there is no immediate need to care about the quality of your code or its style.
 Likewise, when you are using Git to maintain some small personal project, why should you are about things like commit messages or even pull request titles — who creates branches in personal projects anyway, right?<!--more-->
