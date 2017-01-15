@@ -1,0 +1,160 @@
+---
+---
+
+@import "variables";
+@import "normalize";
+@import "include-media";
+@import "bourbon/bourbon";
+@import url('https://fonts.googleapis.com/css?family=Lato:300,300i');
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+html {
+  font-family: 'lato', sans-sarif;
+  font-size: 21px;
+  font-style: italic;
+  font-weight: 300;
+}
+
+body {
+  background-color: $color-off-white;
+
+  @include media('<=small') {
+    padding: $space-xs;
+  }
+
+  @include media('>small', '<=medium') {
+    padding: $space-s;
+  }
+
+  @include media('>medium', '<large') {
+    padding: $space-m;
+  }
+
+  @include media('>=large') {
+    padding: $space-l;
+  }
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+a, a:active, a:link, a:visited {
+  color: $color-red;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.svg-sprite {
+  display: none;
+}
+
+.home-Main {
+  animation: fadeIn 0.5s ease-in;
+  margin: 0 auto;
+  width: 100%;
+  position: relative;
+
+  @include media('<=small') {
+    top: $space-l;
+  }
+
+  @include media('>small', '<=medium') {
+    top: $space-xxl;
+  }
+
+  @include media('>medium', '<large') {
+    top: $space-xxl;
+  }
+
+  @include media('>=large') {
+    top: $space-xxxl;
+  }
+}
+
+.home-Header {
+  position: relative;
+}
+
+.home-ProfileImage {
+  border-radius: 999px;
+  box-shadow: 0 $space-xs $space-s 0 transparentize($color-base01, .9);
+  left: 50%;
+  position: relative;
+  transform: translateX(-50%);
+
+  @include media('<=small') {
+    @include size(64px);
+  }
+
+  @include media('>small', '<=medium') {
+    @include size(96px);
+  }
+
+  @include media('>medium') {
+    @include size(128px);
+  }
+}
+
+.home-Introduction {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  max-width: 700px;
+  margin: $space-xxl 0;
+}
+
+.home-Svgs {
+  display: inline-flex;
+  margin: 0 auto;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+
+  & > li:not(:last-of-type) {
+    margin-right: $space-m;
+  }
+}
+
+.home-Svgs_Svg {
+  @include size(24px);
+  transition: transform 0.2s ease-in;
+
+  &#{&}-github {
+    fill: $color-base01;
+  }
+
+  &#{&}-twitter {
+    fill: $color-turquoise;
+  }
+
+  &#{&}-instagram {
+    fill: $color-purple;
+  }
+
+  &#{&}-medium {
+    fill: $color-green;
+  }
+
+  &:hover {
+    transform: scale(1.5);
+  }
+}
