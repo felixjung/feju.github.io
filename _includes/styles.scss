@@ -15,6 +15,7 @@
 
 html {
   font-family: monospace;
+  color: $color-base02;
 
   @include media('<=small') {
     font-size: 15px;
