@@ -1,0 +1,21 @@
+{% assign last_updated = site.time | date: '%s' %}
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="{{ include.twitter_username }}" />
+<meta name="twitter:title" content="{{ include.title }}" />
+<meta name="twitter:description" content="{{ include.description }}" />
+<meta name="twitter:image" content="{{ include.preview_image_url }}" />
+<meta name="twitter:image:alt" content="{{ include.preview_image_alt }}" />
+
+<!-- Open Graph -->
+<meta property="og:title" content="{{ include.title }}" />
+<meta property="og:description" content="{{ include.description }}" />
+<meta property="og:type" content="website" />
+<meta property="og:updated_time" content="{{ last_updated }}" />
+<meta property="og:url" content="{{ include.url }}" />
+<meta property="og:image" content="{{ include.preview_image_url }}" />
+<!-- <meta property="og:image:secure_url" content="https://secure.example.com/ogp.jpg" /> -->
+<meta property="og:image:type" content="image/jpg" />
+<meta property="og:image:width" content="240" />
+<meta property="og:image:height" content="240" />

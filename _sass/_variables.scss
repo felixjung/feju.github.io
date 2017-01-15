@@ -1,0 +1,36 @@
+// Base16 Ocean colors (https://chriskempson.github.io/base16/)
+$color-base01: #2b303b;
+$color-base02: #343d46;
+$color-base03: #4f5b66;
+$color-base04: #65737e;
+$color-base05: #a7adba;
+$color-base06: #c0c5ce;
+$color-base07: #dfe1e8;
+$color-base08: #eff1f5;
+$color-red: #bf616a;
+$color-orange: #d08770;
+$color-yellow: #ebcb8b;
+$color-green: #a3be8c;
+$color-turquoise: #96b5b4;
+$color-blue: #8fa1b3;
+$color-purple: #b48ead;
+$color-brown: #ab7967;
+
+// More colors
+$color-off-white: lighten($color-base08, 2%);
+
+// Spacing
+$space-xs: 6px;
+$space-s: 12px;
+$space-m: 18px;
+$space-l: 24px;
+$space-xl: 30px;
+$space-xxl: 36px;
+$space-xxxl: 36px;
+
+// Breakpoints
+$breakpoints: (
+  'small': 320px,
+  'medium': 768px,
+  'large': 1024px
+) !default;

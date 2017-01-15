@@ -1,0 +1,60 @@
+{% assign assets_baseurl = site.url | append: "/" | append: site.assets_path %}
+{% assign images_baseurl = assets_baseurl | append: "/" | append: site.image_folder %}
+{% assign meta_baseurl = assets_baseurl | append: '/' | append: site.meta_folder %}
+{% assign preview_image_url = images_baseurl | append: "/" | append: site.preview_image %}
+{% assign profile_image_url = images_baseurl | append: "/" | append: "profile-image.jpg" %}
+{% assign css_url = assets_baseurl | append: '/' | append: site.css_file %}
+{% assign js_url = assets_baseurl | append: '/' | append: site.js_file %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>{{ site.title }}</title>
+    <meta name="description" content="{{ site.description }}" />
+
+    {%
+      include social-meta.html
+      title = site.title
+      description = site.description
+      preview_image_url = preview_image_url
+      preview_image_alt = site.author
+      twitter_username = site.twitter_username
+      url = site.url
+    %}
+
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ meta_baseurl }}/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="{{ meta_baseurl }}/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="{{ meta_baseurl }}/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="{{ meta_baseurl }}/manifest.json">
+    <link rel="mask-icon" href="{{ meta_baseurl }}/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="{{ css_url }}" />
+  </head>
+  <body>
+    <div class="svg-sprite">{% include sprite.svg %}</div>
+    <main class="home-Main">
+      <img class="home-ProfileImage" src="{{ profile_image_url }}" alt="Felix Jung">
+      <div class="home-Introduction">
+        {{ content }}
+      </div>
+      <ul class="home-Svgs">
+        {% for profile in site.data.profiles %}
+          <li>
+            <a
+              class="home-Svgs-SvgLink"
+              href="{{ profile.url }}">
+              <svg viewBox="0 0 16 16" class="home-Svgs_Svg home-Svgs_Svg-{{ profile.name }}">
+                <use xlink:href="#{{ profile.name }}"></use>
+              </svg>
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </main>
+  </body>
+</html>
