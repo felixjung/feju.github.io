@@ -2,7 +2,6 @@
 @import "normalize";
 @import "include-media";
 @import "bourbon/bourbon";
-@import url('https://fonts.googleapis.com/css?family=Fira+Mono:400');
 
 @keyframes fadeIn {
   from {
@@ -15,8 +14,7 @@
 }
 
 html {
-  font-family: 'Fira Mono', sans-sarif;
-  font-weight: 400;
+  font-family: monospace;
 
   @include media('<=small') {
     font-size: 15px;
