@@ -38,7 +38,10 @@ html {
 }
 
 body {
-  background-color: $color-off-white;
+  background: linear-gradient(
+    to bottom, lighten($color-off-white, 50%), $color-off-white
+  );
+  height: 100vh;
 
   @include media('<=small') {
     padding: $space-xs;
