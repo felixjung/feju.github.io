@@ -5,7 +5,7 @@
 @import "normalize";
 @import "include-media";
 @import "bourbon/bourbon";
-@import url('https://fonts.googleapis.com/css?family=Lato:300,300i,400');
+@import url('https://fonts.googleapis.com/css?family=Fira+Mono:400');
 
 @keyframes fadeIn {
   from {
@@ -18,24 +18,21 @@
 }
 
 html {
-  font-family: 'lato', sans-sarif;
-  font-style: italic;
+  font-family: 'Fira Mono', sans-sarif;
+  font-weight: 400;
 
   @include media('<=small') {
     font-size: 15px;
-    font-weight: 300;
     line-height: 22px;
   }
 
   @include media('>small', '<=medium') {
     font-size: 18px;
-    font-weight: 300;
     line-height: 24px;
   }
 
   @include media('>medium') {
     font-size: 21px;
-    font-weight: 300;
     line-height: 30px;
   }
 }
