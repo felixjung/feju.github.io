@@ -5,7 +5,7 @@
 @import "normalize";
 @import "include-media";
 @import "bourbon/bourbon";
-@import url('https://fonts.googleapis.com/css?family=Lato:300,300i');
+@import url('https://fonts.googleapis.com/css?family=Lato:300,300i,400');
 
 @keyframes fadeIn {
   from {
@@ -19,9 +19,25 @@
 
 html {
   font-family: 'lato', sans-sarif;
-  font-size: 21px;
   font-style: italic;
-  font-weight: 300;
+
+  @include media('<=small') {
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 22px;
+  }
+
+  @include media('>small', '<=medium') {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 24px;
+  }
+
+  @include media('>medium') {
+    font-size: 21px;
+    font-weight: 300;
+    line-height: 30px;
+  }
 }
 
 body {
@@ -130,12 +146,33 @@ a:hover {
   transform: translateX(-50%);
 
   & > li:not(:last-of-type) {
-    margin-right: $space-m;
+    @include media('<=small') {
+      margin-right: $space-xl;
+    }
+
+    @include media('>small', '<=medium') {
+      margin-right: $space-l;
+    }
+
+    @include media('>medium') {
+      margin-right: $space-m;
+    }
   }
 }
 
 .home-Svgs_Svg {
-  @include size(24px);
+  @include media('<=small') {
+    @include size(48px);
+  }
+
+  @include media('>small', '<=medium') {
+    @include size(42px);
+  }
+
+  @include media('>medium') {
+    @include size(32px);
+  }
+
   transition: transform 0.2s ease-in;
 
   &#{&}-github {
