@@ -14,7 +14,7 @@
 }
 
 html {
-  font-family: Hack, Menlo, "Courier New", monospace;;
+  font-family: Hack, Menlo, "Courier New", monospace;
   color: $color-base02;
 
   @include media('<=small') {
