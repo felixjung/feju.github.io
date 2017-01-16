@@ -1,12 +1,12 @@
 - name: github
-  url: http://github.com/felixjung
+  url: https://github.com/felixjung
   alt: "Check out my code on Github"
 - name: medium
-  url: http://medium.com/code-matters
+  url: https://codematters.blog
   alt: "Read my blog on Medium"
 - name: twitter
-  url: http://twitter.com/feju
+  url: https://twitter.com/feju
   alt: "Visit @feju on Twitter"
 - name: instagram
-  url: http://instagram.com/felixjung
+  url: https://instagram.com/felixjung
   alt: "Some photos end up on Instagram"
