@@ -32,6 +32,9 @@ meta_folder: "meta"
 css_file: "styles.css"
 js_file: "main.js"
 
+gems:
+  - jekyll-sitemap
+
 # Build settings
 markdown: kramdown
 sass:
@@ -44,3 +47,4 @@ exclude:
   - _build
   - node_modules
   - vendor
+  - yarn.lock
