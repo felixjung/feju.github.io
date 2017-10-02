@@ -1,30 +1,17 @@
-import React from "react"
-import PropTypes from "prop-types"
-import Helmet from "react-helmet"
-
-import { TypographyStyle } from "react-typography"
-import typography from "./utils/typography"
-
-const BUILD_TIME = new Date().getTime()
+import React from 'react'
+import PropTypes from 'prop-types'
+import Helmet from 'react-helmet'
 
 export default class HTML extends React.Component {
   static propTypes = {
-    body: PropTypes.string,
+    body: PropTypes.string.isRequired,
+    headComponents: PropTypes.array.isRequired,
+    postBodyComponents: PropTypes.array.isRequired
   }
 
   render() {
     const head = Helmet.rewind()
-
-    let css
-    if (process.env.NODE_ENV === "production") {
-      css = (
-        <style
-          dangerouslySetInnerHTML={{
-            __html: require("!raw!../public/styles.css"),
-          }}
-        />
-      )
-    }
+    const { headComponents, postBodyComponents, body } = this.props
 
     return (
       <html lang="en">
@@ -35,16 +22,11 @@ export default class HTML extends React.Component {
             name="viewport"
             content="width=device-width, initial-scale=1.0"
           />
-          {this.props.headComponents}
-          <TypographyStyle typography={typography} />
-          {css}
+          {headComponents}
         </head>
         <body>
-          <div
-            id="___gatsby"
-            dangerouslySetInnerHTML={{ __html: this.props.body }}
-          />
-          {this.props.postBodyComponents}
+          <div id="___gatsby" dangerouslySetInnerHTML={{ __html: body }} />
+          {postBodyComponents}
         </body>
       </html>
     )
