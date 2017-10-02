@@ -1,6 +1,9 @@
 module.exports = {
   siteMetadata: {
-    title: 'felixjung.io',
+    title: 'felixjung.io'
   },
-  plugins: ['gatsby-plugin-react-helmet'],
+  plugins: [
+    'gatsby-plugin-catch-links',
+    'gatsby-plugin-emotion'
+  ]
 }

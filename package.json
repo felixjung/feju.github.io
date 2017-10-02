@@ -4,20 +4,54 @@
   "version": "1.0.0",
   "author": "Felix Jung <jung.felix@gmail.com>",
   "dependencies": {
-    "gatsby": "^1.0.1",
-    "gatsby-link": "^1.0.1",
-    "gatsby-plugin-react-helmet": "^1.0.1",
+    "emotion": "8.0.2-12",
+    "emotion-server": "8.0.2-13",
+    "emotion-theming": "^8.0.2-10",
+    "gatsby": "^1.9.50",
+    "gatsby-link": "^1.6.18",
+    "gatsby-plugin-catch-links": "^1.0.8",
+    "gatsby-plugin-emotion": "^1.1.8",
+    "gatsby-plugin-react-helmet": "^1.0.6",
+    "glamor": "^3.0.0-3",
+    "lodash": "^4.17.4",
+    "polished": "^1.7.0",
+    "react-emotion": "8.0.2-13"
   },
-  "devDependencies": { },
+  "devDependencies": {
+    "babel-eslint": "^8.0.1",
+    "eslint": "^4.8.0",
+    "eslint-config-prettier": "^2.6.0",
+    "eslint-config-xo": "^0.18.2",
+    "eslint-formatter-pretty": "^1.3.0",
+    "eslint-import-resolver-webpack": "^0.8.3",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-prettier": "^2.3.1",
+    "eslint-plugin-react": "^7.4.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^4.2.3",
+    "prettier": "^1.7.3"
+  },
   "keywords": [
+    "blog",
     "gatsby"
   ],
   "license": "MIT",
   "main": "n/a",
   "scripts": {
     "build": "gatsby build",
-    "develop": "gatsby develop",
-    "format": "prettier --single-quote --write \"pages/*.js\" \"utils/*.js\" \"wrappers/*.js\" \"html.js\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "gatsby develop",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "precommit": "lint-staged",
+    "test:lint": "eslint --cache src/**/*.js",
+    "fix:prettier": "prettier --no-semi --single-quote true --write src/**/*.js",
+    "fix:eslint": "eslint --fix --quiet src/**/*.js",
+    "fix": "npm run fix:prettier && npm run fix:eslint"
+  },
+  "lint-staged": {
+    "src/**/*.js": [
+      "prettier --no-semi --single-quote true --write",
+      "eslint --fix",
+      "git add"
+    ]
   }
 }
