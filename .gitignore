@@ -1,8 +1,6 @@
-_site/
 node_modules/
-_bower/
-.sass-cache/
+public
+.gatsby-context.js
 .DS_Store
-.bowerrc
-assets/js/felixjung.io.min.js
-Gemfile.lock
+.intermediate-representation/
+.cache/
