@@ -4,6 +4,7 @@ import { ThemeProvider } from 'emotion-theming'
 
 import * as theme from '../styles/variables'
 import '../styles/globals'
+import '../styles/highlight'
 
 import Nav from '../components/Navigation'
 

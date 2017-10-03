@@ -11,5 +11,7 @@ export default injectGlobal`
     font-family: -apple-system, "Helvetica Neue";
     color: ${colors.text};
     background-color: ${colors.background};
+    padding: 0;
+    margin: 0;
   }
 `

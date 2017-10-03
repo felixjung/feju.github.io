@@ -91,3 +91,12 @@ export const lineHeight = createValues(
 )
 
 export const radius = createValues('s', 3, BASE_RADIUS, RADIUS_INCREMENT, 'px')
+export const breakpoints = {
+  s: 320,
+  beforeM: 569,
+  m: 570,
+  beforeL: 819,
+  l: 820,
+  beforeXl: 1069,
+  xl: 1070
+}
