@@ -39,24 +39,7 @@ const NavUl = styled.ul({
   '-webkit-padding-start': 0
 })
 
-const NavLinks = ({ links }) => {
-  const mappedLinks = links.map(({ url, label }) => (
-    <NavLi key={url}>
-      <NavLink to={url}>{label}</NavLink>
-    </NavLi>
-  ))
-  return <NavUl>{mappedLinks}</NavUl>
-}
-
-NavLinks.propTypes = {
-  links: PropTypes.array.isRequired
-}
-
-Nav.propTypes = {
-  links: PropTypes.array.isRequired
-}
-
-export default function Nav({ links }) {
+const Nav = ({ items }) => {
   const StyledNav = inPage(
     styled.nav({
       display: 'flex',
@@ -65,9 +48,25 @@ export default function Nav({ links }) {
       height: '80px'
     })
   )
+  const listItems = items.map(({ url, label }) => (
+    <NavLi key={url}>
+      <NavLink to={url}>{label}</NavLink>
+    </NavLi>
+  ))
   return (
     <StyledNav>
-      <NavLinks links={links} />
+      <NavUl>{listItems}</NavUl>
     </StyledNav>
   )
 }
+
+Nav.propTypes = {
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string.isRequired,
+      url: PropTypes.string.isRequired
+    })
+  ).isRequired
+}
+
+export default Nav

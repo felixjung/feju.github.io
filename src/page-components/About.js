@@ -2,21 +2,14 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
+import { flow, find } from 'lodash/fp'
 
 import { Section } from '../components/Layout'
+import { getPage } from '../lib/contentful'
 import Markdown from '../components/Markdown'
 
-const getAboutData = ({ contentfulPage }) => {
-  const { title } = contentfulPage
-  const sections = contentfulPage.sections.map(({ title, body: { body } }) => ({
-    title,
-    body
-  }))
-  return { title, sections }
-}
-
-const About = ({ data }) => {
-  const { title, sections } = getAboutData(data)
+const About = ({ data: { contentfulPage } }) => {
+  const { title, sections } = getPage(contentfulPage)
   return (
     <Section>
       <h1>{title}</h1>
@@ -37,11 +30,14 @@ About.propTypes = {
 export default About
 
 export const aboutQuery = graphql`
-  query AboutQuery {
-    contentfulPage {
-      id
+  query AboutQuery($id: String!) {
+    contentfulPage(id: { eq: $id }) {
+      route
       title
+      name
       sections {
+        title
+        name
         body {
           body
         }
