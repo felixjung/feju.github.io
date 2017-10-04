@@ -2,7 +2,6 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
-import { flow, find } from 'lodash/fp'
 
 import { Section } from '../components/Layout'
 import { getPage } from '../lib/contentful'

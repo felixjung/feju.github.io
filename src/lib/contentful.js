@@ -1,4 +1,5 @@
-import { flow, map } from 'lodash/fp'
+import { flow, reduce, map, set } from 'lodash/fp'
+import { getNodesFromAllQuery } from './gatsby'
 
 export const getPageSection = ({ title, body: { body }, name }) => ({
   title,
@@ -12,6 +13,7 @@ export const getPage = ({ title, sections, name }) => ({
   sections: sections.map(getPageSection)
 })
 
-export const getPages = ({ allContentfulPage } = {}) => flow(
-  // TODO: make this work again using the above function so that the Nav works.
+export const getNavigationItems = flow(
+  getNodesFromAllQuery('allContentfulPage'),
+  map(({ name: label, route }) => ({ label, url: `/${route}` }))
 )

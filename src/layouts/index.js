@@ -4,32 +4,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { ThemeProvider } from 'emotion-theming'
 
+import { getNavigationItems } from '../lib/contentful'
 import * as theme from '../styles/variables'
 import '../styles/globals'
 import '../styles/highlight'
 
 import Nav from '../components/Navigation'
-import { getPages } from '../lib/contentful'
-
-const navLinks = [
-  {
-    label: 'Blog',
-    url: '/blog'
-  },
-  {
-    label: 'Markdown',
-    url: '/github'
-  },
-  {
-    label: 'About',
-    url: '/about'
-  }
-]
-
-const getNavigationItems = data => {
-  const pages = getPages(data)
-  return pages.map(({ name: label, route: url }) => ({ label, url }))
-}
 
 export default class Template extends React.Component {
   static propTypes = {
@@ -38,11 +18,11 @@ export default class Template extends React.Component {
 
   render() {
     const { data } = this.props
-    // const navItems = getNavigationItems(data)
+    const navItems = getNavigationItems(data)
     return (
       <ThemeProvider theme={theme}>
         <div>
-          <Nav items={navLinks} />
+          <Nav items={navItems} />
           {this.props.children()}
         </div>
       </ThemeProvider>
@@ -51,7 +31,7 @@ export default class Template extends React.Component {
 }
 
 export const pagesQuery = graphql`
-  query PagesQuery {
+  query ContentfulPagesQuery {
     allContentfulPage {
       edges {
         node {
