@@ -1,15 +1,18 @@
+/* global exports */
+
 const { resolve: resolvePath } = require('path')
 const { stat } = require('fs')
 const { promisify } = require('util')
 const statAsync = promisify(stat)
 
-const { flow, get, map } = require('lodash/fp')
+const { flow, map, concat } = require('lodash/fp')
 
-function getComponentPath(name) {
-  return resolvePath(`./src/page-components/${name}.js`)
-}
+const { createAllQuery, getNodesForContentType } = require('./util')
 
-async function componentExists(path) {
+// TODO: make component folder a variable
+const getComponentPath = name => resolvePath(`./src/page-components/${name}.js`)
+
+const componentExists = async (path) => {
   try {
     const stats = await statAsync(path)
     return stats.isFile()
@@ -18,47 +21,59 @@ async function componentExists(path) {
   }
 }
 
-async function createContentfulPageObject({ id, route, name }) {
-  const path = getComponentPath(name)
-  const isExistingComponent = await componentExists(path)
-  if (!isExistingComponent) {
-    throw new TypeError(`No component for Page "${name}" found at "${path}".`)
+const handleGraphQl = ({ data, errors }) => {
+  if (errors) {
+    throw new Error(errors)
   }
-
-  return {
-    path: `/${route}`,
-    component: path,
-    context: { id }
-  }
+  return { data }
 }
 
-const getPageNodes = get('data.allContentfulPage.edges')
-const getPageData = ({ node }) => node
+const pageObjectPropsFromNode = ({ id, route, name }) => ({
+  component: getComponentPath(name),
+  context: { id },
+  path: `/${route}`
+})
 
-function createPages({ graphql, boundActionCreators }) {
-  const { createPage } = boundActionCreators
-  return graphql(`
-    {
-      allContentfulPage {
-        edges {
-          node {
-            route
-            name
-            id
-          }
-        }
-      }
-    }
-  `)
-    .then(
-      flow(
-        getPageNodes,
-        map(getPageData),
-        map(createContentfulPageObject),
-        Promise.all
-      )
+const blogPostObjectPropsFromNode = ({ slug, publishDate, id }) => ({
+  // TODO: filter by publishDate
+  component: getComponentPath('BlogPost'),
+  context: { id },
+  path: `/blog/${slug}`
+})
+
+const createBlogPageObject = () => ({
+  component: getComponentPath('Blog'),
+  path: '/blog'
+})
+
+const getPages = graphql => {
+  return graphql(createAllQuery('page', `route name id`)).then(
+    flow(
+      handleGraphQl,
+      getNodesForContentType('page'),
+      map(pageObjectPropsFromNode)
     )
-    .then(flow(map(createPage), Promise.all))
+  )
+}
+
+const getBlogPosts = graphql =>
+  graphql(createAllQuery('blogPost', 'slug publishDate id')).then(
+    flow(
+      handleGraphQl,
+      getNodesForContentType('blogPost'),
+      map(blogPostObjectPropsFromNode)
+    )
+  )
+
+const createPages = async ({ graphql, boundActionCreators }) => {
+  const { createPage } = boundActionCreators
+  const pagePageObjects = await getPages(graphql)
+  const blogPostPageObjects = await getBlogPosts(graphql)
+  const allPageObjects = concat(
+    pagePageObjects,
+    blogPostPageObjects
+  )
+  return map(createPage, allPageObjects)
 }
 
 exports.createPages = createPages
