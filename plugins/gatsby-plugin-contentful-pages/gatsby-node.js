@@ -12,7 +12,7 @@ const { createAllQuery, getNodesForContentType } = require('./util')
 // TODO: make component folder a variable
 const getComponentPath = name => resolvePath(`./src/page-components/${name}.js`)
 
-const componentExists = async (path) => {
+const componentExists = async path => {
   try {
     const stats = await statAsync(path)
     return stats.isFile()
@@ -69,10 +69,7 @@ const createPages = async ({ graphql, boundActionCreators }) => {
   const { createPage } = boundActionCreators
   const pagePageObjects = await getPages(graphql)
   const blogPostPageObjects = await getBlogPosts(graphql)
-  const allPageObjects = concat(
-    pagePageObjects,
-    blogPostPageObjects
-  )
+  const allPageObjects = concat(pagePageObjects, blogPostPageObjects)
   return map(createPage, allPageObjects)
 }
 

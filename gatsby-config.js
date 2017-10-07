@@ -1,3 +1,17 @@
+/* global module */
+
+const mapBlogPost = ({
+  title,
+  subtitle,
+  publishDate,
+  excerpt: { excerpt }
+}) => ({
+  title,
+  subtitle,
+  publishDate,
+  excerpt
+})
+
 module.exports = {
   siteMetadata: {
     title: 'felixjung.io'
@@ -9,13 +23,40 @@ module.exports = {
       resolve: 'gatsby-source-contentful',
       options: {
         spaceId: 'ibq1vhkmncem',
-        accessToken: 'fa30b33bc2cd61d8ca05a5075a34047d44b4417c1c5e52991f7ae9ce4aa5c708'
+        accessToken:
+          'fa30b33bc2cd61d8ca05a5075a34047d44b4417c1c5e52991f7ae9ce4aa5c708'
       }
     },
+    'gatsby-plugin-contentful-pages',
     {
-      resolve: 'gatsby-plugin-contentful-pages',
+      resolve: 'gatsby-plugin-paginated-json',
       options: {
-
+        destination: 'api',
+        collections: [
+          {
+            baseName: 'posts',
+            pageSize: 5,
+            rootQueryType: 'allContentfulBlogPost',
+            query: rootQueryType => `
+              {
+                ${rootQueryType}(sort: {fields: [publishDate], order: DESC}) {
+                  edges {
+                    node {
+                      id
+                      publishDate
+                      title
+                      subtitle
+                      excerpt {
+                        excerpt
+                      }
+                    }
+                  }
+                }
+              }
+            `,
+            map: mapBlogPost
+          }
+        ]
       }
     }
   ]

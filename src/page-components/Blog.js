@@ -12,10 +12,9 @@ const getBlogPosts = getNodesFromAllQuery('allContentfulBlogPost')
 
 const Blog = ({ data }) => {
   const blogPosts = getBlogPosts(data)
-  debugger;
   return (
     <Section>
-      <h1>{title}</h1>
+      <h1>This will be a blog one day</h1>
     </Section>
   )
 }
