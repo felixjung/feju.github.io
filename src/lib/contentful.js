@@ -1,4 +1,4 @@
-import { flow, reduce, map, set } from 'lodash/fp'
+import { flow, map } from 'lodash/fp'
 import { getNodesFromAllQuery } from './gatsby'
 
 export const getPageSection = ({ title, body: { body }, name }) => ({
