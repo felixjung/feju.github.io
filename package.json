@@ -48,7 +48,6 @@
     "build": "gatsby build",
     "start": "gatsby develop",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "precommit": "lint-staged",
     "test:lint": "eslint --cache src/**/*.js",
     "fix:prettier": "prettier --no-semi --single-quote true --write src/**/*.js",
     "fix:eslint": "eslint --fix --quiet src/**/*.js",
