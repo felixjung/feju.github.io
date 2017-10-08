@@ -70,6 +70,19 @@ const createDestinationUri = flow(stripSlashes, d => `/${d}`)
 const createDestinationPath = flow(stripSlashes, dest =>
   resolve(PUBLIC_PATH, dest)
 )
+const getPageUris = curry(
+  (destinationUri, fileNameFn, maxIndex, currentIndex) => {
+    const next =
+      currentIndex === maxIndex
+        ? undefined
+        : `${destinationUri}/${fileNameFn(currentIndex + 1)}`
+    const previous =
+      currentIndex === 0
+        ? undefined
+        : `${destinationUri}/${fileNameFn(currentIndex - 1)}`
+    return { previous, next }
+  }
+)
 
 const writePages = dest => ({ baseName, pages }) => {
   const fileNameForIndex = indexedWithBaseName(baseName)
@@ -77,24 +90,18 @@ const writePages = dest => ({ baseName, pages }) => {
   const destinationPath = createDestinationPath(dest)
   const padPageIndex = padIndex(pages)
   const createPageFileName = flow(padPageIndex, fileNameForIndex)
-  const getPreviousPageUri = currentIndex => {
-    const previousIndex = currentIndex - 1
-    return previousIndex === -1
-      ? undefined
-      : `${destinationUri}/${createPageFileName(previousIndex)}`
-  }
-  const getNextPageUri = currentIndex => {
-    const nextIndex = currentIndex + 1
-    return nextIndex === pages.length
-      ? undefined
-      : `${destinationUri}/${createPageFileName(nextIndex)}`
-  }
 
   const createWriteData = index => {
     const path = join(destinationPath, createPageFileName(index))
+    const { previous, next } = getPageUris(
+      destinationUri,
+      createPageFileName,
+      pages.length - 1,
+      index
+    )
     const data = JSON.stringify({
-      next: getNextPageUri(index),
-      previous: getPreviousPageUri(index),
+      next,
+      previous,
       items: pages[index]
     })
     return [path, data]
