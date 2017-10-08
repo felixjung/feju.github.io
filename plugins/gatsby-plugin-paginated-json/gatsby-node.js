@@ -35,7 +35,6 @@ const getQueryData = (graphql, rootQueryType, query) => {
 
 const PUBLIC_PATH = './public'
 
-// TODO: transpile to use ...rest
 const queryCollection = graphql => ({
   rootQueryType,
   query,
@@ -62,50 +61,43 @@ const padIndex = (collection, zeroBase = true) => index => {
   return padCharsStart('0')(digits)(index)
 }
 
-const toBasePath = (dest, baseName, relative) => index => {
-  const basePath = relative
-    ? join(`/${dest}`, baseName)
-    : resolve(PUBLIC_PATH, dest, baseName)
-  return `${basePath}-${index}.json`
-}
+const indexedWithBaseName = baseName => index => `${baseName}-${index}.json`
+const stripLeadingSlash = str => str.replace(/^\//, '')
+const stripTrailingSlash = str => str.replace(/\/$/, '')
+const stripSlashes = flow(stripLeadingSlash, stripTrailingSlash)
 
-const trace = data => {
-  console.log(data)
-  return data
-}
+const createDestinationUri = flow(stripSlashes, d => `/${d}`)
+const createDestinationPath = flow(stripSlashes, dest =>
+  resolve(PUBLIC_PATH, dest)
+)
 
 const writePages = dest => ({ baseName, pages }) => {
-  const absPathForIndex = toBasePath(dest, baseName, false)
-  const relPathForIndex = toBasePath(dest, baseName, true)
-  const padIndexForPages = padIndex(pages)
-  const createPagePath = flow(padIndexForPages, relPathForIndex)
-  const createFilePath = flow(padIndexForPages, absPathForIndex)
-  const getNextPagePath = currentIndex => {
+  const fileNameForIndex = indexedWithBaseName(baseName)
+  const destinationUri = createDestinationUri(dest)
+  const destinationPath = createDestinationPath(dest)
+  const padPageIndex = padIndex(pages)
+  const createPageFileName = flow(padPageIndex, fileNameForIndex)
+  const getNextPageUri = currentIndex => {
     const nextIndex = currentIndex + 1
-    return nextIndex === pages.length ? undefined : createPagePath(nextIndex)
+    return nextIndex === pages.length
+      ? undefined
+      : `${destinationUri}/${createPageFileName(nextIndex)}`
   }
-  const getMeta = currentIndex => ({
-    next: getNextPagePath(currentIndex)
-  })
-  return flow(
-    keys,
-    map(
-      flow(
-        toInteger,
-        currentIndex => ({
-          index: currentIndex,
-          data: [pages[currentIndex], getMeta(currentIndex)]
-        }),
-        ({ index, data: [page, meta] }) => ({
-          index,
-          data: Object.assign({}, meta, { items: page })
-        }),
-        ({ index, data }) =>
-          writeFileAsync(createFilePath(index), JSON.stringify(data))
-      )
-    ),
-    Promise.all
-  )(pages)
+
+  const createWriteData = index => {
+    const path = join(destinationPath, createPageFileName(index))
+    const data = JSON.stringify({
+      next: getNextPageUri(index),
+      items: pages[index]
+    })
+    return [path, data]
+  }
+
+  const writePage = flow(toInteger, createWriteData, ([path, data]) =>
+    writeFileAsync(path, data)
+  )
+
+  return flow(keys, map(writePage), Promise.all)(pages)
 }
 
 const onPostBuild = async ({ graphql }, { destination, collections }) => {
@@ -113,7 +105,6 @@ const onPostBuild = async ({ graphql }, { destination, collections }) => {
     collections
   )
   const paginatedData = map(paginate, paginationData)
-  console.log(paginatedData)
   return flow(map(writePages(destination)), Promise.all)(paginatedData)
 }
 
