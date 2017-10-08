@@ -77,6 +77,12 @@ const writePages = dest => ({ baseName, pages }) => {
   const destinationPath = createDestinationPath(dest)
   const padPageIndex = padIndex(pages)
   const createPageFileName = flow(padPageIndex, fileNameForIndex)
+  const getPreviousPageUri = currentIndex => {
+    const previousIndex = currentIndex - 1
+    return previousIndex === -1
+      ? undefined
+      : `${destinationUri}/${createPageFileName(previousIndex)}`
+  }
   const getNextPageUri = currentIndex => {
     const nextIndex = currentIndex + 1
     return nextIndex === pages.length
@@ -88,6 +94,7 @@ const writePages = dest => ({ baseName, pages }) => {
     const path = join(destinationPath, createPageFileName(index))
     const data = JSON.stringify({
       next: getNextPageUri(index),
+      previous: getPreviousPageUri(index),
       items: pages[index]
     })
     return [path, data]
