@@ -35,7 +35,7 @@ module.exports = {
         collections: [
           {
             baseName: 'posts',
-            pageSize: 2,
+            pageSize: 4,
             query: `
               {
                 allContentfulBlogPost(
