@@ -8,47 +8,58 @@ const {
   curry,
   flow,
   get,
+  head,
+  identity,
   keys,
   map,
   padCharsStart,
-  toInteger
+  toInteger,
+  values,
+  countBy
 } = require('lodash/fp')
 const writeFileAsync = promisify(writeFile)
 
-const handleGraphQl = ({ data, errors }) => {
+const validateQuery = data =>
+  flow(keys, countBy(identity), count => {
+    if (count > 1) {
+      throw new TypeError('You can only run one query per collection.')
+    }
+    return data
+  })(data)
+
+const getEdges = flow(values, head, get('edges'))
+
+const getNodes = map(get('node'))
+
+const runQuery = async (graphql, query) => {
+  const { data, errors } = await graphql(query)
   if (errors) {
     throw new Error(errors)
   }
   return data
 }
 
-const getNodesFromAllQuery = curry((rootQueryType, data) =>
-  flow(get(`${rootQueryType}.edges`), map(({ node }) => node))(data)
-)
-
-const processQueryResponse = rootQueryType =>
-  flow(handleGraphQl, getNodesFromAllQuery(rootQueryType))
-
-const getQueryData = (graphql, rootQueryType, query) => {
-  return graphql(query(rootQueryType)).then(processQueryResponse(rootQueryType))
+const getQueryNodes = async (graphql, query) => {
+  const data = await runQuery(graphql, query)
+  const edges = flow(validateQuery, getEdges)(data)
+  return getNodes(edges)
 }
 
 const PUBLIC_PATH = './public'
 
-const queryCollection = graphql => ({
-  rootQueryType,
+const runCollectionQuery = graphql => async ({
   query,
   map: mapNode,
   pageSize,
   baseName
-}) =>
-  getQueryData(graphql, rootQueryType, query).then(
-    flow(map(mapNode), entries => ({
-      baseName,
-      pageSize,
-      entries
-    }))
-  )
+}) => {
+  const nodes = await getQueryNodes(graphql, query)
+  return flow(map(mapNode), entries => ({
+    baseName,
+    pageSize,
+    entries
+  }))(nodes)
+}
 
 const paginate = ({ baseName, pageSize, entries }) => ({
   baseName,
@@ -115,9 +126,10 @@ const writePages = dest => ({ baseName, pages }) => {
 }
 
 const onPostBuild = async ({ graphql }, { destination, collections }) => {
-  const paginationData = await flow(map(queryCollection(graphql)), Promise.all)(
-    collections
-  )
+  const paginationData = await flow(
+    map(runCollectionQuery(graphql)),
+    Promise.all
+  )(collections)
   const paginatedData = map(paginate, paginationData)
   return flow(map(writePages(destination)), Promise.all)(paginatedData)
 }

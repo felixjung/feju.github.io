@@ -35,11 +35,12 @@ module.exports = {
         collections: [
           {
             baseName: 'posts',
-            pageSize: 5,
-            rootQueryType: 'allContentfulBlogPost',
-            query: rootQueryType => `
+            pageSize: 2,
+            query: `
               {
-                ${rootQueryType}(sort: {fields: [publishDate], order: DESC}) {
+                allContentfulBlogPost(
+                  sort: {fields: [publishDate], order: DESC}
+                ) {
                   edges {
                     node {
                       id
