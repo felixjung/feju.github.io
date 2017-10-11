@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import remark from 'remark'
 import externalLinks from 'remark-external-links'
@@ -9,59 +9,58 @@ import styled from 'react-emotion'
 import js from 'highlight.js/lib/languages/javascript'
 import githubSchema from 'hast-util-sanitize/lib/github.json'
 
-import {
-  SmartParagraph,
-  InsetH1,
-  InsetH2,
-  InsetH3,
-  InsetH4,
-  InsetH5,
-  InsetH6,
-  InsetOl,
-  InsetUl,
-  InsetTable,
-  Pre,
-  ContentfulImage
-} from './Layout'
-
-const schema = Object.assign({}, githubSchema, {
-  attributes: Object.assign({}, githubSchema.attributes, {
+const SCHEMA = {
+  ...githubSchema,
+  attributes: {
+    ...githubSchema.attributes,
     code: [...(githubSchema.attributes.code || []), 'className']
-  })
-})
+  }
+}
 
 const MarkdownDiv = styled('div')({})
 
-const markdownRenderer = remark()
-  .use(reactRenderer, {
-    sanitize: schema,
+const createRenderer = remarkReactComponents =>
+  remark()
+    .use(reactRenderer, {
+      sanitize: SCHEMA,
+      remarkReactComponents
+    })
+    .use(externalLinks)
+    .use(emoji)
+
+class Markdown extends Component {
+  static propTypes = {
+    text: PropTypes.string.isRequired,
+    remarkReactComponents: PropTypes.object
+  }
+
+  static defaultProps = {
     remarkReactComponents: {
-      pre: Pre,
       code: remarkLowlight({
         js
-      }),
-      p: SmartParagraph,
-      h1: InsetH1,
-      h2: InsetH2,
-      h3: InsetH3,
-      h4: InsetH4,
-      h5: InsetH5,
-      h6: InsetH6,
-      ul: InsetUl,
-      ol: InsetOl,
-      table: InsetTable,
-      img: ContentfulImage
+      })
     }
-  })
-  .use(externalLinks)
-  .use(emoji)
+  }
 
-const Markdown = ({ text }) => (
-  <MarkdownDiv>{markdownRenderer.processSync(text).contents}</MarkdownDiv>
-)
+  constructor(props) {
+    super(props)
+    const { remarkReactComponents } = props
+    this.markdownRenderer = createRenderer(remarkReactComponents)
+  }
 
-Markdown.propTypes = {
-  text: PropTypes.string.isRequired
+  shouldComponentUpdate({ text: nextText }) {
+    const { text: prevText } = this.props
+    return nextText !== prevText
+  }
+
+  render() {
+    const { text } = this.props
+    return (
+      <MarkdownDiv>
+        {this.markdownRenderer.processSync(text).contents}
+      </MarkdownDiv>
+    )
+  }
 }
 
 export default Markdown
