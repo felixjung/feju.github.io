@@ -17,6 +17,38 @@ export const insetStyles = [
   })
 ]
 
+export const blogGridContainerStyles = [
+  {
+    display: 'grid',
+    gridTemplateColumns: 'auto minmax(auto, 700px) minmax(200px, 300px) auto'
+  },
+  ({ theme }) => ({
+    gridColumnGap: theme.spacing.s
+  })
+]
+
+export const asideTrackStyles = [
+  {
+    gridColumnStart: 3,
+    gridColumnEnd: 4
+  }
+]
+
+export const mainTrackStyles = [
+  {
+    gridColumnStart: 2,
+    gridColumnEnd: 3
+  }
+]
+
+export const gridStyles = [
+  {
+    display: 'grid',
+    gridTemplateColumns: 'auto minmax(auto, 700px) minmax(200px, 300px) auto',
+    margin: '0 auto'
+  }
+]
+
 export const InsetParagraph = styled('p')(...insetStyles)
 export const InsetUl = styled('ul')(...insetStyles)
 export const InsetOl = styled('ol')(...insetStyles)
