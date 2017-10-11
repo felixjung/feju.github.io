@@ -47,22 +47,13 @@ const getQueryNodes = async (graphql, query) => {
 
 const PUBLIC_PATH = './public'
 
-const runCollectionQuery = graphql => async ({
-  query,
-  map: mapNode,
-  pageSize,
-  baseName
-}) => {
-  const nodes = await getQueryNodes(graphql, query)
-  return flow(map(mapNode), entries => ({
-    baseName,
-    pageSize,
-    entries
-  }))(nodes)
+const runCollectionQuery = graphql => async ({ query, pageSize, name }) => {
+  const entries = await getQueryNodes(graphql, query)
+  return { entries, pageSize, name }
 }
 
-const paginate = ({ baseName, pageSize, entries }) => ({
-  baseName,
+const paginate = ({ name, pageSize, entries }) => ({
+  name,
   pages: chunk(pageSize, entries)
 })
 
@@ -72,7 +63,7 @@ const padIndex = (collection, zeroBase = true) => index => {
   return padCharsStart('0')(digits)(index)
 }
 
-const indexedWithBaseName = baseName => index => `${baseName}-${index}.json`
+const indexedWithBaseName = name => index => `${name}-${index}.json`
 const stripLeadingSlash = str => str.replace(/^\//, '')
 const stripTrailingSlash = str => str.replace(/\/$/, '')
 const stripSlashes = flow(stripLeadingSlash, stripTrailingSlash)
@@ -95,8 +86,8 @@ const getPageUris = curry(
   }
 )
 
-const writePages = dest => ({ baseName, pages }) => {
-  const fileNameForIndex = indexedWithBaseName(baseName)
+const writePages = dest => ({ name, pages }) => {
+  const fileNameForIndex = indexedWithBaseName(name)
   const destinationUri = createDestinationUri(dest)
   const destinationPath = createDestinationPath(dest)
   const padPageIndex = padIndex(pages)

@@ -34,7 +34,7 @@ module.exports = {
         destination: 'api',
         collections: [
           {
-            baseName: 'posts',
+            name: 'posts',
             pageSize: 4,
             query: `
               {
