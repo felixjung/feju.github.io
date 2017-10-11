@@ -55,11 +55,7 @@ class Markdown extends Component {
 
   render() {
     const { text } = this.props
-    return (
-      <MarkdownDiv>
-        {this.markdownRenderer.processSync(text).contents}
-      </MarkdownDiv>
-    )
+    return this.markdownRenderer.processSync(text).contents.props.children
   }
 }
 

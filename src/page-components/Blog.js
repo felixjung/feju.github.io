@@ -1,48 +1,82 @@
 /* global graphql */
 
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { find, flow } from 'lodash/fp'
+import styled from 'react-emotion'
+
 import { getCollections } from '../../plugins/gatsby-plugin-paginated-json'
+import PostPreview from '../components/PostPreview'
 
 // Utility
 
 // Components
-import { Section } from '../components/Layout'
-import Markdown from '../components/Markdown'
+import {
+  blogGridContainerStyles,
+  asideTrackStyles,
+  mainTrackStyles
+} from '../components/Layout'
 
-// Const getBlogPosts = getNodesFromAllQuery('allContentfulBlogPost')
-const getPostsOptions = find(({ baseName }) => baseName === 'posts')
+const getPostsOptions = find(({ name }) => name === 'posts')
 
-const PostPreview = ({ id, title, subtitle, publishDate, excerpt }) => (
-  <article key={id}>
-    <h2>{title}</h2>
-    <h3>{subtitle}</h3>
-    <Markdown text={excerpt} />
-  </article>
-)
+const Section = styled('section')(...mainTrackStyles)
+const Aside = styled('aside')(...asideTrackStyles)
+const Container = styled('div')(...blogGridContainerStyles)
 
-const Blog = ({ data }) => {
-  const { allContentfulBlogPost, allSitePlugin } = data
+class Blog extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      posts: [],
+      next: '/api/posts-1.json'
+    }
 
-  const { pageSize } = flow(getCollections, getPostsOptions)(allSitePlugin)
-  const posts = allContentfulBlogPost.edges
-    .map(
-      ({
-        node: { id, publishDate, excerpt: { excerpt }, title, subtitle }
-      }) => ({
-        publishDate,
-        excerpt,
+    this.handleLoadMore = this.handleLoadMore.bind(this)
+  }
+
+  componentDidMount() {
+    const { data } = this.props
+    const { allContentfulBlogPost, allSitePlugin } = data
+    const { pageSize } = flow(getCollections, getPostsOptions)(allSitePlugin)
+    const posts = allContentfulBlogPost.edges
+      .map(({ node: { id, publishDate, title, description } }) => ({
         id,
         title,
-        subtitle
+        description,
+        publishDate
+      }))
+      .slice(0, pageSize)
+    this.setState(prevState => ({
+      ...prevState,
+      posts: prevState.posts.concat(posts)
+    }))
+  }
+
+  handleLoadMore() {
+    const { next } = this.state
+    fetch(next)
+      .then(resp => resp.json())
+      .then(({ items, next }) => {
+        this.setState(prevState => ({
+          ...prevState,
+          next,
+          posts: prevState.posts.concat(items)
+        }))
       })
+  }
+
+  render() {
+    const { posts, next } = this.state
+    return (
+      <Container>
+        <Section>
+          {posts.map(({ id, ...post }) => <PostPreview key={id} {...post} />)}
+          {next && <button onClick={this.handleLoadMore}>Load more</button>}
+        </Section>
+        <Aside>This is the aside.</Aside>
+      </Container>
     )
-    .slice(0, pageSize)
-
-  // TODO: filter blog posts and render them out
-
-  return <Section>{posts.map(PostPreview)}</Section>
+  }
 }
 
 Blog.propTypes = {
@@ -64,10 +98,7 @@ export const query = graphql`
           id
           publishDate
           title
-          subtitle
-          excerpt {
-            excerpt
-          }
+          description
         }
       }
     }
@@ -76,7 +107,7 @@ export const query = graphql`
         node {
           pluginOptions {
             collections {
-              baseName
+              name
               pageSize
               query
             }
