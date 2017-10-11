@@ -1,23 +1,12 @@
 /* global module */
 
-const mapBlogPost = ({
-  title,
-  subtitle,
-  publishDate,
-  excerpt: { excerpt }
-}) => ({
-  title,
-  subtitle,
-  publishDate,
-  excerpt
-})
-
 module.exports = {
   siteMetadata: {
     title: 'felixjung.io'
   },
   plugins: [
     'gatsby-plugin-catch-links',
+    'gatsby-plugin-react-next',
     'gatsby-plugin-emotion',
     {
       resolve: 'gatsby-source-contentful',
