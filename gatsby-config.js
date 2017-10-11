@@ -34,17 +34,14 @@ module.exports = {
                     node {
                       id
                       publishDate
+                      slug
                       title
-                      subtitle
-                      excerpt {
-                        excerpt
-                      }
+                      description
                     }
                   }
                 }
               }
-            `,
-            map: mapBlogPost
+            `
           }
         ]
       }
