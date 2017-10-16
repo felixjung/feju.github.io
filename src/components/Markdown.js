@@ -5,7 +5,6 @@ import externalLinks from 'remark-external-links'
 import reactRenderer from 'remark-react'
 import remarkLowlight from 'remark-react-lowlight'
 import emoji from 'remark-gemoji-to-emoji'
-import styled from 'react-emotion'
 import js from 'highlight.js/lib/languages/javascript'
 import githubSchema from 'hast-util-sanitize/lib/github.json'
 
@@ -16,8 +15,6 @@ const SCHEMA = {
     code: [...(githubSchema.attributes.code || []), 'className']
   }
 }
-
-const MarkdownDiv = styled('div')({})
 
 const createRenderer = remarkReactComponents =>
   remark()
@@ -55,7 +52,7 @@ class Markdown extends Component {
 
   render() {
     const { text } = this.props
-    return this.markdownRenderer.processSync(text).contents.props.children
+    return this.markdownRenderer.processSync(text).contents
   }
 }
 

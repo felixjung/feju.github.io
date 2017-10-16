@@ -7,28 +7,57 @@ import styled from 'react-emotion'
 
 import { getCollections } from '../../plugins/gatsby-plugin-paginated-json'
 import PostPreview from '../components/PostPreview'
+import { medium, large, xLarge, xxLarge } from '../styles/mixins'
+import { mainContainer } from '../styles/layout-styles'
 
 // Utility
 
 // Components
-import {
-  blogGridContainerStyles,
-  asideTrackStyles,
-  mainTrackStyles
-} from '../components/Layout'
 
 const getPostsOptions = find(({ name }) => name === 'posts')
 
-const Section = styled('section')(...mainTrackStyles)
-const Aside = styled('aside')(...asideTrackStyles)
-const Container = styled('div')(...blogGridContainerStyles)
+const gridStyles = [
+  ({ theme }) => ({
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fill, 1fr)',
+    gridAutoRows: 'minmax(80vh, auto)',
+    gridRowGap: theme.spacing.m
+  }),
+  medium(({ theme }) => ({
+    gridAutoRows: 'minmax(300px, 500px)',
+    gridRowGap: theme.spacing.xxl,
+    gridColumnGap: theme.spacing.xxl
+  })),
+  large(({ theme }) => ({
+    gridTemplateColumns: 'repeat(auto-fill, minmax(40%, 1fr))',
+    gridRowGap: theme.spacing.xxl,
+    gridColumnGap: theme.spacing.xxl
+  })),
+  xLarge(({ theme }) => ({
+    gridRowGap: theme.spacing.xxxxl,
+    gridColumnGap: theme.spacing.xxxxl
+  })),
+  xxLarge(({ theme }) => ({
+    gridTemplateColumns: 'repeat(auto-fill, minmax(30%, 1fr))',
+    gridRowGap: theme.spacing.xxxxxl,
+    gridColumnGap: theme.spacing.xxxxxl
+  }))
+]
+
+const Posts = styled('div')(...gridStyles)
+const LoadMoreContainer = styled('div')(...mainContainer, {
+  display: 'flex',
+  justifyContent: 'center',
+  width: '100%'
+})
+const Section = styled('section')(...mainContainer)
 
 class Blog extends Component {
   constructor(props) {
     super(props)
     this.state = {
       posts: [],
-      next: '/api/posts-1.json'
+      next: null
     }
 
     this.handleLoadMore = this.handleLoadMore.bind(this)
@@ -38,17 +67,13 @@ class Blog extends Component {
     const { data } = this.props
     const { allContentfulBlogPost, allSitePlugin } = data
     const { pageSize } = flow(getCollections, getPostsOptions)(allSitePlugin)
-    const posts = allContentfulBlogPost.edges
-      .map(({ node: { id, publishDate, title, description } }) => ({
-        id,
-        title,
-        description,
-        publishDate
-      }))
-      .slice(0, pageSize)
+    const allPosts = allContentfulBlogPost.edges.map(({ node }) => node)
+    const next = allPosts.length > pageSize ? '/api/posts-1.json' : null
+    const posts = allPosts.slice(0, pageSize)
     this.setState(prevState => ({
       ...prevState,
-      posts: prevState.posts.concat(posts)
+      posts: prevState.posts.concat(posts),
+      next
     }))
   }
 
@@ -68,13 +93,14 @@ class Blog extends Component {
   render() {
     const { posts, next } = this.state
     return (
-      <Container>
-        <Section>
+      <Section>
+        <Posts>
           {posts.map(({ id, ...post }) => <PostPreview key={id} {...post} />)}
+        </Posts>
+        <LoadMoreContainer>
           {next && <button onClick={this.handleLoadMore}>Load more</button>}
-        </Section>
-        <Aside>This is the aside.</Aside>
-      </Container>
+        </LoadMoreContainer>
+      </Section>
     )
   }
 }
@@ -99,6 +125,21 @@ export const query = graphql`
           publishDate
           title
           description
+          slug
+          category {
+            identifier
+            name
+          }
+          tags
+          hero {
+            description
+            title
+            responsiveSizes(maxWidth: 375, quality: 70, toFormat: JPG) {
+              src
+              srcSet
+              sizes
+            }
+          }
         }
       }
     }

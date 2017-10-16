@@ -1,6 +1,6 @@
 import { injectGlobal } from 'emotion'
 
-import { colors } from '../styles/variables'
+import { colors, fontSize } from '../styles/variables'
 
 export default injectGlobal`
   * {
@@ -9,6 +9,7 @@ export default injectGlobal`
 
   html, body {
     font-family: -apple-system, "Helvetica Neue";
+    font-size: ${fontSize.l};
     color: ${colors.text};
     background-color: ${colors.background};
     padding: 0;

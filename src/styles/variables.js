@@ -2,9 +2,9 @@ import fp from 'lodash/fp'
 
 const BASE_SPACE = 6
 const SPACE_INCREMENT = 6
-const BASE_FONT_SIZE = 8
-const FONT_INCREMENT = 2
-const BASE_LINE_HEIGHT = 10
+const BASE_FONT_SIZE = 12
+const FONT_INCREMENT = 3
+const BASE_LINE_HEIGHT = 16
 const LINE_HEIGHT_INCREMENT = 2
 const BASE_RADIUS = 1
 const RADIUS_INCREMENT = 2
@@ -18,7 +18,8 @@ const SIZES = [
   'xxl',
   'xxxl',
   'xxxxl',
-  'xxxxxl'
+  'xxxxxl',
+  'xxxxxxl'
 ]
 
 const appendUnit = (unit, val) => `${val}${unit}`
@@ -65,32 +66,65 @@ const palette = {
   dodgerBlue: '#20A4F3'
 }
 
+const greys = {
+  greyUltraLight: '#f7f7f7',
+  greyLight: '#e6e6e6',
+  greyMedium: '#d9d9d9',
+  greyHeavy: '#bebebe',
+  greyDark: '#3f3f3f'
+}
+
 export const colors = {
-  text: palette.russianViolet,
+  text: '#000',
   link: palette.mediumTurquoise,
   primary: palette.radicalRed,
   secondary: palette.dodgerBlue,
-  background: palette.whiteSmoke,
-  error: palette.tulip
+  background: '#FFF',
+  shadow: palette.russianViolet,
+  error: palette.tulip,
+  ...greys
 }
 
-export const spacing = createValues('xs', 8, BASE_SPACE, SPACE_INCREMENT, 'px')
+export const categories = {
+  apple: {
+    backgroundColor: palette.lightCyan,
+    color: palette.russianViolet
+  },
+  travel: {
+    backgroundColor: palette.maastrichtBlue,
+    color: '#fff'
+  },
+  development: {
+    backgroundColor: palette.radicalRed,
+    color: palette.dodgerBlue
+  },
+  photography: {
+    backgroundColor: palette.whiteSmoke,
+    color: palette.dodgerBlue
+  },
+  default: {
+    backgroundColor: palette.greyDark,
+    color: '#fff'
+  }
+}
+
+export const spacing = createValues('xs', 10, BASE_SPACE, SPACE_INCREMENT, 'px')
 export const fontSize = createValues(
   'xs',
-  6,
+  12,
   BASE_FONT_SIZE,
   FONT_INCREMENT,
   'px'
 )
 export const lineHeight = createValues(
   's',
-  5,
+  7,
   BASE_LINE_HEIGHT,
   LINE_HEIGHT_INCREMENT,
   'px'
 )
 
-export const radius = createValues('s', 3, BASE_RADIUS, RADIUS_INCREMENT, 'px')
+export const radius = createValues('s', 8, BASE_RADIUS, RADIUS_INCREMENT, 'px')
 export const breakpoints = {
   s: 320,
   beforeM: 569,
@@ -98,5 +132,7 @@ export const breakpoints = {
   beforeL: 819,
   l: 820,
   beforeXl: 1069,
-  xl: 1070
+  xl: 1070,
+  beforeXXL: 1399,
+  xxl: 1400
 }

@@ -1,26 +1,48 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'react-emotion'
+import { css } from 'emotion'
 import Link from 'gatsby-link'
 
 import { inPage } from './Layout'
 import * as theme from '../styles/variables'
+import { mainContainer } from '../styles/layout-styles'
 
-const activeNavLinkStyles = {
-  backgroundColor: theme.colors.primary,
-  color: '#FFF'
-}
+const activeNavLinkStyles = {}
 
-const NavLink = styled(Link)(({ theme }) => ({
-  border: `1px solid ${theme.colors.primary}`,
-  borderColor: theme.colors.primary,
-  borderRadius: theme.radius.m,
-  color: theme.colors.primary,
-  display: 'inline-block',
-  padding: theme.spacing.s,
-  textDecoration: 'none',
-  ':hover': activeNavLinkStyles
-}))
+const NavLink = styled(Link)(
+  ({ theme }) => ({
+    // Border: `1px solid ${theme.colors.primary}`,
+    // borderColor: theme.colors.primary,
+    // borderRadius: theme.radius.m,
+    color: theme.colors.primary,
+    fontWeight: '600',
+    display: 'inline-block',
+    padding: `${theme.spacing.s} 0`,
+    textDecoration: 'none'
+  }),
+  css`
+    position: relative;
+
+    &::after {
+      position: absolute;
+      bottom: 3px;
+      left: 0;
+      border-radius: 3px;
+      height: 6px;
+      width: 0;
+      content: '';
+      background-color: black;
+      transition: width 150ms ease-in-out;
+    }
+
+    &:hover {
+      &::after {
+        width: 100%;
+      }
+    }
+  `
+)
 
 const NavLi = styled.li(({ theme }) => ({
   ':not(:last-of-type)': {
@@ -39,24 +61,32 @@ const NavUl = styled.ul({
   '-webkit-padding-start': 0
 })
 
+export const NAVIGATION_HEIGHT = '75px'
+
+const NavContainer = styled('div')(({ theme }) => ({
+  width: '100%',
+  backgroundColor: theme.primary,
+  marginBottom: theme.spacing.xxxl
+}))
+
 const Nav = ({ items }) => {
-  const StyledNav = inPage(
-    styled.nav({
-      display: 'flex',
-      alignItems: 'center',
-      width: '100%',
-      height: '80px'
-    })
-  )
+  const StyledNav = styled('nav')(...mainContainer, {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    height: NAVIGATION_HEIGHT
+  })
   const listItems = items.map(({ url, label }) => (
     <NavLi key={url}>
       <NavLink to={url}>{label}</NavLink>
     </NavLi>
   ))
   return (
-    <StyledNav>
-      <NavUl>{listItems}</NavUl>
-    </StyledNav>
+    <NavContainer>
+      <StyledNav>
+        <NavUl>{listItems}</NavUl>
+      </StyledNav>
+    </NavContainer>
   )
 }
 

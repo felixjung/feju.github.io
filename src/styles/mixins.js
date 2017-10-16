@@ -15,3 +15,6 @@ export const large = flow(withMinWidth(`${breakpoints.l}px`), forMedia)(
 export const xLarge = flow(withMinWidth(`${breakpoints.xl}px`), forMedia)(
   forScreen
 )
+export const xxLarge = flow(withMinWidth(`${breakpoints.xxl}px`), forMedia)(
+  forScreen
+)
