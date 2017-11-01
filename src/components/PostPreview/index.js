@@ -64,6 +64,15 @@ const descriptionHoverClass = css`
   transform: translateY(20px);
 `
 
+const backgroundClass = css`
+  transform: scale3d(1, 1, 1);
+  transition: transform ${transitionAnimation};
+`
+
+const backgroundHoverClass = css`
+  transform: scale3d(1.1, 1.1, 1);
+`
+
 class PostPreview extends Component {
   static propTypes = {
     hero: PropTypes.object,
@@ -101,11 +110,16 @@ class PostPreview extends Component {
     // Use Link component?
     const postLink = `/blog/${slug}`
 
-    // TODO: add back image animations.
+    const backgroundClasses = classNames(backgroundClass, {
+      [backgroundHoverClass]: isHovering
+    })
     const background = hero ? (
-      <ImageBackground hero={hero} />
+      <ImageBackground hero={hero} className={backgroundClasses} />
     ) : (
-      <ColorBackground category={category.identifier} />
+      <ColorBackground
+        category={category.identifier}
+        className={backgroundClasses}
+      />
     )
 
     const headlineClasses = classNames(headlineClass, {

@@ -28,7 +28,7 @@ const overlayClass = css`
   width: 100%;
 `
 
-const ImageBackground = ({ hero, classes }) => {
+const ImageBackground = ({ hero, className }) => {
   const { src, srcSet, sizes } = hero.responsiveSizes
 
   // TODO: see, if we can put the overlay directly on the img in CSS.
@@ -38,7 +38,7 @@ const ImageBackground = ({ hero, classes }) => {
         src={src}
         srcSet={srcSet}
         sizes={sizes}
-        className={classNames(imgClass, classes)}
+        className={classNames(imgClass, className)}
       />
       <div className={overlayClass} />
     </div>
