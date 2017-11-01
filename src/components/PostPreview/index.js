@@ -14,10 +14,10 @@ import AnchorWrapper from './AnchorWrapper'
 
 const Article = styled('article')(({ theme }) => ({
   boxShadow: `0 ${theme.spacing.xs} ${theme.spacing.l} ${transparentize(
-    0.75,
+    0.7,
     theme.colors.shadow
   )}`,
-  borderRadius: theme.radius.xxxl,
+  borderRadius: theme.radius.l,
   overflow: 'hidden'
 }))
 
