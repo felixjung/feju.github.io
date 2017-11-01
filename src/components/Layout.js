@@ -1,8 +1,5 @@
 import React from 'react'
-import styled from 'react-emotion'
 import PropTypes from 'prop-types'
-
-import { medium } from '../styles/mixins'
 
 export const inPage = Comp => {
   const wrappedComponent = ({ children }) => (
