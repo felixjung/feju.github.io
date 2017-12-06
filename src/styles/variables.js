@@ -1,11 +1,12 @@
 import fp from 'lodash/fp'
+import { lighten } from 'polished'
 
 const BASE_SPACE = 6
 const SPACE_INCREMENT = 6
-const BASE_FONT_SIZE = 12
+const BASE_FONT_SIZE = 10
 const FONT_INCREMENT = 3
 const BASE_LINE_HEIGHT = 16
-const LINE_HEIGHT_INCREMENT = 2
+const LINE_HEIGHT_INCREMENT = 6
 const BASE_RADIUS = 1
 const RADIUS_INCREMENT = 2
 const SIZES = [
@@ -75,14 +76,40 @@ const greys = {
 }
 
 export const colors = {
-  text: '#000',
-  link: palette.mediumTurquoise,
+  text: lighten(0.2, '#000'),
+  link: {
+    default: lighten(0.4, palette.mediumTurquoise),
+    hover: lighten(0.3, palette.mediumTurquoise)
+  },
+  inlineCodeBackground: greys.greyLight,
   primary: palette.radicalRed,
   secondary: palette.dodgerBlue,
   background: '#FFF',
   shadow: palette.russianViolet,
   error: palette.tulip,
+  blockQuote: palette.tulip,
   ...greys
+}
+
+export const fonts = {
+  sansSerif: {
+    family: '"Open Sans", Helvetica, sans-serif',
+    weights: {
+      light: 300,
+      regular: 600,
+      heavy: 700
+    }
+  },
+  serif: {
+    family: 'Merriweather, Georgia, serif',
+    weights: {
+      light: 300,
+      heavy: 700
+    }
+  },
+  mono: {
+    family: 'Menlo, mono'
+  }
 }
 
 export const categories = {
@@ -108,10 +135,16 @@ export const categories = {
   }
 }
 
-export const spacing = createValues('xs', 10, BASE_SPACE, SPACE_INCREMENT, 'px')
+export const spacing = createValues(
+  'xxs',
+  10,
+  BASE_SPACE,
+  SPACE_INCREMENT,
+  'px'
+)
 export const fontSize = createValues(
   'xs',
-  12,
+  10,
   BASE_FONT_SIZE,
   FONT_INCREMENT,
   'px'

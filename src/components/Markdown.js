@@ -41,7 +41,11 @@ class Markdown extends Component {
 
   constructor(props) {
     super(props)
-    const { remarkReactComponents } = props
+    const { remarkReactComponents: inputComponents } = props
+    const remarkReactComponents = {
+      ...inputComponents,
+      code: remarkLowlight({ js })
+    }
     this.markdownRenderer = createRenderer(remarkReactComponents)
   }
 

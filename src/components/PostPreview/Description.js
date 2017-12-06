@@ -4,9 +4,6 @@ import styled from 'react-emotion'
 import { transparentize } from 'polished'
 
 import Markdown from '../Markdown'
-import TagList from '../TagList'
-import Tag from '../Tag'
-import Category from '../Category'
 
 const DescriptionContainer = styled('div')`
   ${({ theme, className }) =>
@@ -32,33 +29,19 @@ const DescriptionParagraph = styled('p')(({ theme }) => ({
   margin: 0,
   fontFamily: 'Georgia',
   fontSize: theme.fontSize.m,
-  lineHeight: theme.lineHeight.xxxxl,
+  lineHeight: theme.lineHeight.xl,
   color: theme.colors.greyDark
 }))
 
-const Description = ({ text, tags, category, ...props }) => {
-  const showTagList = category || tags
-  const tagElements = tags && tags.map(name => <Tag key={name}>{name}</Tag>)
-  const categoryElement = category && (
-    <li key={category.identifier}>
-      <Category identifier={category.identifier}>{category.name}</Category>
-    </li>
-  )
+const Description = ({ text, children, ...props }) => (
+  <DescriptionContainer {...props}>
+    <Markdown text={text} remarkReactComponents={{ p: DescriptionParagraph }} />
+    {children}
+  </DescriptionContainer>
+)
 
-  return (
-    <DescriptionContainer {...props}>
-      <Markdown
-        text={text}
-        remarkReactComponents={{ p: DescriptionParagraph }}
-      />
-      {showTagList && (
-        <TagList>
-          {categoryElement}
-          {tagElements}
-        </TagList>
-      )}
-    </DescriptionContainer>
-  )
+Description.propTypes = {
+  text: PropTypes.string.isRequired
 }
 
 export default Description

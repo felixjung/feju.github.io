@@ -2,19 +2,13 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { find, flow } from 'lodash/fp'
 import styled from 'react-emotion'
 
-import { getCollections } from '../../plugins/gatsby-plugin-paginated-json'
 import PostPreview from '../components/PostPreview'
 import { medium, large, xLarge, xxLarge } from '../styles/mixins'
 import { mainContainer } from '../styles/layout-styles'
 
-// Utility
-
 // Components
-
-const getPostsOptions = find(({ name }) => name === 'posts')
 
 const gridStyles = [
   ({ theme }) => ({
@@ -56,38 +50,15 @@ class Blog extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      posts: [],
-      next: null
+      posts: []
     }
-
-    this.handleLoadMore = this.handleLoadMore.bind(this)
   }
 
   componentDidMount() {
     const { data } = this.props
-    const { allContentfulBlogPost, allSitePlugin } = data
-    const { pageSize } = flow(getCollections, getPostsOptions)(allSitePlugin)
-    const allPosts = allContentfulBlogPost.edges.map(({ node }) => node)
-    const next = allPosts.length > pageSize ? '/api/posts-1.json' : null
-    const posts = allPosts.slice(0, pageSize)
-    this.setState(prevState => ({
-      ...prevState,
-      posts: prevState.posts.concat(posts),
-      next
-    }))
-  }
-
-  handleLoadMore() {
-    const { next } = this.state
-    fetch(next)
-      .then(resp => resp.json())
-      .then(({ items, next }) => {
-        this.setState(prevState => ({
-          ...prevState,
-          next,
-          posts: prevState.posts.concat(items)
-        }))
-      })
+    const { allContentfulBlogPost } = data
+    const posts = allContentfulBlogPost.edges.map(({ node }) => node)
+    this.setState({ posts })
   }
 
   render() {
@@ -138,19 +109,6 @@ export const query = graphql`
               src
               srcSet
               sizes
-            }
-          }
-        }
-      }
-    }
-    allSitePlugin(filter: { name: { eq: "gatsby-plugin-paginated-json" } }) {
-      edges {
-        node {
-          pluginOptions {
-            collections {
-              name
-              pageSize
-              query
             }
           }
         }

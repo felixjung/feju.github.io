@@ -20,7 +20,7 @@ const contentfulImageWithStyles = styles => {
     const xlSrc = `${optimizedSrc}&w=1920&h=1080`
     const xlSrc2x = `${optimizedSrc}&w=3840&h=2160&q=70`
     const hiResQuality = 70
-    const Img = styled('img')(styles)
+    const Img = styled('img')(...styles)
     return (
       <picture>
         <source

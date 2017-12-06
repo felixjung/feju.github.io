@@ -1,11 +1,6 @@
 import { injectGlobal } from 'emotion'
 
 export default injectGlobal`
-  p > code {
-    background: #ddd;
-    border-radius: 3px;
-  }
-
   pre code.hljs {
     display: block;
     overflow-x: auto;

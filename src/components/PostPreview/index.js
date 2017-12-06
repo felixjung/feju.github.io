@@ -3,7 +3,9 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import styled from 'react-emotion'
 import { css } from 'emotion'
-import { darken, radialGradient, transparentize } from 'polished'
+import { transparentize } from 'polished'
+
+import GroupedTags from '../GroupedTags'
 
 import Description from './Description'
 import ImageBackground from './ImageBackground'
@@ -147,7 +149,9 @@ class PostPreview extends Component {
             tags={tags}
             category={category}
             className={descriptionClasses}
-          />
+          >
+            <GroupedTags tags={tags} category={category} />
+          </Description>
         </AnchorWrapper>
       </Article>
     )

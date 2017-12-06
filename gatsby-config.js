@@ -18,32 +18,9 @@ module.exports = {
     },
     'gatsby-plugin-contentful-pages',
     {
-      resolve: 'gatsby-plugin-paginated-json',
+      resolve: `gatsby-plugin-google-fonts`,
       options: {
-        destination: 'api',
-        collections: [
-          {
-            name: 'posts',
-            pageSize: 100,
-            query: `
-              {
-                allContentfulBlogPost(
-                  sort: {fields: [publishDate], order: DESC}
-                ) {
-                  edges {
-                    node {
-                      id
-                      publishDate
-                      slug
-                      title
-                      description
-                    }
-                  }
-                }
-              }
-            `
-          }
-        ]
+        fonts: ['open sans:300,300i,600,700', 'merriweather:300']
       }
     }
   ]
