@@ -61,7 +61,20 @@ const Article = styled('article')(
       ],
       lineHeight: 1.85,
       width: [`calc(100% - ${theme.spacing.m})`, '80%', '90%'],
-      maxWidth: [null, null, '740px']
+      maxWidth: [null, null, '740px'],
+      'p code': {
+        verticalAlign: '1px',
+        fontSize: [
+          theme.fontSize.s,
+          dynamicFontSize(
+            theme.fontSize.s,
+            theme.fontSize.m,
+            theme.breakpoints.m,
+            theme.breakpoints.l
+          ),
+          theme.fontSize.m
+        ]
+      }
     })
 )
 
