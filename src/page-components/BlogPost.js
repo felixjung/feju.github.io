@@ -29,7 +29,8 @@ import {
   Table,
   Thead,
   Th,
-  Td
+  Td,
+  HorizontalRule
 } from '../components/Elements'
 
 const Container = styled('div')({
@@ -237,7 +238,8 @@ const remarkReactComponents = {
   table: styled(Table)(tableFontstyles),
   th: Th,
   td: Td,
-  thead: Thead
+  thead: Thead,
+  hr: HorizontalRule
 }
 
 const BlogPostH1 = remarkReactComponents.h1

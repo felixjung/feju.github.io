@@ -85,6 +85,7 @@ export const colors = {
   primary: palette.radicalRed,
   secondary: palette.dodgerBlue,
   background: '#FFF',
+  horizontalRule: palette.mediumTurquoise,
   shadow: palette.russianViolet,
   error: palette.tulip,
   blockQuote: palette.tulip,
