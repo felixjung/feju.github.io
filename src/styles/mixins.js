@@ -1,30 +1,10 @@
 import { flow, reduce, slice, take, zipAll, map } from 'lodash/fp'
 import facepaint from 'facepaint'
-import * as media from 'media'
 
-import { breakpoints, spacing } from './variables'
-
-const { queryHelpers, forMedia } = media
-const { forScreen, withMinWidth } = queryHelpers
-
-const toUnit = unit => val => `${val}${unit}`
-
-export const medium = flow(withMinWidth(`${breakpoints.m}px`), forMedia)(
-  forScreen
-)
-export const large = flow(withMinWidth(`${breakpoints.l}px`), forMedia)(
-  forScreen
-)
-export const xLarge = flow(withMinWidth(`${breakpoints.xl}px`), forMedia)(
-  forScreen
-)
-export const xxLarge = flow(withMinWidth(`${breakpoints.xxl}px`), forMedia)(
-  forScreen
-)
+import { breakpoints } from './variables'
 
 export const createMediaQueries = flow(
-  map(flow(toUnit('px'), withMinWidth)),
-  map(fn => media.media(fn({}))),
+  map(width => `@media (min-width: ${width}px)`),
   facepaint
 )
 
