@@ -4,6 +4,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'react-emotion'
 import { css } from 'emotion'
+import { transparentize } from 'polished'
 import { camelCase, keyBy } from 'lodash/fp'
 
 import { normalizePage } from '../lib/contentful'
@@ -55,17 +56,22 @@ const Section = styled('section')(...mainContainer, textContainer)
 const imageSize = '20vmin'
 const minImageSize = '100px'
 const maxImageSize = '256px'
-const ProfileImage = styled('img')`
-  border-radius: ${maxImageSize};
-  display: block;
-  min-height: ${minImageSize};
-  max-height: ${maxImageSize};
-  height: ${imageSize};
-  width: ${imageSize};
-  min-width: ${minImageSize};
-  max-width: ${maxImageSize};
-  margin: 0 auto;
-`
+const ProfileImage = styled('img')(
+  ({ theme }) => ({
+    boxShadow: `0 6px 12px 0 ${transparentize(0.8, theme.colors.text)}`
+  }),
+  css`
+    border-radius: ${maxImageSize};
+    display: block;
+    min-height: ${minImageSize};
+    max-height: ${maxImageSize};
+    height: ${imageSize};
+    width: ${imageSize};
+    min-width: ${minImageSize};
+    max-width: ${maxImageSize};
+    margin: 0 auto;
+  `
+)
 
 const About = ({ data: { contentfulPage } }) => {
   const page = normalizePage(contentfulPage)
