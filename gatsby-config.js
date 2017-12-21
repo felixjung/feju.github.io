@@ -1,5 +1,10 @@
 /* global module */
 
+const configEnvs = ['develop']
+if (configEnvs.includes(process.env.NODE_ENV)) {
+  require('dotenv').config({ path: `.env.${process.env.NODE_ENV}` })
+}
+
 module.exports = {
   siteMetadata: {
     title: 'felixjung.io'
@@ -11,9 +16,8 @@ module.exports = {
     {
       resolve: 'gatsby-source-contentful',
       options: {
-        spaceId: 'ibq1vhkmncem',
-        accessToken:
-          'fa30b33bc2cd61d8ca05a5075a34047d44b4417c1c5e52991f7ae9ce4aa5c708'
+        spaceId: process.env.GATSBY_CONTENTFUL_SPACE,
+        accessToken: process.env.GATSBY_CONTENTFUL_API_TOKEN
       }
     },
     'gatsby-plugin-contentful-pages',

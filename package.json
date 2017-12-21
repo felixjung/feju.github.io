@@ -34,6 +34,7 @@
   },
   "devDependencies": {
     "babel-eslint": "^8.0.1",
+    "dotenv": "^4.0.0",
     "eslint": "^4.8.0",
     "eslint-config-prettier": "^2.6.0",
     "eslint-config-xo": "^0.18.2",
@@ -54,7 +55,7 @@
   "main": "n/a",
   "scripts": {
     "build": "gatsby build",
-    "start": "gatsby develop",
+    "start": "NODE_ENV=develop gatsby develop",
     "test": "echo \"Error: no test specified\" && exit 1",
     "test:lint": "eslint --cache src/**/*.js",
     "fix:prettier": "prettier --no-semi --single-quote true --write src/**/*.js",
