@@ -5,12 +5,14 @@ const baseListStyles = [
   ({ theme }) => ({
     marginTop: 0,
     marginBottom: theme.spacing.l,
-    marginLeft: `calc(2 * ${theme.spacing.xxxxl})`,
+    marginLeft: theme.spacing.xxxxl,
+    padding: 0,
     p: {
       display: 'inline'
     },
     'ul, ol': {
-      marginLeft: theme.spacing.xxxxl
+      marginLeft: theme.spacing.xxxxl,
+      padding: 0
     }
   }),
   css`
