@@ -31,19 +31,14 @@ const handleGraphQl = ({ data, errors }) => {
 const pageObjectPropsFromNode = ({ id, route, name }) => ({
   component: getComponentPath(name),
   context: { id },
-  path: `/${route}`
+  path: `/${route || ''}`
 })
 
 const blogPostObjectPropsFromNode = ({ slug, publishDate, id }) => ({
   // TODO: filter by publishDate
   component: getComponentPath('BlogPost'),
   context: { id },
-  path: `/blog/${slug}`
-})
-
-const createBlogPageObject = () => ({
-  component: getComponentPath('Blog'),
-  path: '/blog'
+  path: `/posts/${slug}`
 })
 
 const getPages = graphql => {

@@ -1,11 +1,6 @@
 import { injectGlobal } from 'emotion'
 
-import {
-  baseFontSize,
-  colors,
-  fonts,
-  breakpoints
-} from '../styles/variables'
+import { baseFontSize, colors, fonts, breakpoints } from '../styles/variables'
 import { dynamicBaseFont } from '../styles/mixins'
 
 export default injectGlobal`

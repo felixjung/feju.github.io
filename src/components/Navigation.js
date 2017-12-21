@@ -2,15 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'react-emotion'
 import Link from 'gatsby-link'
+import { css } from 'emotion'
 
 import { mainContainer } from '../styles/layout-styles'
 import { colors } from '../styles/variables'
-
-const activeStyle = {
-  border: `1px solid ${colors.navigation.link}`,
-  backgroundColor: colors.navigation.link,
-  color: '#fff'
-}
 
 const NavLink = styled(Link)(({ theme }) => ({
   border: '1px solid transparent',
@@ -61,7 +56,25 @@ const Nav = ({ items }) => {
   })
   const listItems = items.map(({ url, label }) => (
     <NavLi key={url}>
-      <NavLink to={url} activeStyle={activeStyle}>
+      <NavLink
+        to={url}
+        isActive={(match, location) => {
+          if (!match) {
+            return false
+          }
+          const { path } = match
+          const { pathname } = location
+          const isIdentical = path === pathname
+          const isPost = /^\/posts/.test(pathname)
+          const isBlogLink = path === '/'
+          return isIdentical || (isPost && isBlogLink)
+        }}
+        activeStyle={{
+          border: `1px solid ${colors.navigation.link}`,
+          backgroundColor: colors.navigation.link,
+          color: '#fff'
+        }}
+      >
         {label}
       </NavLink>
     </NavLi>

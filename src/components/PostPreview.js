@@ -84,7 +84,7 @@ class PostPreview extends Component {
       ...otherProps
     } = this.props
 
-    const link = `/blog/${slug}`
+    const link = `/posts/${slug}`
 
     return (
       <Article>

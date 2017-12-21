@@ -15,7 +15,7 @@ export const normalizePage = ({ title, sections, name }) => ({
 
 export const getNavigationItems = flow(
   getNodesFromAllQuery('allContentfulPage'),
-  map(({ name: label, route }) => ({ label, url: `/${route}` }))
+  map(({ name: label, route }) => ({ label, url: `/${route || ''}` }))
 )
 
 export const getPageSection = (title, sections) =>
