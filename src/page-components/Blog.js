@@ -60,7 +60,7 @@ export const query = graphql`
           id
           publishDate
           title
-          description
+          summary
           slug
           category {
             identifier

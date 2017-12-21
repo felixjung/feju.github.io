@@ -208,7 +208,7 @@ const BlogPost = ({ data: { contentfulBlogPost } }) => {
     title,
     publishDate,
     body: { body },
-    description,
+    summary,
     category,
     tags
   } = contentfulBlogPost
@@ -218,7 +218,7 @@ const BlogPost = ({ data: { contentfulBlogPost } }) => {
       <Article>
         <PostPublishDate date={publishDate} />
         <BlogPostH1>{title}</BlogPostH1>
-        <Summary>{description}</Summary>
+        <Summary>{summary}</Summary>
         <Markdown remarkReactComponents={remarkReactComponents} text={body} />
         <GroupedTagsWrapper>
           <GroupedTags category={category} tags={tags} />
@@ -232,7 +232,7 @@ BlogPost.propTypes = {
   data: PropTypes.shape({
     contentfulBlogPost: PropTypes.shape({
       title: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired,
+      summary: PropTypes.string.isRequired,
       body: PropTypes.shape({ body: PropTypes.string.isRequired }).isRequired,
       publishDate: PropTypes.string.isRequired
     })
@@ -253,7 +253,7 @@ export const query = graphql`
         name
         identifier
       }
-      description
+      summary
       publishDate
     }
   }

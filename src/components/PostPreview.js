@@ -61,7 +61,7 @@ class PostPreview extends Component {
       name: PropTypes.string.isRequired
     }),
     tags: PropTypes.arrayOf(PropTypes.string),
-    description: PropTypes.string.isRequired,
+    summary: PropTypes.string.isRequired,
     publishDate: PropTypes.string.isRequired
   }
 
@@ -75,7 +75,7 @@ class PostPreview extends Component {
   render() {
     const {
       title,
-      description: summary,
+      summary,
       publishDate,
       slug,
       hero,
