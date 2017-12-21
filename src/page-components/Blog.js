@@ -5,44 +5,12 @@ import PropTypes from 'prop-types'
 import styled from 'react-emotion'
 
 import PostPreview from '../components/PostPreview'
-import { medium, large, xLarge, xxLarge } from '../styles/mixins'
 import { mainContainer } from '../styles/layout-styles'
 
-// Components
-
-const gridStyles = [
-  ({ theme }) => ({
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fill, 1fr)',
-    gridAutoRows: 'minmax(80vh, auto)',
-    gridRowGap: theme.spacing.m
-  }),
-  medium(({ theme }) => ({
-    gridAutoRows: 'minmax(300px, 500px)',
-    gridRowGap: theme.spacing.xxl,
-    gridColumnGap: theme.spacing.xxl
-  })),
-  large(({ theme }) => ({
-    gridTemplateColumns: 'repeat(auto-fill, minmax(40%, 1fr))',
-    gridRowGap: theme.spacing.xxl,
-    gridColumnGap: theme.spacing.xxl
-  })),
-  xLarge(({ theme }) => ({
-    gridRowGap: theme.spacing.xxxxl,
-    gridColumnGap: theme.spacing.xxxxl
-  })),
-  xxLarge(({ theme }) => ({
-    gridTemplateColumns: 'repeat(auto-fill, minmax(30%, 1fr))',
-    gridRowGap: theme.spacing.xxxxxl,
-    gridColumnGap: theme.spacing.xxxxxl
-  }))
-]
-
-const Posts = styled('div')(...gridStyles)
-const LoadMoreContainer = styled('div')(...mainContainer, {
+const Posts = styled('div')({
   display: 'flex',
-  justifyContent: 'center',
-  width: '100%'
+  flexWrap: 'wrap',
+  justifyContent: 'space-between'
 })
 const Section = styled('section')(...mainContainer)
 
@@ -68,9 +36,6 @@ class Blog extends Component {
         <Posts>
           {posts.map(({ id, ...post }) => <PostPreview key={id} {...post} />)}
         </Posts>
-        <LoadMoreContainer>
-          {next && <button onClick={this.handleLoadMore}>Load more</button>}
-        </LoadMoreContainer>
       </Section>
     )
   }

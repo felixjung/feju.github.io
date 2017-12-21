@@ -1,15 +1,18 @@
 import fp from 'lodash/fp'
 import { lighten } from 'polished'
 
-const BASE_SPACE = 6
-const SPACE_INCREMENT = 6
-const BASE_FONT_SIZE = 10
-const FONT_INCREMENT = 3
-const BASE_LINE_HEIGHT = 16
-const LINE_HEIGHT_INCREMENT = 6
+const BASE_SPACE = 0.5
+const SPACE_INCREMENT = 0.2
+const BASE_FONT_SIZE = 0.6
+const FONT_INCREMENT = 0.2
+const BASE_LINE_HEIGHT = 1
+const LINE_HEIGHT_INCREMENT = 0.2
 const BASE_RADIUS = 1
 const RADIUS_INCREMENT = 2
 const SIZES = [
+  'xxxxxs',
+  'xxxxs',
+  'xxxs',
   'xxs',
   'xs',
   's',
@@ -46,7 +49,7 @@ const createValues = (
 ) => {
   const sizes = getSizes(baseSizes, startSize, sizeCount)
   const values = range(baseValue, sizeCount, increment)
-  return fp.flow(fp.zipObject, fp.mapValues(fp.curry(appendUnit)('px')))(
+  return fp.flow(fp.zipObject, fp.mapValues(fp.curry(appendUnit)(unit)))(
     sizes,
     values
   )
@@ -80,6 +83,9 @@ export const colors = {
   link: {
     default: lighten(0.4, palette.mediumTurquoise),
     hover: lighten(0.3, palette.mediumTurquoise)
+  },
+  navigation: {
+    link: palette.radicalRed
   },
   inlineCodeBackground: greys.greyLight,
   primary: palette.radicalRed,
@@ -141,21 +147,24 @@ export const spacing = createValues(
   10,
   BASE_SPACE,
   SPACE_INCREMENT,
-  'px'
+  'rem'
 )
+
+export const baseFontSize = { min: '16px', max: '22px' }
+
 export const fontSize = createValues(
-  'xs',
+  'xxs',
   10,
   BASE_FONT_SIZE,
   FONT_INCREMENT,
-  'px'
+  'rem'
 )
 export const lineHeight = createValues(
   's',
   7,
   BASE_LINE_HEIGHT,
   LINE_HEIGHT_INCREMENT,
-  'px'
+  ''
 )
 
 export const radius = createValues('s', 8, BASE_RADIUS, RADIUS_INCREMENT, 'px')

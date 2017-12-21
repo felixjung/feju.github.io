@@ -12,7 +12,9 @@ export const Paragraph = styled('p')(
     marginBottom: theme.spacing.xs,
     '> code': {
       backgroundColor: theme.colors.inlineCodeBackground,
-      borderRadius: theme.radius.m
+      borderRadius: theme.radius.m,
+      fontSize: theme.fontSize.xs,
+      verticalAlign: '1px'
     }
   })
 )

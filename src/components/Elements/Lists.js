@@ -5,17 +5,18 @@ const baseListStyles = [
   ({ theme }) => ({
     marginTop: 0,
     marginBottom: theme.spacing.l,
-    marginLeft: theme.spacing.l,
+    marginLeft: `calc(2 * ${theme.spacing.xxxxl})`,
     p: {
       display: 'inline'
     },
     'ul, ol': {
-      marginLeft: theme.spacing.m
+      marginLeft: theme.spacing.xxxxl
     }
   }),
   css`
     ul {
       list-style-type: circle;
+      list-style-position: inside;
     }
   `
 ]
@@ -27,6 +28,4 @@ export const Ul = styled('ul')(
   `
 )
 
-export const Ol = styled('ol')(...baseListStyles, ({ theme }) => ({
-  marginLeft: theme.spacing.l
-}))
+export const Ol = styled('ol')(...baseListStyles)

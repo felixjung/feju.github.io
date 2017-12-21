@@ -8,9 +8,9 @@ import Category from './Category'
 const GroupedTags = ({ category, tags }) => {
   const tagElements = tags && tags.map(name => <Tag key={name}>{name}</Tag>)
   const categoryElement = category && (
-    <li key={category.identifier}>
-      <Category identifier={category.identifier}>{category.name}</Category>
-    </li>
+    <Category identifier={category.identifier} key={category.identifier}>
+      {category.name}
+    </Category>
   )
   return (
     <TagList>

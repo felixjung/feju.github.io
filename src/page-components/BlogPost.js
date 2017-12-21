@@ -7,7 +7,7 @@ import { has } from 'lodash/fp'
 import facepaint from 'facepaint'
 
 import { breakpoints } from '../styles/variables'
-import { dynamicFontSize } from '../styles/mixins'
+import { textContainer } from '../styles/mixins'
 import Markdown from '../components/Markdown'
 import contentfulImageWithStyles from '../components/ContentfulImage'
 import PublishDate from '../components/PublishDate'
@@ -47,35 +47,11 @@ const Article = styled('article')(
   {
     margin: '0 auto'
   },
+  textContainer,
   ({ theme }) =>
     mq({
-      fontFamily: theme.fonts.serif.family,
-      fontSize: [
-        theme.fontSize.m,
-        dynamicFontSize(
-          theme.fontSize.m,
-          theme.fontSize.l,
-          theme.breakpoints.m,
-          theme.breakpoints.l
-        ),
-        theme.fontSize.l
-      ],
-      lineHeight: 1.85,
-      width: [`calc(100% - ${theme.spacing.m})`, '80%', '90%'],
-      maxWidth: [null, null, '740px'],
-      'p code': {
-        verticalAlign: '1px',
-        fontSize: [
-          theme.fontSize.s,
-          dynamicFontSize(
-            theme.fontSize.s,
-            theme.fontSize.m,
-            theme.breakpoints.m,
-            theme.breakpoints.l
-          ),
-          theme.fontSize.m
-        ]
-      }
+      width: [`calc(100% - ${theme.spacing.xxxxl})`, '90%', '90%'],
+      maxWidth: [null, null, '750px']
     })
 )
 
@@ -92,13 +68,13 @@ const CodeBackground = styled('div')(
         `calc(100% + ${theme.spacing.xxxxl} + ${theme.spacing.xxxxl})`
       ],
       padding: [
-        `${theme.spacing.xl} ${theme.spacing.xs}`,
-        `${theme.spacing.xl} 10vw`,
+        `${theme.spacing.xl} calc(${theme.spacing.xxxxl} / 2)`,
+        `${theme.spacing.xl} 5vw`,
         `${theme.spacing.xl} ${theme.spacing.xxxxl}`
       ],
       margin: [
-        `${theme.spacing.xl} -${theme.spacing.xs}`,
-        `${theme.spacing.xl} -10vw`,
+        `${theme.spacing.xl} calc(-${theme.spacing.xxxxl} / 2)`,
+        `${theme.spacing.xl} -5vw`,
         `${theme.spacing.xxxl} -${theme.spacing.xxxxl}`
       ],
       borderRadius: [null, null, theme.radius.l]
@@ -112,8 +88,8 @@ const img = contentfulImageWithStyles([
   ({ theme }) =>
     mq({
       margin: [
-        `${theme.spacing.xl} -${theme.spacing.xs}`,
-        `${theme.spacing.xl} -10vw`,
+        `${theme.spacing.xl} calc(-${theme.spacing.xxxxl} / 2)`,
+        `${theme.spacing.xl} -5vw`,
         `${theme.spacing.xxxl} -${theme.spacing.xxxxl}`
       ],
       width: [
@@ -129,22 +105,13 @@ const FullWidthDiv = styled('div')`
   width: 100%;
 `
 
-const Description = styled('p')(({ theme }) =>
+const Summary = styled('p')(({ theme }) =>
   mq({
     fontFamily: theme.fonts.sansSerif.family,
     fontWeight: theme.fonts.sansSerif.weights.light,
-    lineHeight: 1.4,
-    fontSize: [
-      theme.fontSize.xl,
-      dynamicFontSize(
-        theme.fontSize.xl,
-        theme.fontSize.xxxl,
-        theme.breakpoints.m,
-        theme.breakpoints.l
-      ),
-      theme.fontSize.xxxl
-    ],
-    margin: `${theme.spacing.l} 0`
+    lineHeight: theme.lineHeight.m,
+    fontSize: theme.fontSize.xxl,
+    margin: `calc(2 * ${theme.spacing.xl}) 0`
   })
 )
 
@@ -156,28 +123,10 @@ const BlockquoteStyles = ({ theme }) =>
       lineHeight: 1.5
     },
     p: {
-      fontSize: [
-        theme.fontSize.l,
-        dynamicFontSize(
-          theme.fontSize.l,
-          theme.fontSize.xxl,
-          theme.breakpoints.m,
-          theme.breakpoints.l
-        ),
-        theme.fontSize.xxl
-      ]
+      fontSize: theme.fontSize.xxxl
     },
     li: {
-      fontSize: [
-        theme.fontSize.m,
-        dynamicFontSize(
-          theme.fontSize.m,
-          theme.fontSize.l,
-          theme.breakpoints.m,
-          theme.breakpoints.l
-        ),
-        theme.fontSize.l
-      ],
+      fontSize: theme.fontSize.m,
       fontWeight: theme.fonts.sansSerif.weights.regular
     }
   })
@@ -201,7 +150,10 @@ p.propTypes = {
   ])
 }
 
-const Pre = styled('pre')({ lineHeight: 1.2 })
+const Pre = styled('pre')(({ theme }) => ({
+  lineHeight: 1.2,
+  fontSize: theme.fontSize.xs
+}))
 
 const pre = props => (
   <CodeBackground>
@@ -209,13 +161,9 @@ const pre = props => (
   </CodeBackground>
 )
 
-const headingFontStyles = ({ theme }) => ({
-  fontFamily: theme.fonts.sansSerif.family,
-  fontWeight: theme.fonts.sansSerif.weights.heavy
-})
-
 const tableFontstyles = ({ theme }) => ({
   fontFamily: theme.fonts.sansSerif.family,
+  fontSize: theme.fontSize.xs,
   fontWeight: theme.fonts.sansSerif.weights.light
 })
 
@@ -226,12 +174,12 @@ const remarkReactComponents = {
   p: Paragraph,
   ul: Ul,
   ol: Ol,
-  h1: styled(H1)(headingFontStyles),
-  h2: styled(H2)(headingFontStyles),
-  h3: styled(H3)(headingFontStyles),
-  h4: styled(H4)(headingFontStyles),
-  h5: styled(H5)(headingFontStyles),
-  h6: styled(H6)(headingFontStyles),
+  h1: H1,
+  h2: H2,
+  h3: H3,
+  h4: H4,
+  h5: H5,
+  h6: H6,
   strong: Strong,
   em: Em,
   blockquote: styled(Blockquote)(BlockquoteStyles),
@@ -245,7 +193,7 @@ const remarkReactComponents = {
 const BlogPostH1 = remarkReactComponents.h1
 
 const GroupedTagsWrapper = styled('div')(({ theme }) => ({
-  margin: `${theme.spacing.l} 0`
+  margin: `calc(2 * ${theme.spacing.xl}) 0`
 }))
 
 const PostPublishDate = styled(PublishDate)(({ theme }) => ({
@@ -270,7 +218,7 @@ const BlogPost = ({ data: { contentfulBlogPost } }) => {
       <Article>
         <PostPublishDate date={publishDate} />
         <BlogPostH1>{title}</BlogPostH1>
-        <Description>{description}</Description>
+        <Summary>{description}</Summary>
         <Markdown remarkReactComponents={remarkReactComponents} text={body} />
         <GroupedTagsWrapper>
           <GroupedTags category={category} tags={tags} />

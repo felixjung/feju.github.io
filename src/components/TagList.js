@@ -8,8 +8,9 @@ const TagList = styled('ul')(({ theme }) => ({
   li: {
     display: 'inline-block',
     whiteSpace: 'nowrap',
+    marginBottom: `calc(${theme.spacing.xxs} / 2)`,
     '&:not(:last-of-type)': {
-      marginRight: theme.spacing.xs
+      marginRight: `calc(${theme.spacing.xxs} / 2)`
     }
   }
 }))

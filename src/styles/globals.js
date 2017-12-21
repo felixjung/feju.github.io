@@ -1,6 +1,12 @@
 import { injectGlobal } from 'emotion'
 
-import { colors } from '../styles/variables'
+import {
+  baseFontSize,
+  colors,
+  fonts,
+  breakpoints
+} from '../styles/variables'
+import { dynamicBaseFont } from '../styles/mixins'
 
 export default injectGlobal`
   * {
@@ -10,8 +16,25 @@ export default injectGlobal`
     -webkit-margin-after: 0;
   }
 
+  html {
+    font-size: ${baseFontSize.min};
+
+    @media (min-width: ${breakpoints.m}px) {
+      font-size: ${dynamicBaseFont(
+        baseFontSize.min,
+        baseFontSize.max,
+        breakpoints.m,
+        breakpoints.xl
+      )};
+    }
+
+    @media (min-width: ${breakpoints.xl}px) {
+      font-size: ${baseFontSize.max};
+    }
+  }
+
   html, body {
-    font-family: 'Open Sans', sans-serif;
+    font-family: ${fonts.serif.family};
     color: ${colors.text};
     background-color: ${colors.background};
     margin: 0;

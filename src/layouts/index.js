@@ -13,7 +13,8 @@ import Nav from '../components/Navigation'
 
 export default class Template extends React.Component {
   static propTypes = {
-    children: PropTypes.func
+    children: PropTypes.func,
+    data: PropTypes.object.isRequired
   }
 
   render() {
