@@ -1,5 +1,5 @@
 import fp from 'lodash/fp'
-import { lighten } from 'polished'
+import { lighten, darken } from 'polished'
 
 const BASE_SPACE = 0.5
 const SPACE_INCREMENT = 0.2
@@ -94,7 +94,7 @@ export const colors = {
   horizontalRule: palette.mediumTurquoise,
   shadow: palette.russianViolet,
   error: palette.tulip,
-  blockQuote: palette.tulip,
+  blockQuote: darken(0.1, greys.greyMedium),
   ...greys
 }
 

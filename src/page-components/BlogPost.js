@@ -96,7 +96,7 @@ const FigureCaption = styled('figcaption')(({ theme }) => ({
   color: theme.colors.greyHeavy,
   textAlign: 'center',
   fontSize: theme.fontSize.xs,
-  lineHeight: theme.lineHeight.s,
+  lineHeight: theme.lineHeight.m,
   fontFamily: theme.fonts.sansSerif.family
 }))
 
@@ -146,21 +146,15 @@ const Summary = styled('p')(({ theme }) =>
   })
 )
 
-const BlockquoteStyles = ({ theme }) =>
-  mq({
-    width: ['95%', '90%', '80%'],
-    '*': {
-      fontFamily: theme.fonts.sansSerif.family,
-      lineHeight: 1.5
-    },
-    p: {
-      fontSize: theme.fontSize.xxxl
-    },
-    li: {
-      fontSize: theme.fontSize.m,
-      fontWeight: theme.fonts.sansSerif.weights.regular
-    }
-  })
+const BlockquoteStyles = ({ theme }) => ({
+  '*': {
+    fontFamily: theme.fonts.sansSerif.family
+  },
+  li: {
+    fontSize: theme.fontSize.m,
+    fontWeight: theme.fonts.sansSerif.weights.regular
+  }
+})
 
 const p = ({ children, ...props }) => {
   const firstChild = children[0]

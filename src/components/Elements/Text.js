@@ -47,10 +47,6 @@ export const Strong = styled('strong')(({ theme }) => ({
 export const Blockquote = styled('blockquote')(
   css`
     position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80%;
-
     ul {
       list-style-type: none;
       text-align: right;
@@ -61,13 +57,24 @@ export const Blockquote = styled('blockquote')(
     }
   `,
   ({ theme }) => ({
+    padding: `0 ${theme.spacing.xl}`,
     margin: `${theme.spacing.l} 0`,
     '*': {
       color: theme.colors.blockQuote,
-      lineHeight: theme.lineHeight.xxl
+      fontSize: theme.fontSize.m,
+      lineHeight: theme.lineHeight.l
     },
     p: {
       fontStyle: 'italic'
+    },
+    '&::before': {
+      backgroundColor: theme.colors.blockQuote,
+      content: `''`,
+      display: 'block',
+      height: '100%',
+      width: theme.spacing.xxs,
+      left: 0,
+      position: 'absolute'
     }
   })
 )

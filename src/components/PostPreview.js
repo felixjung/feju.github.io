@@ -46,7 +46,7 @@ const PublishDate = styled(DefaultPublishDate)(({ theme }) =>
 
 const Article = styled('article')(({ theme }) =>
   mq({
-    margin: [`${theme.spacing.xl} 0`],
+    marginTop: [theme.spacing.l, theme.spacing.l, theme.spacing.xl],
     width: ['100%', '100%', '45%']
   })
 )
