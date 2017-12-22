@@ -9,7 +9,7 @@ import facepaint from 'facepaint'
 import { breakpoints } from '../styles/variables'
 import { textContainer } from '../styles/mixins'
 import Markdown from '../components/Markdown'
-import contentfulImageWithStyles from '../components/ContentfulImage'
+import ContentfulPicture from '../components/ContentfulPicture'
 import PublishDate from '../components/PublishDate'
 import GroupedTags from '../components/GroupedTags'
 import {
@@ -81,16 +81,35 @@ const CodeBackground = styled('div')(
     })
 )
 
-const img = contentfulImageWithStyles([
+const Figure = styled('figure')(({ theme }) =>
+  mq({
+    margin: [
+      `${theme.spacing.xl} 0`,
+      `${theme.spacing.xl} 0`,
+      `${theme.spacing.xxxl} 0`
+    ]
+  })
+)
+const FigureCaption = styled('figcaption')(({ theme }) => ({
+  display: 'block',
+  width: '100%',
+  color: theme.colors.greyHeavy,
+  textAlign: 'center',
+  fontSize: theme.fontSize.xs,
+  lineHeight: theme.lineHeight.s,
+  fontFamily: theme.fonts.sansSerif.family
+}))
+
+const Picture = styled(ContentfulPicture)([
   {
     overflow: 'hidden'
   },
   ({ theme }) =>
     mq({
       margin: [
-        `${theme.spacing.xl} calc(-${theme.spacing.xxxxl} / 2)`,
-        `${theme.spacing.xl} -5vw`,
-        `${theme.spacing.xxxl} -${theme.spacing.xxxxl}`
+        `0 calc(-${theme.spacing.xxxxl} / 2)`,
+        `0 -5vw`,
+        `0 -${theme.spacing.xxxxl}`
       ],
       width: [
         '100vw',
@@ -100,6 +119,18 @@ const img = contentfulImageWithStyles([
       borderRadius: [null, null, theme.radius.l]
     })
 ])
+
+const img = ({ alt, ...props }) => (
+  <Figure>
+    <Picture {...{ alt, ...props }} />
+    <FigureCaption>{alt}</FigureCaption>
+  </Figure>
+)
+img.propTypes = {
+  alt: PropTypes.string
+}
+img.displayName = 'Figure'
+img.defaultProps = { alt: undefined }
 
 const FullWidthDiv = styled('div')`
   width: 100%;
