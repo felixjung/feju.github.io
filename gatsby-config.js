@@ -5,14 +5,28 @@ if (configEnvs.includes(process.env.NODE_ENV)) {
   require('dotenv').config({ path: `.env.${process.env.NODE_ENV}` })
 }
 
+const getBaseUrl = env => {
+  const urls = {
+    develop: 'http://localhost:8000',
+    staging: 'https://stage.felixjung.io',
+    production: 'https://felixjung.io'
+  }
+  return urls[env] || urls.production
+}
+
 module.exports = {
   siteMetadata: {
-    title: 'felixjung.io'
+    baseUrl: getBaseUrl(process.env.NODE_ENV),
+    title: 'felixjung.io',
+    author: 'Felix Jung',
+    description: 'The personal website of Felix Jung.',
+    twitter: '@feju'
   },
   plugins: [
     'gatsby-plugin-catch-links',
     'gatsby-plugin-react-next',
     'gatsby-plugin-emotion',
+    'gatsby-plugin-react-helmet',
     {
       resolve: 'gatsby-source-contentful',
       options: {

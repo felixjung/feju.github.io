@@ -4,6 +4,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'react-emotion'
 
+import MetaTags from '../components/MetaTags'
+import { normalizePage } from '../lib/contentful'
 import PostPreview from '../components/PostPreview'
 import { mainContainer } from '../styles/layout-styles'
 
@@ -31,8 +33,13 @@ class Blog extends Component {
 
   render() {
     const { posts } = this.state
+    const { data: { contentfulPage } } = this.props
+    const { metaTitle: title, metaDescription: description } = normalizePage(
+      contentfulPage
+    )
     return (
       <Section>
+        <MetaTags {...{ title, description }} />
         <Posts>
           {posts.map(({ id, ...post }) => <PostPreview key={id} {...post} />)}
         </Posts>
@@ -53,7 +60,11 @@ Blog.propTypes = {
 export default Blog
 
 export const query = graphql`
-  query BlogQuery {
+  query BlogQuery($id: String!) {
+    contentfulPage(id: { eq: $id }) {
+      metaTitle
+      metaDescription
+    }
     allContentfulBlogPost(sort: { fields: [publishDate], order: DESC }) {
       edges {
         node {

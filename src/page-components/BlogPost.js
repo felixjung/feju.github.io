@@ -8,6 +8,7 @@ import facepaint from 'facepaint'
 
 import { breakpoints } from '../styles/variables'
 import { textContainer } from '../styles/mixins'
+import MetaTags from '../components/MetaTags'
 import Markdown from '../components/Markdown'
 import ContentfulPicture from '../components/ContentfulPicture'
 import PublishDate from '../components/PublishDate'
@@ -228,7 +229,7 @@ const PostPublishDate = styled(PublishDate)(({ theme }) => ({
   marginBottom: theme.spacing.s
 }))
 
-const BlogPost = ({ data: { contentfulBlogPost } }) => {
+const BlogPost = ({ data: { contentfulBlogPost, site } }) => {
   const {
     title,
     publishDate,
@@ -237,9 +238,11 @@ const BlogPost = ({ data: { contentfulBlogPost } }) => {
     category,
     tags
   } = contentfulBlogPost
+  const { author } = site.siteMetadata
 
   return (
     <Container>
+      <MetaTags {...{ title, description: summary, author, type: 'article' }} />
       <Article>
         <PostPublishDate date={publishDate} />
         <BlogPostH1>{title}</BlogPostH1>
@@ -280,6 +283,11 @@ export const query = graphql`
       }
       summary
       publishDate
+    }
+    site {
+      siteMetadata {
+        author
+      }
     }
   }
 `

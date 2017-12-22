@@ -7,10 +7,14 @@ export const normalizeSection = ({ title, body: { body }, name }) => ({
   body
 })
 
-export const normalizePage = ({ title, sections, name }) => ({
+export const normalizePage = (
+  { title, sections = [], name, metaTitle, metaDescription } = {}
+) => ({
   title,
   name,
-  sections: sections.map(normalizeSection)
+  sections: sections.map(normalizeSection),
+  metaTitle,
+  metaDescription
 })
 
 export const getNavigationItems = flow(

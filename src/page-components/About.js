@@ -7,6 +7,7 @@ import { css } from 'emotion'
 import { transparentize } from 'polished'
 import { camelCase, keyBy } from 'lodash/fp'
 
+import MetaTags from '../components/MetaTags'
 import { normalizePage } from '../lib/contentful'
 import Markdown from '../components/Markdown'
 import { mainContainer } from '../styles/layout-styles'
@@ -74,11 +75,16 @@ const ProfileImage = styled('img')(
 )
 
 const About = ({ data: { contentfulPage } }) => {
-  const page = normalizePage(contentfulPage)
-  const sections = keyBy(({ title }) => camelCase(title), page.sections)
+  const {
+    sections,
+    metaDescription: description,
+    metaTitle: title
+  } = normalizePage(contentfulPage)
+  const keyedSections = keyBy(({ title }) => camelCase(title), sections)
 
   return (
     <Section>
+      <MetaTags {...{ title, description }} />
       <ProfileImage
         src={profile}
         alt="Felix' profile picture"
@@ -88,7 +94,7 @@ const About = ({ data: { contentfulPage } }) => {
       />
       <Markdown
         remarkReactComponents={remarkReactComponents}
-        text={sections.aboutMe.body}
+        text={keyedSections.aboutMe.body}
       />
     </Section>
   )
@@ -109,6 +115,8 @@ export const aboutQuery = graphql`
     contentfulPage(id: { eq: $id }) {
       route
       name
+      metaTitle
+      metaDescription
       sections {
         title
         name
