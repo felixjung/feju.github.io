@@ -30,7 +30,7 @@ class Blog extends Component {
   }
 
   render() {
-    const { posts, next } = this.state
+    const { posts } = this.state
     return (
       <Section>
         <Posts>

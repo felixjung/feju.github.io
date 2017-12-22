@@ -87,7 +87,7 @@ class PostPreview extends Component {
     const link = `/posts/${slug}`
 
     return (
-      <Article>
+      <Article {...otherProps}>
         <PublishDate date={publishDate} />
         <TitleLink to={link}>
           <Title
