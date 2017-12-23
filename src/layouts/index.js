@@ -2,7 +2,9 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
+import styled from 'react-emotion'
 import { ThemeProvider } from 'emotion-theming'
+import facepaint from 'facepaint'
 
 import { getNavigationItems } from '../lib/contentful'
 import * as theme from '../styles/variables'
@@ -11,6 +13,22 @@ import '../styles/highlight'
 
 import MetaTags from '../components/MetaTags'
 import Nav from '../components/Navigation'
+import Footer from '../components/Footer'
+
+const mq = facepaint([
+  `@media(min-width: ${theme.breakpoints.m}px)`,
+  `@media(min-width: ${theme.breakpoints.l}px)`
+])
+
+const CopySymbol = styled('span')`
+  font-size: ${({ theme }) => theme.fontSize.xxs};
+`
+
+const Wrapper = styled('div')(({ theme }) =>
+  mq({
+    paddingTop: [theme.spacing.xxxl, `calc(5 * ${theme.spacing.xxxl})`]
+  })
+)
 
 export default class Template extends React.Component {
   static propTypes = {
@@ -23,16 +41,26 @@ export default class Template extends React.Component {
 
   render() {
     const { data, location } = this.props
-    const { title, description, twitter, baseUrl } = data.site.siteMetadata
+    const {
+      title,
+      description,
+      twitter,
+      baseUrl,
+      author
+    } = data.site.siteMetadata
     const url = `${baseUrl}${location.pathname}`
     const navItems = getNavigationItems(data)
     return (
       <ThemeProvider theme={theme}>
-        <div>
+        <Wrapper>
           <MetaTags {...{ title, description, twitter, url }} />
           <Nav items={navItems} />
           {this.props.children()}
-        </div>
+          <Footer>
+            <CopySymbol>&copy;&nbsp;</CopySymbol>
+            2007 {author}
+          </Footer>
+        </Wrapper>
       </ThemeProvider>
     )
   }
@@ -59,6 +87,7 @@ export const pagesQuery = graphql`
     site {
       siteMetadata {
         baseUrl
+        author
         title
         description
         twitter
