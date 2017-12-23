@@ -43,13 +43,13 @@ const MetaTags = ({
 MetaTags.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  url: PropTypes.string.isRequired,
   twitter: PropTypes.string,
   updateTime: PropTypes.string,
   previewImage: PropTypes.shape({
     url: PropTypes.string.isRequired,
     alt: PropTypes.string.isRequired
   }),
+  url: PropTypes.string,
   type: PropTypes.string,
   author: PropTypes.string
 }
