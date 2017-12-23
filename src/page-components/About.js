@@ -7,6 +7,7 @@ import { css } from 'emotion'
 import { transparentize } from 'polished'
 import { camelCase, keyBy } from 'lodash/fp'
 
+import { Github, Instagram, Twitter } from '../components/Icon'
 import MetaTags from '../components/MetaTags'
 import { normalizePage } from '../lib/contentful'
 import Markdown from '../components/Markdown'
@@ -74,6 +75,42 @@ const ProfileImage = styled('img')(
   `
 )
 
+const iconConfigs = [
+  {
+    component: Github,
+    name: 'github',
+    url: 'https://github.com/felixjung',
+    alt: 'Check out my code on Github.'
+  },
+  {
+    component: Twitter,
+    name: 'twitter',
+    url: 'https://twitter.com/feju',
+    alt: 'Follow @feju on Twitter.'
+  },
+  {
+    component: Instagram,
+    name: 'instagram',
+    url: 'https://instagram.com/felixjung',
+    alt: 'I post some photos on Instagram, too.'
+  }
+]
+
+const SocialIcons = styled('ul')`
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+`
+
+const SocialIcon = styled('li')(({ theme }) => ({
+  '&:not(:last-of-type)': {
+    marginRight: theme.spacing.m
+  }
+}))
+
 const About = ({ data: { contentfulPage } }) => {
   const {
     sections,
@@ -96,6 +133,19 @@ const About = ({ data: { contentfulPage } }) => {
         remarkReactComponents={remarkReactComponents}
         text={keyedSections.aboutMe.body}
       />
+      <SocialIcons
+        className={css`
+          margin: 3em 0;
+        `}
+      >
+        {iconConfigs.map(({ component: Icon, name, url, alt }) => (
+          <SocialIcon key={name}>
+            <a href={url} target="_blank">
+              <Icon alt={alt} />
+            </a>
+          </SocialIcon>
+        ))}
+      </SocialIcons>
     </Section>
   )
 }

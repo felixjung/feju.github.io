@@ -26,6 +26,12 @@ module.exports = {
     'gatsby-plugin-catch-links',
     'gatsby-plugin-react-next',
     'gatsby-plugin-emotion',
+    {
+      resolve: 'gatsby-plugin-svgr',
+      options: {
+        dir: 'src/assets/icons'
+      }
+    },
     'gatsby-plugin-react-helmet',
     {
       resolve: 'gatsby-source-contentful',

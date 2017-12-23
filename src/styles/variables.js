@@ -88,6 +88,9 @@ export const colors = {
     link: palette.radicalRed
   },
   inlineCodeBackground: greys.greyLight,
+  githubIcon: greys.greyDark,
+  instagramIcon: palette.tulip,
+  twitterIcon: palette.dodgerBlue,
   primary: palette.radicalRed,
   secondary: palette.dodgerBlue,
   background: '#FFF',
