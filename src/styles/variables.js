@@ -67,7 +67,9 @@ const palette = {
   radicalRed: '#FF3366',
   maximumBlueGreen: '#2EC4B6',
   whiteSmoke: '#F6F7F8',
-  dodgerBlue: '#20A4F3'
+  dodgerBlue: '#20A4F3',
+  /* Third option */
+  yellow: '#ffb900'
 }
 
 const greys = {
@@ -81,18 +83,16 @@ const greys = {
 export const colors = {
   text: lighten(0.2, '#000'),
   link: {
-    default: lighten(0.4, palette.mediumTurquoise),
-    hover: lighten(0.3, palette.mediumTurquoise)
+    default: lighten(0.4, palette.yellow),
+    hover: lighten(0.3, palette.yellow)
   },
   navigation: {
-    link: palette.radicalRed
+    link: palette.maximumBlueGreen
   },
   inlineCodeBackground: greys.greyLight,
   githubIcon: greys.greyDark,
   instagramIcon: palette.tulip,
   twitterIcon: palette.dodgerBlue,
-  primary: palette.radicalRed,
-  secondary: palette.dodgerBlue,
   background: '#FFF',
   horizontalRule: palette.mediumTurquoise,
   shadow: palette.russianViolet,
