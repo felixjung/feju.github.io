@@ -129,7 +129,7 @@ export default class Nav extends Component {
 
   handleScroll() {
     this.setState(({ scrollTop: prevScrollTop }) => {
-      const { scrollTop } = document.documentElement
+      const { scrollTop } = document.scrollingElement
       if (!prevScrollTop) {
         return { scrollTop }
       }
