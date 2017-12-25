@@ -3,7 +3,7 @@
 import React from 'react'
 import styled from 'react-emotion'
 import PropTypes from 'prop-types'
-import { has } from 'lodash/fp'
+import { get } from 'lodash/fp'
 import facepaint from 'facepaint'
 
 import { breakpoints } from '../styles/variables'
@@ -121,21 +121,17 @@ const Picture = styled(ContentfulPicture)([
     })
 ])
 
-const img = ({ alt, ...props }) => (
+const FigureImage = ({ alt, ...props }) => (
   <Figure>
     <Picture {...{ alt, ...props }} />
     <FigureCaption>{alt}</FigureCaption>
   </Figure>
 )
-img.propTypes = {
+FigureImage.propTypes = {
   alt: PropTypes.string
 }
-img.displayName = 'Figure'
-img.defaultProps = { alt: undefined }
-
-const FullWidthDiv = styled('div')`
-  width: 100%;
-`
+FigureImage.displayName = 'Figure'
+FigureImage.defaultProps = { alt: undefined }
 
 const Summary = styled('p')(({ theme }) =>
   mq({
@@ -159,14 +155,12 @@ const BlockquoteStyles = ({ theme }) => ({
 
 const p = ({ children, ...props }) => {
   const firstChild = children[0]
-  const isImage = has('props.src', firstChild)
-  if (isImage) {
-    return <FullWidthDiv>{children}</FullWidthDiv>
+  const isFigure = get('type.name', firstChild) === 'Figure'
+  if (isFigure) {
+    return <FigureImage {...firstChild.props} />
   }
 
-  const TrackParagraph = Paragraph
-
-  return <TrackParagraph {...props}>{children}</TrackParagraph>
+  return <Paragraph {...props}>{children}</Paragraph>
 }
 
 p.propTypes = {
@@ -194,10 +188,10 @@ const tableFontstyles = ({ theme }) => ({
 })
 
 const remarkReactComponents = {
-  img,
   pre,
+  p,
   a: Anchor,
-  p: Paragraph,
+  img: FigureImage,
   ul: Ul,
   ol: Ol,
   h1: H1,
