@@ -45,7 +45,11 @@ module.exports = {
       resolve: 'gatsby-source-contentful',
       options: {
         spaceId: process.env.GATSBY_CONTENTFUL_SPACE,
-        accessToken: process.env.GATSBY_CONTENTFUL_API_TOKEN
+        accessToken: process.env.GATSBY_CONTENTFUL_API_TOKEN,
+        host:
+          process.env.NODE_ENV === 'production'
+            ? 'cdn.contentful.com'
+            : 'preview.contentful.com'
       }
     },
     'gatsby-plugin-contentful-pages',
