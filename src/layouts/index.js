@@ -26,7 +26,7 @@ const CopySymbol = styled('span')`
 
 const Wrapper = styled('div')(({ theme }) =>
   mq({
-    paddingTop: [0, `calc(5 * ${theme.spacing.xxxl})`]
+    paddingTop: [theme.spacing.xs, `calc(5 * ${theme.spacing.xxxl})`]
   })
 )
 
