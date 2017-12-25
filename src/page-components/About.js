@@ -6,7 +6,9 @@ import styled from 'react-emotion'
 import { css } from 'emotion'
 import { transparentize } from 'polished'
 import { camelCase, keyBy } from 'lodash/fp'
+import Img from 'gatsby-image'
 
+import { colors } from '../styles/variables'
 import { Github, Instagram, Twitter } from '../components/Icon'
 import MetaTags from '../components/MetaTags'
 import { normalizePage } from '../lib/contentful'
@@ -58,7 +60,7 @@ const Section = styled('section')(...mainContainer, textContainer)
 const imageSize = '20vmin'
 const minImageSize = '100px'
 const maxImageSize = '256px'
-const ProfileImage = styled('img')(
+const ProfileImage = styled(Img)(
   ({ theme }) => ({
     boxShadow: `0 6px 12px 0 ${transparentize(0.8, theme.colors.text)}`
   }),
@@ -111,7 +113,7 @@ const SocialIcon = styled('li')(({ theme }) => ({
   }
 }))
 
-const About = ({ data: { contentfulPage } }) => {
+const About = ({ data: { contentfulPage, profileImage } }) => {
   const {
     sections,
     metaDescription: description,
@@ -123,8 +125,8 @@ const About = ({ data: { contentfulPage } }) => {
     <Section>
       <MetaTags {...{ title, description }} />
       <ProfileImage
-        src={profile}
-        alt="Felix' profile picture"
+        {...profileImage}
+        alt="Photo of Felix"
         className={css`
           margin-bottom: 10vmin;
         `}
@@ -173,6 +175,20 @@ export const aboutQuery = graphql`
         body {
           body
         }
+      }
+    }
+    profileImage: imageSharp(id: { regex: "/profile.png/" }) {
+      sizes(
+        maxWidth: 256
+        traceSVG: {
+          background: "#011627"
+          color: "#f7f7f7"
+          turnPolicy: TURNPOLICY_MINORITY
+          blackOnWhite: false
+        }
+        toFormat: JPG
+      ) {
+        ...GatsbyImageSharpSizes_tracedSVG
       }
     }
   }

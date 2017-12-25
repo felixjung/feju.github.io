@@ -1,4 +1,4 @@
-/* global module */
+/* global module, __dirname */
 
 const configEnvs = ['develop']
 if (configEnvs.includes(process.env.NODE_ENV)) {
@@ -26,6 +26,14 @@ module.exports = {
     'gatsby-plugin-catch-links',
     'gatsby-plugin-react-next',
     'gatsby-plugin-emotion',
+    'gatsby-transformer-sharp',
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `images`,
+        path: `${__dirname}/src/assets/images`
+      }
+    },
     {
       resolve: 'gatsby-plugin-svgr',
       options: {
