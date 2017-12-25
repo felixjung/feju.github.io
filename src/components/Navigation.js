@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'react-emotion'
-import { css } from 'emotion'
 import Link from 'gatsby-link'
 import facepaint from 'facepaint'
 import { transparentize } from 'polished'
@@ -65,11 +64,12 @@ const NavContainer = styled('div')(
       bottom: [0, 'auto'],
       boxShadow: [
         `0 0 calc(${theme.spacing.xs} / 2) ${transparentize(
-          0.5,
+          0.6,
           theme.colors.text
         )}`,
         'none'
       ],
+      borderTop: [`1px solid ${theme.colors.greyUltraLight}`, 'none'],
       display: 'flex',
       height: [
         `calc(3 * ${theme.spacing.l})`,
@@ -82,9 +82,12 @@ const NavContainer = styled('div')(
       width: '100%',
       zIndex: 2
     }),
-  ({ scrollingUp }) => {
+  ({ scrollingUp, scrollTop }) => {
     return mq({
-      transform: [scrollingUp ? 'translateY(0)' : 'translateY(100%)', 'none']
+      transform: [
+        scrollingUp || !scrollTop ? 'translateY(0)' : 'translateY(100%)',
+        'none'
+      ]
     })
   }
 )
@@ -130,7 +133,10 @@ export default class Nav extends Component {
       if (!prevScrollTop) {
         return { scrollTop }
       }
-      return { scrollTop, scrollingUp: scrollTop < prevScrollTop }
+      return {
+        scrollTop,
+        scrollingUp: scrollTop < prevScrollTop
+      }
     })
   }
 
