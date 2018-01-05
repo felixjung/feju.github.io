@@ -50,6 +50,7 @@ export default class Template extends React.Component {
     } = data.site.siteMetadata
     const url = `${baseUrl}${location.pathname}`
     const navItems = getNavigationItems(data)
+    const currentYear = new Date().getFullYear()
     return (
       <ThemeProvider theme={theme}>
         <Wrapper>
@@ -58,7 +59,7 @@ export default class Template extends React.Component {
           {this.props.children()}
           <Footer>
             <CopySymbol>&copy;&nbsp;</CopySymbol>
-            2007 {author}
+            2017 - {currentYear} {author}
           </Footer>
         </Wrapper>
       </ThemeProvider>
