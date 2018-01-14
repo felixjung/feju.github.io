@@ -27,7 +27,9 @@ const CopySymbol = styled('span')`
 
 const Wrapper = styled('div')(({ theme }) =>
   mq({
-    paddingTop: [theme.spacing.xs, 0]
+    paddingTop: [theme.spacing.xs, 0],
+    display: 'flex',
+    flexDirection: ['column-reverse', 'column']
   })
 )
 
@@ -55,15 +57,17 @@ export default class Template extends React.Component {
     return (
       <ThemeProvider theme={theme}>
         <ScrollProvider>
-          <Wrapper>
+          <div>
             <MetaTags {...{ title, description, twitter, url }} />
-            <Nav items={navItems} />
-            {this.props.children()}
+            <Wrapper>
+              <Nav items={navItems} />
+              {this.props.children()}
+            </Wrapper>
             <Footer>
               <CopySymbol>&copy;&nbsp;</CopySymbol>
               2017 - {currentYear} {author}
             </Footer>
-          </Wrapper>
+          </div>
         </ScrollProvider>
       </ThemeProvider>
     )

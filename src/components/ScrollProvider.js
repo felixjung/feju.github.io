@@ -2,11 +2,28 @@ import { Component, Children } from 'react'
 import PropTypes from 'prop-types'
 import { throttle } from 'lodash/fp'
 
+const getScrollState = ({
+  scrollTop: scrollPosition,
+  clientHeight: visibleHeight,
+  offsetHeight: scrollHeight
+}) => {
+  const isScrolledToBottom = scrollPosition + visibleHeight === scrollHeight
+  const isScrolledToTop = scrollPosition === 0
+  return {
+    scrollPosition,
+    visibleHeight,
+    scrollHeight,
+    isScrolledToBottom,
+    isScrolledToTop
+  }
+}
+
 export const SCROLL_CONTEXT_TYPES = {
-  scrollInfo: PropTypes.shape({
-    scrollPosition: PropTypes.number,
-    scrollingElement: PropTypes.any
-  })
+  scrollPosition: PropTypes.number,
+  visibleHeight: PropTypes.number,
+  scrollHeight: PropTypes.number,
+  isScrolledToBottom: PropTypes.bool,
+  isScrolledToTop: PropTypes.bool
 }
 
 export default class ScrollProvider extends Component {
@@ -16,7 +33,11 @@ export default class ScrollProvider extends Component {
     super(props)
     this.scrollingElement = null
     this.state = {
-      scrollPosition: 0
+      scrollPosition: 0,
+      scrollHeight: null,
+      visibleHeight: null,
+      isScrolledToTop: true,
+      isScrolledToBottom: false
     }
     this.debouncedScroll = throttle(50, this.handleScroll)
   }
@@ -25,6 +46,10 @@ export default class ScrollProvider extends Component {
     window.addEventListener('scroll', this.debouncedScroll)
     const { scrollingElement } = document
     this.scrollingElement = scrollingElement
+    this.setState(prevState => ({
+      ...prevState,
+      ...getScrollState(scrollingElement)
+    }))
   }
 
   componentWillUnmount() {
@@ -32,16 +57,13 @@ export default class ScrollProvider extends Component {
   }
 
   getChildContext() {
-    const { scrollPosition } = this.state
-    const { scrollingElement } = this
-    return { scrollInfo: { scrollPosition, scrollingElement } }
+    return { ...this.state }
   }
 
   handleScroll = () => {
-    const { scrollTop: scrollPosition } = this.scrollingElement
     this.setState(prevState => ({
       ...prevState,
-      scrollPosition
+      ...getScrollState(this.scrollingElement)
     }))
   }
 

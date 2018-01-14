@@ -7,7 +7,7 @@ import { transparentize } from 'polished'
 
 import { breakpoints } from '../styles/variables'
 import { mainContainer } from '../styles/layout-styles'
-import { colors } from '../styles/variables'
+import * as theme from '../styles/variables'
 import Reveal from './Reveal'
 
 const mq = facepaint([
@@ -56,18 +56,18 @@ const NavUl = styled('ul')`
   width: 100%;
 `
 
-const NavContainer = styled('div')(({ theme }) =>
+const NavContainer = styled('div')(({ theme, isPinned, isFixed }) =>
   mq({
     alignItems: 'center',
     backgroundColor: '#fff',
-    boxShadow: [
-      `0 0 calc(${theme.spacing.xs} / 2) ${transparentize(
-        0.6,
-        theme.colors.text
-      )}`,
-      'none'
-    ],
-    borderTop: [`1px solid ${theme.colors.greyUltraLight}`, 'none'],
+    borderTop:
+      isPinned && isFixed
+        ? [`1px solid ${theme.colors.greyUltraLight}`, 'none']
+        : [`1px solid #fff`, 'none'],
+    borderBottom:
+      isPinned && isFixed
+        ? ['none', `1px solid ${theme.colors.greyUltraLight}`]
+        : [`1px solid #fff`, 'none'],
     display: 'flex',
     padding: [`${theme.spacing.s} 0`, `${theme.spacing.xs} 0`],
     width: '100%'
@@ -82,9 +82,7 @@ const StyledNav = styled('nav')(
   })
 )
 
-const revealOuter = css`
-  margin: 50px 0;
-`
+const revealOuter = css(mq({ margin: [0, '50px 0'] }))
 
 const Navigation = ({ items }) => {
   const listItems = items.map(({ url, label }) => (
@@ -103,8 +101,8 @@ const Navigation = ({ items }) => {
           return isIdentical || (isPost && isBlogLink)
         }}
         activeStyle={{
-          border: `1px solid ${colors.navigation.link}`,
-          backgroundColor: colors.navigation.link,
+          border: `1px solid ${theme.colors.navigation.link}`,
+          backgroundColor: theme.colors.navigation.link,
           color: '#fff'
         }}
       >
@@ -115,8 +113,8 @@ const Navigation = ({ items }) => {
 
   return (
     <Reveal pinStart={50} outerClassName={revealOuter}>
-      {() => (
-        <NavContainer>
+      {props => (
+        <NavContainer {...props}>
           <StyledNav>
             <NavUl>{listItems}</NavUl>
           </StyledNav>

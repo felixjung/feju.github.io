@@ -2,18 +2,26 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { getContext } from 'recompose'
 import { css, cx } from 'emotion'
+import facepaint from 'facepaint'
 
+import { breakpoints } from '../styles/variables'
 import { SCROLL_CONTEXT_TYPES } from './ScrollProvider'
+
+const mq = facepaint([
+  `@media(min-width: ${breakpoints.m}px)`,
+  `@media(min-width: ${breakpoints.l}px)`
+])
 
 class Reveal extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
-    scrollInfo: SCROLL_CONTEXT_TYPES.scrollInfo.isRequired,
+    ...SCROLL_CONTEXT_TYPES,
     downTolerance: PropTypes.number,
     upTolerance: PropTypes.number,
     pinStart: PropTypes.number,
     outerClassName: PropTypes.string,
-    innerClassName: PropTypes.string
+    innerClassName: PropTypes.string,
+    pinnedClassName: PropTypes.string
   }
 
   static defaultProps = {
@@ -35,21 +43,21 @@ class Reveal extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { scrollInfo: nextScrollInfo, pinStart } = nextProps
-    const { scrollInfo } = this.props
+    const { scrollPosition: nextScrollPosition, pinStart } = nextProps
+    const { scrollPosition } = this.props
     this.setState(prevState => {
       const clientHeight = this.innerWrapper.clientHeight
-      const isScrollingDown =
-        nextScrollInfo.scrollPosition > scrollInfo.scrollPosition
+      const isScrollingDown = nextScrollPosition > scrollPosition
       const pinThreshold = clientHeight + pinStart
+
       // Using pinStart while scrolling up ensures the element smoothly
       // moves into static position.
       const isFixed =
-        (isScrollingDown && nextScrollInfo.scrollPosition >= pinThreshold) ||
-        (!isScrollingDown && nextScrollInfo.scrollPosition >= pinStart)
+        (isScrollingDown && nextScrollPosition >= pinThreshold) ||
+        (!isScrollingDown && nextScrollPosition >= pinStart)
       const isPinned =
         (!isScrollingDown && isFixed) ||
-        (isScrollingDown && nextScrollInfo.scrollPosition <= pinThreshold)
+        (isScrollingDown && nextScrollPosition <= pinThreshold)
       return {
         ...prevState,
         isFixed,
@@ -74,50 +82,66 @@ class Reveal extends Component {
   render() {
     const {
       children,
-      scrollInfo,
-      downTolerance,
-      upTolerance,
       outerClassName,
       innerClassName,
-      ...props
+      pinnedClassName
     } = this.props
     const { isFixed, isPinned, isAnimated } = this.state
     const height = this.innerWrapper && this.innerWrapper.clientHeight
-    const outerWrapperClass = css`
-      height: ${height ? height + 'px' : 'auto'};
-      left: 0;
-      position: relative;
-      right: 0;
-      top: 0;
-      z-index: 1;
-    `
-    const innerWrapperClass = css`
-      position: relative;
-      top: 0;
-      left: 0;
-      right: 0;
-      transform: translateY(0px);
-    `
-    const fixedClass = css`
-      position: fixed;
-      transform: translateY(-100%);
-      ${isAnimated ? 'transition: all 500ms ease' : undefined};
-    `
-    const pinnedClass = css`
-      transform: translateY(0px);
-    `
+    const outerWrapperClass = css(
+      mq({
+        height: height ? height + 'px' : 'auto',
+        left: 0,
+        position: ['fixed', 'relative'],
+        right: 0,
+        top: ['auto', 0],
+        bottom: [0, 'auto'],
+        zIndex: 1
+      })
+    )
+    const innerWrapperClass = css(
+      mq({
+        position: 'relative',
+        top: ['auto', 0],
+        bottom: [0, 'auto'],
+        left: 0,
+        right: 0,
+        transform: ['translateY(0px)', 'translateY(0px)']
+      })
+    )
+
+    const fixedClass = css(
+      mq({
+        position: 'fixed',
+        transform: ['translateY(100%)', 'translateY(-100%)'],
+        transition: isAnimated
+          ? ['all 500ms ease', 'all 500ms ease']
+          : ['all 500ms ease', 'none']
+      })
+    )
+    const pinnedClass = css(
+      mq({
+        transform: ['translateY(0px)', 'translateY(0px)']
+      })
+    )
+    const renderProps = {
+      isPinned,
+      isFixed,
+      isAnimated
+    }
     return (
       <div className={cx(outerWrapperClass, outerClassName)}>
         <div
           className={cx(innerWrapperClass, innerClassName, {
             [fixedClass]: isFixed,
-            [pinnedClass]: isPinned
+            [pinnedClass]: isPinned,
+            [pinnedClassName]: isPinned && isFixed
           })}
           ref={el => {
             this.innerWrapper = el
           }}
         >
-          {children(props)}
+          {children(renderProps)}
         </div>
       </div>
     )
