@@ -11,8 +11,6 @@ class Reveal extends Component {
     scrollInfo: SCROLL_CONTEXT_TYPES.scrollInfo.isRequired,
     downTolerance: PropTypes.number,
     upTolerance: PropTypes.number,
-    downThreshold: PropTypes.number,
-    upThreshold: PropTypes.number,
     pinStart: PropTypes.number,
     outerClassName: PropTypes.string,
     innerClassName: PropTypes.string
@@ -22,8 +20,6 @@ class Reveal extends Component {
     downTolerance: 100, // How far to scroll to trigger pinning
     upTolerance: 100,
     pinStart: 0, // Extra space above/before element
-    downThreshold: 0, // Distance from element to start pinning from
-    upThreshold: 0,
     outerClassName: null,
     innerClassName: null
   }

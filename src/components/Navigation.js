@@ -110,7 +110,7 @@ const Navigation = ({ items }) => {
   ))
 
   return (
-    <Reveal pinStart={50} downThreshold={50}>
+    <Reveal pinStart={50}>
       {() => (
         <NavContainer>
           <StyledNav>
