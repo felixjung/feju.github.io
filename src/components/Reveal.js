@@ -75,7 +75,6 @@ class Reveal extends Component {
     const {
       children,
       scrollInfo,
-      pinStart,
       downTolerance,
       upTolerance,
       outerClassName,
@@ -91,7 +90,6 @@ class Reveal extends Component {
       right: 0;
       top: 0;
       z-index: 1;
-      margin-top: ${pinStart}px;
     `
     const innerWrapperClass = css`
       position: relative;

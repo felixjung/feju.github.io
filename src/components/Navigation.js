@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled from 'react-emotion'
+import styled, { css } from 'react-emotion'
 import Link from 'gatsby-link'
 import facepaint from 'facepaint'
 import { transparentize } from 'polished'
@@ -82,6 +82,10 @@ const StyledNav = styled('nav')(
   })
 )
 
+const revealOuter = css`
+  margin: 50px 0;
+`
+
 const Navigation = ({ items }) => {
   const listItems = items.map(({ url, label }) => (
     <NavLi key={url}>
@@ -110,7 +114,7 @@ const Navigation = ({ items }) => {
   ))
 
   return (
-    <Reveal pinStart={50}>
+    <Reveal pinStart={50} outerClassName={revealOuter}>
       {() => (
         <NavContainer>
           <StyledNav>
