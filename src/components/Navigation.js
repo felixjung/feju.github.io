@@ -1,14 +1,14 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'react-emotion'
 import Link from 'gatsby-link'
 import facepaint from 'facepaint'
 import { transparentize } from 'polished'
-import { throttle } from 'lodash/fp'
 
 import { breakpoints } from '../styles/variables'
 import { mainContainer } from '../styles/layout-styles'
 import { colors } from '../styles/variables'
+import Reveal from './Reveal'
 
 const mq = facepaint([
   `@media(min-width: ${breakpoints.m}px)`,
@@ -56,40 +56,22 @@ const NavUl = styled('ul')`
   width: 100%;
 `
 
-const NavContainer = styled('div')(
-  ({ theme }) =>
-    mq({
-      alignItems: 'center',
-      backgroundColor: '#fff',
-      bottom: [0, 'auto'],
-      boxShadow: [
-        `0 0 calc(${theme.spacing.xs} / 2) ${transparentize(
-          0.6,
-          theme.colors.text
-        )}`,
-        'none'
-      ],
-      borderTop: [`1px solid ${theme.colors.greyUltraLight}`, 'none'],
-      display: 'flex',
-      height: [
-        `calc(3 * ${theme.spacing.l})`,
-        `calc(5 * ${theme.spacing.xxxl})`
-      ],
-      marginTop: [0, `calc(-5 * ${theme.spacing.xxxl})`],
-      position: ['fixed', 'static'],
-      transform: ['translateY(0)', 'translateY(0)'],
-      transition: 'transform 200ms ease-in-out',
-      width: '100%',
-      zIndex: 2
-    }),
-  ({ scrollingUp, scrollTop }) => {
-    return mq({
-      transform: [
-        scrollingUp || !scrollTop ? 'translateY(0)' : 'translateY(100%)',
-        'none'
-      ]
-    })
-  }
+const NavContainer = styled('div')(({ theme }) =>
+  mq({
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    boxShadow: [
+      `0 0 calc(${theme.spacing.xs} / 2) ${transparentize(
+        0.6,
+        theme.colors.text
+      )}`,
+      'none'
+    ],
+    borderTop: [`1px solid ${theme.colors.greyUltraLight}`, 'none'],
+    display: 'flex',
+    padding: [`${theme.spacing.s} 0`, `${theme.spacing.xs} 0`],
+    width: '100%'
+  })
 )
 
 const StyledNav = styled('nav')(
@@ -100,81 +82,53 @@ const StyledNav = styled('nav')(
   })
 )
 
-export default class Nav extends Component {
-  static propTypes = {
-    items: PropTypes.arrayOf(
-      PropTypes.shape({
-        label: PropTypes.string.isRequired,
-        url: PropTypes.string.isRequired
-      })
-    ).isRequired
-  }
+const Navigation = ({ items }) => {
+  const listItems = items.map(({ url, label }) => (
+    <NavLi key={url}>
+      <NavLink
+        to={url}
+        isActive={(match, location) => {
+          if (!match) {
+            return false
+          }
+          const { path } = match
+          const { pathname } = location
+          const isIdentical = path === pathname
+          const isPost = /^\/posts/.test(pathname)
+          const isBlogLink = path === '/'
+          return isIdentical || (isPost && isBlogLink)
+        }}
+        activeStyle={{
+          border: `1px solid ${colors.navigation.link}`,
+          backgroundColor: colors.navigation.link,
+          color: '#fff'
+        }}
+      >
+        {label}
+      </NavLink>
+    </NavLi>
+  ))
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      scrollTop: null,
-      scrollingUp: false
-    }
-    this.handleScroll = throttle(200, this.handleScroll.bind(this))
-  }
-
-  componentDidMount() {
-    window.addEventListener('scroll', this.handleScroll)
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('scroll', this.handleScroll)
-  }
-
-  handleScroll() {
-    this.setState(({ scrollTop: prevScrollTop }) => {
-      const { scrollTop } = document.scrollingElement
-      if (!prevScrollTop) {
-        return { scrollTop }
-      }
-      return {
-        scrollTop,
-        scrollingUp: scrollTop < prevScrollTop
-      }
-    })
-  }
-
-  render() {
-    const { items } = this.props
-
-    const listItems = items.map(({ url, label }) => (
-      <NavLi key={url}>
-        <NavLink
-          to={url}
-          isActive={(match, location) => {
-            if (!match) {
-              return false
-            }
-            const { path } = match
-            const { pathname } = location
-            const isIdentical = path === pathname
-            const isPost = /^\/posts/.test(pathname)
-            const isBlogLink = path === '/'
-            return isIdentical || (isPost && isBlogLink)
-          }}
-          activeStyle={{
-            border: `1px solid ${colors.navigation.link}`,
-            backgroundColor: colors.navigation.link,
-            color: '#fff'
-          }}
-        >
-          {label}
-        </NavLink>
-      </NavLi>
-    ))
-
-    return (
-      <NavContainer {...this.state}>
-        <StyledNav>
-          <NavUl>{listItems}</NavUl>
-        </StyledNav>
-      </NavContainer>
-    )
-  }
+  return (
+    <Reveal pinStart={50} downThreshold={50}>
+      {() => (
+        <NavContainer>
+          <StyledNav>
+            <NavUl>{listItems}</NavUl>
+          </StyledNav>
+        </NavContainer>
+      )}
+    </Reveal>
+  )
 }
+
+Navigation.propTypes = {
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string.isRequired,
+      url: PropTypes.string.isRequired
+    })
+  ).isRequired
+}
+
+export default Navigation

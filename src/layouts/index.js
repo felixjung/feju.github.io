@@ -8,6 +8,7 @@ import facepaint from 'facepaint'
 
 import { getNavigationItems } from '../lib/contentful'
 import * as theme from '../styles/variables'
+import ScrollProvider from '../components/ScrollProvider'
 import '../styles/globals'
 import '../styles/highlight'
 
@@ -26,7 +27,7 @@ const CopySymbol = styled('span')`
 
 const Wrapper = styled('div')(({ theme }) =>
   mq({
-    paddingTop: [theme.spacing.xs, `calc(5 * ${theme.spacing.xxxl})`]
+    paddingTop: [theme.spacing.xs, 0]
   })
 )
 
@@ -53,15 +54,17 @@ export default class Template extends React.Component {
     const currentYear = new Date().getFullYear()
     return (
       <ThemeProvider theme={theme}>
-        <Wrapper>
-          <MetaTags {...{ title, description, twitter, url }} />
-          <Nav items={navItems} />
-          {this.props.children()}
-          <Footer>
-            <CopySymbol>&copy;&nbsp;</CopySymbol>
-            2017 - {currentYear} {author}
-          </Footer>
-        </Wrapper>
+        <ScrollProvider>
+          <Wrapper>
+            <MetaTags {...{ title, description, twitter, url }} />
+            <Nav items={navItems} />
+            {this.props.children()}
+            <Footer>
+              <CopySymbol>&copy;&nbsp;</CopySymbol>
+              2017 - {currentYear} {author}
+            </Footer>
+          </Wrapper>
+        </ScrollProvider>
       </ThemeProvider>
     )
   }
