@@ -44,14 +44,8 @@ export default class Template extends React.Component {
 
   render() {
     const { data, location } = this.props
-    const {
-      title,
-      description,
-      twitter,
-      siteUrl,
-      author
-    } = data.site.siteMetadata
-    const url = `${siteUrl}${location.pathname}`
+    const { title, description, twitter, author } = data.site.siteMetadata
+    const url = `/${location.pathname}`
     const navItems = getNavigationItems(data)
     const currentYear = new Date().getFullYear()
     return (
@@ -94,7 +88,6 @@ export const pagesQuery = graphql`
     }
     site {
       siteMetadata {
-        siteUrl
         author
         title
         description
