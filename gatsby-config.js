@@ -76,6 +76,7 @@ module.exports = {
         fonts: ['open sans:300,300i,600,700', 'merriweather:300']
       }
     },
+    'gatsby-plugin-offline',
     {
       resolve: 'gatsby-plugin-sitemap'
     }
