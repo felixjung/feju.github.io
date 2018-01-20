@@ -85,6 +85,33 @@ module.exports = {
         color: '#FF3366',
         showSpinner: false
       }
+    },
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: 'Code Matters',
+        /* eslint-disable camelcase */
+        short_name: 'CM',
+        start_url: '/',
+        background_color: '#4DCCBD',
+        theme_color: '#FFFFFF',
+        /* eslint-enable camelcase */
+        display: 'browser',
+        orientation: 'portrait',
+        lang: 'en-US',
+        icons: [
+          {
+            src: '/meta/android-chrome-192x192.png',
+            sizes: '192x192',
+            type: 'image/png'
+          },
+          {
+            src: '/meta/android-chrome-256x256.png',
+            sizes: '256x256',
+            type: 'image/png'
+          }
+        ]
+      }
     }
   ]
 }

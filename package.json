@@ -17,6 +17,7 @@
     "gatsby-plugin-catch-links": "^1.0.9",
     "gatsby-plugin-emotion": "^1.1.8",
     "gatsby-plugin-google-fonts": "^0.0.3",
+    "gatsby-plugin-manifest": "^1.0.12",
     "gatsby-plugin-netlify": "^1.0.14",
     "gatsby-plugin-nprogress": "^1.0.10",
     "gatsby-plugin-offline": "^1.0.12",
@@ -59,7 +60,10 @@
     "lint-staged": "^4.2.3",
     "prettier": "^1.7.4"
   },
-  "keywords": ["blog", "gatsby"],
+  "keywords": [
+    "blog",
+    "gatsby"
+  ],
   "license": "MIT",
   "main": "n/a",
   "scripts": {
@@ -67,8 +71,7 @@
     "start": "NODE_ENV=develop gatsby develop",
     "test": "echo \"Error: no test specified\" && exit 1",
     "test:lint": "eslint --cache src/**/*.js",
-    "fix:prettier":
-      "prettier --no-semi --single-quote true --write src/**/*.js",
+    "fix:prettier": "prettier --no-semi --single-quote true --write src/**/*.js",
     "fix:eslint": "eslint --fix --quiet src/**/*.js",
     "fix": "npm run fix:prettier && npm run fix:eslint"
   },
