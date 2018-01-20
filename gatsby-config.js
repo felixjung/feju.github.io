@@ -5,10 +5,11 @@ const { findKey } = require('lodash')
 const getEnv = () => {
   const { BRANCH, WEBHOOK_TITLE, NODE_ENV, PULL_REQUEST } = process.env
   const envs = {
-    production:
-      (BRANCH === 'master' && WEBHOOK_TITLE.toLowerCase() !== 'preview') ||
-      NODE_ENV === 'production',
-    preview: BRANCH === 'master' && WEBHOOK_TITLE.toLowerCase === 'preview',
+    preview:
+      BRANCH === 'master' &&
+      WEBHOOK_TITLE &&
+      WEBHOOK_TITLE.toLowerCase() === 'preview',
+    production: BRANCH === 'master' || NODE_ENV === 'production',
     staging: Boolean(PULL_REQUEST),
     develop: NODE_ENV === 'develop'
   }
