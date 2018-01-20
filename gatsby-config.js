@@ -6,9 +6,10 @@ const getEnv = () => {
   const { BRANCH, WEBHOOK_TITLE, NODE_ENV, PULL_REQUEST } = process.env
   const envs = {
     production:
-      BRANCH === 'master' && WEBHOOK_TITLE.toLowerCase() !== 'preview',
+      (BRANCH === 'master' && WEBHOOK_TITLE.toLowerCase() !== 'preview') ||
+      NODE_ENV === 'production',
     preview: BRANCH === 'master' && WEBHOOK_TITLE.toLowerCase === 'preview',
-    staging: PULL_REQUEST,
+    staging: Boolean(PULL_REQUEST),
     develop: NODE_ENV === 'develop'
   }
 
@@ -18,17 +19,17 @@ const getEnv = () => {
 const BUILD_ENV = getEnv()
 
 if (BUILD_ENV === 'develop') {
-  require('dotenv').config({ path: `.env.${process.env.NODE_ENV}` })
+  require('dotenv').config({ path: `.env.${BUILD_ENV}` })
 }
 
-const getBaseUrl = env => {
+const getSiteUrl = env => {
   const { DEPLOY_PRIME_URL } = process.env
   return env === 'develop' ? 'http://localhost:8000' : DEPLOY_PRIME_URL
 }
 
 module.exports = {
   siteMetadata: {
-    baseUrl: getBaseUrl(BUILD_ENV),
+    siteUrl: getSiteUrl(BUILD_ENV),
     title: 'felixjung.io',
     author: 'Felix Jung',
     description: 'The personal website of Felix Jung.',
@@ -72,6 +73,42 @@ module.exports = {
       resolve: `gatsby-plugin-google-fonts`,
       options: {
         fonts: ['open sans:300,300i,600,700', 'merriweather:300']
+      }
+    },
+    {
+      resolve: `gatsby-plugin-sitemap`,
+      options: {
+        output: `/sitemap.xml`,
+        query: `
+        {
+          site {
+            siteMetadata {
+              siteUrl
+            }
+          }
+
+          allSitePage(
+            filter: {
+              path: {
+                regex: "/^(?!/(dev-404-page|404|)).*$/"
+              }
+            }
+          ) {
+            edges {
+              node {
+                path
+              }
+            }
+          }
+        }`,
+        serialize: ({ site, allSitePage }) =>
+          allSitePage.edges.map(edge => {
+            return {
+              url: site.siteMetadata.siteUrl + edge.node.path,
+              changefreq: `daily`,
+              priority: 0.7
+            }
+          })
       }
     }
   ]
