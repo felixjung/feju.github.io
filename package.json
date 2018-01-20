@@ -56,10 +56,7 @@
     "lint-staged": "^4.2.3",
     "prettier": "^1.7.4"
   },
-  "keywords": [
-    "blog",
-    "gatsby"
-  ],
+  "keywords": ["blog", "gatsby"],
   "license": "MIT",
   "main": "n/a",
   "scripts": {
@@ -67,7 +64,8 @@
     "start": "NODE_ENV=develop gatsby develop",
     "test": "echo \"Error: no test specified\" && exit 1",
     "test:lint": "eslint --cache src/**/*.js",
-    "fix:prettier": "prettier --no-semi --single-quote true --write src/**/*.js",
+    "fix:prettier":
+      "prettier --no-semi --single-quote true --write src/**/*.js",
     "fix:eslint": "eslint --fix --quiet src/**/*.js",
     "fix": "npm run fix:prettier && npm run fix:eslint"
   },
@@ -79,6 +77,6 @@
     ]
   },
   "resolutions": {
-    "gatsby/graphql": "0.11.7"
+    "gatsby/graphql": "0.10.5"
   }
 }
