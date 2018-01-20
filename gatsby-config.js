@@ -1,22 +1,34 @@
 /* global module, __dirname */
 
-const configEnvs = ['develop']
-if (configEnvs.includes(process.env.NODE_ENV)) {
+const { findKey } = require('lodash')
+
+const getEnv = () => {
+  const { BRANCH, WEBHOOK_TITLE, NODE_ENV, PULL_REQUEST } = process.env
+  const envs = {
+    production:
+      BRANCH === 'master' && WEBHOOK_TITLE.toLowerCase() !== 'preview',
+    preview: BRANCH === 'master' && WEBHOOK_TITLE.toLowerCase === 'preview',
+    staging: PULL_REQUEST,
+    develop: NODE_ENV === 'develop'
+  }
+
+  return findKey(envs) || 'production'
+}
+
+const BUILD_ENV = getEnv()
+
+if (BUILD_ENV === 'develop') {
   require('dotenv').config({ path: `.env.${process.env.NODE_ENV}` })
 }
 
 const getBaseUrl = env => {
-  const urls = {
-    develop: 'http://localhost:8000',
-    staging: 'https://stage.felixjung.io',
-    production: 'https://felixjung.io'
-  }
-  return urls[env] || urls.production
+  const { DEPLOY_PRIME_URL } = process.env
+  return env === 'develop' ? 'http://localhost:8000' : DEPLOY_PRIME_URL
 }
 
 module.exports = {
   siteMetadata: {
-    baseUrl: getBaseUrl(process.env.NODE_ENV),
+    baseUrl: getBaseUrl(BUILD_ENV),
     title: 'felixjung.io',
     author: 'Felix Jung',
     description: 'The personal website of Felix Jung.',
@@ -45,11 +57,14 @@ module.exports = {
       resolve: 'gatsby-source-contentful',
       options: {
         spaceId: process.env.GATSBY_CONTENTFUL_SPACE,
-        accessToken: process.env.GATSBY_CONTENTFUL_API_TOKEN,
+        accessToken:
+          BUILD_ENV === 'preview'
+            ? process.env.GATSBY_CONTENTFUL_CPA_TOKEN
+            : process.env.GATSBY_CONTENTFUL_CDA_TOKEN,
         host:
-          process.env.NODE_ENV === 'production'
-            ? 'cdn.contentful.com'
-            : 'preview.contentful.com'
+          BUILD_ENV === 'preview'
+            ? 'preview.contentful.com'
+            : 'cdn.contentful.com'
       }
     },
     'gatsby-plugin-contentful-pages',
