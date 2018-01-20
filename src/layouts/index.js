@@ -48,10 +48,10 @@ export default class Template extends React.Component {
       title,
       description,
       twitter,
-      baseUrl,
+      siteUrl,
       author
     } = data.site.siteMetadata
-    const url = `${baseUrl}${location.pathname}`
+    const url = `${siteUrl}${location.pathname}`
     const navItems = getNavigationItems(data)
     const currentYear = new Date().getFullYear()
     return (
@@ -94,7 +94,7 @@ export const pagesQuery = graphql`
     }
     site {
       siteMetadata {
-        baseUrl
+        siteUrl
         author
         title
         description

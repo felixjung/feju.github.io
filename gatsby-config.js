@@ -21,14 +21,14 @@ if (BUILD_ENV === 'develop') {
   require('dotenv').config({ path: `.env.${process.env.NODE_ENV}` })
 }
 
-const getBaseUrl = env => {
+const getSiteUrl = env => {
   const { DEPLOY_PRIME_URL } = process.env
   return env === 'develop' ? 'http://localhost:8000' : DEPLOY_PRIME_URL
 }
 
 module.exports = {
   siteMetadata: {
-    baseUrl: getBaseUrl(BUILD_ENV),
+    siteUrl: getSiteUrl(BUILD_ENV),
     title: 'felixjung.io',
     author: 'Felix Jung',
     description: 'The personal website of Felix Jung.',
