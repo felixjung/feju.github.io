@@ -78,8 +78,13 @@ module.exports = {
     },
     'gatsby-plugin-offline',
     'gatsby-plugin-netlify',
+    'gatsby-plugin-sitemap',
     {
-      resolve: 'gatsby-plugin-sitemap'
+      resolve: 'gatsby-plugin-nprogress',
+      options: {
+        color: '#FF3366',
+        showSpinner: false
+      }
     }
   ]
 }
