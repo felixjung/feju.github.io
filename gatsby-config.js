@@ -87,7 +87,13 @@ module.exports = {
             }
           }
 
-          allSitePage {
+          allSitePage(
+            filter: {
+              path: {
+                regex: "/^(?!/(dev-404-page|404|)).*$/"
+              }
+            }
+          ) {
             edges {
               node {
                 path
