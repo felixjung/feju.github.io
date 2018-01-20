@@ -6,9 +6,10 @@ const getEnv = () => {
   const { BRANCH, WEBHOOK_TITLE, NODE_ENV, PULL_REQUEST } = process.env
   const envs = {
     production:
-      BRANCH === 'master' && WEBHOOK_TITLE.toLowerCase() !== 'preview',
+      (BRANCH === 'master' && WEBHOOK_TITLE.toLowerCase() !== 'preview') ||
+      NODE_ENV === 'production',
     preview: BRANCH === 'master' && WEBHOOK_TITLE.toLowerCase === 'preview',
-    staging: PULL_REQUEST,
+    staging: Boolean(PULL_REQUEST),
     develop: NODE_ENV === 'develop'
   }
 
@@ -18,7 +19,7 @@ const getEnv = () => {
 const BUILD_ENV = getEnv()
 
 if (BUILD_ENV === 'develop') {
-  require('dotenv').config({ path: `.env.${process.env.NODE_ENV}` })
+  require('dotenv').config({ path: `.env.${BUILD_ENV}` })
 }
 
 const getSiteUrl = env => {
