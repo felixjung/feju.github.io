@@ -76,8 +76,15 @@ module.exports = {
         fonts: ['open sans:300,300i,600,700', 'merriweather:300']
       }
     },
+    'gatsby-plugin-offline',
+    'gatsby-plugin-netlify',
+    'gatsby-plugin-sitemap',
     {
-      resolve: 'gatsby-plugin-sitemap'
+      resolve: 'gatsby-plugin-nprogress',
+      options: {
+        color: '#FF3366',
+        showSpinner: false
+      }
     }
   ]
 }
