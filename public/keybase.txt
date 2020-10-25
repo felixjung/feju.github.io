@@ -1,0 +1,67 @@
+==================================================================
+https://keybase.io/felixjung
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://felixjung.io
+  * I am felixjung (https://keybase.io/felixjung) on keybase.
+  * I have a public key with fingerprint 8AC5 2600 8E2C CBC3 5775  B7D6 336D FEA2 1F3B 8864
+
+To do so, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "fingerprint": "8ac526008e2ccbc35775b7d6336dfea21f3b8864",
+            "host": "keybase.io",
+            "key_id": "336dfea21f3b8864",
+            "kid": "0101480ac7c9c374716f2b144b9cb0e0aa44ae7d456bbd21fd793fc312c5189d1f3e0a",
+            "uid": "39ecfb594944e59ab066d9561b125b00",
+            "username": "felixjung"
+        },
+        "service": {
+            "hostname": "felixjung.io",
+            "protocol": "http:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1424421785,
+    "expire_in": 157680000,
+    "prev": "c99bc34daf935c9db6d7ccebb97c6148dd4496460082831e34e69aeb4038f4ff",
+    "seqno": 4,
+    "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v2.0.4
+Comment: https://keybase.io/crypto
+
+yMIXAnicbZJbSBVBGMePlYVHg0rQh4pgSLodbGd39jKnqw9FVGBZ4Smr087srK7a
+2eOe9aSI0ksF3SC7QIGF9dBFNMNCKQOPKWH6YJIPItWBot5EESVBqdmsl2hehvm+
+3///zffN9Cxd6POnJOp3Xbh26/mplP5EXqXv8LfJ2zWA2EY1CNaAMvZ7M61IMXOi
+jhVxQRBoOpVFRRA0JlJKqCSrqkxUQ5EkxTCZLkJTIpqmIBAAJXbMU3AbosdYrmXz
+GD+ELYNH/8OX/U4IUIBIE3SqUkwlFalQMUUCESKYEoEJuo6QzlQDyQohBtcbKpZM
+KkGRylDDBjfkELernK+DGTWJjBFGiMlYJ4KiGFhWIIGiTATBA2PMieinGadNVm5V
+lVZGikFtAPBw3KLMm4HXyr/IfENRx3ZtapfzTInrRoOe0K2OeuQZRsJ/PMLEihh8
+jlwQZ07MsiMgCDlJXcszhUhESISqJgcAq4paDgtbHiGriibw5ZVhcW5JMeYzR4Zu
+Ykmm2CCKoVLKCMEqVfjYDAMhrCDvfURNgkxCTME6I0iQNBOZJvC6qojYIIj4NfVi
+bhmziiO6W+kwUNvddXyRL8XvW5y6wPsJPn/asr//I5yx5OexDbmB1903xuqaYXkL
+XVU9jufumuc6Hl7uLMp41LJ8Kt5fm1+3ifQdnKlJ5Nz7BALZRRXJx2dzfBMlMyEz
+c+jO0dCaLBccKn2ZXN12Y/3cxI++D1+D7w40tdU3dz9rONg5oj+9m9p64cGG+yPX
+x7bmN86C49MZm6duNQ2fj11MX3ukMKGMFqZ1xG8v0E86/duspvWJLa9m0t80zIYu
+77jkH8rePzeOctrrr/S2vFi0b8/ya+3rktWhVx8brw4OrmscyIMrk+k7G1a8Pfc9
+tF/NzHKTBdufNH05kTq5rIAM1GTvGC2r6to4vLO54GaWPP05kNZTty09T8rXe3e/
+h3tb/b8A1Pkqwg==
+=sq9N
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/felixjung
+
+==================================================================

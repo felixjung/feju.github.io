@@ -1,0 +1,11 @@
+// Extent the project tsconfig for typescript-eslint
+{
+  "extends": "./tsconfig.json",
+  "baseUrl": ".",
+  "include": [
+    "next-env.d.ts",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "*.js",
+  ],
+}
