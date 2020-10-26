@@ -132,7 +132,11 @@ const PostsPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
   url,
 }) => (
   <React.Fragment>
-    <MetaTags title={title} url={url} />
+    <MetaTags
+      title={title}
+      description="A software development blog by Felix Jung."
+      url={url}
+    />
     <PostList posts={posts} />
   </React.Fragment>
 );
