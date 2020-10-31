@@ -174,7 +174,7 @@ const Ul: React.FC = ({ children }) => (
         width: 100%;
         max-width: ${CONTENT_WIDTH};
         ${spacing([null, hPadding], 'padding')(theme)};
-        ${spacing({ bottom: 'large', right: 'regular' })(theme)};
+        ${spacing({ bottom: 'large' })(theme)};
       `
     }
   >
@@ -188,7 +188,7 @@ const Ol: React.FC = ({ children }) => (
         width: 100%;
         max-width: ${CONTENT_WIDTH};
         ${spacing([null, hPadding], 'padding')(theme)};
-        ${spacing({ bottom: 'large', right: 'regular' })(theme)};
+        ${spacing({ bottom: 'large' })(theme)};
       `
     }
   >
@@ -197,8 +197,10 @@ const Ol: React.FC = ({ children }) => (
 );
 
 const StyledLi = ProseText.withComponent('li');
-const Li: React.FC = ({ children }) => (
-  <StyledLi size={TEXT_SIZE}>{children}</StyledLi>
+const Li: React.FC = ({ children, ...props }) => (
+  <StyledLi {...props} size={TEXT_SIZE}>
+    {children}
+  </StyledLi>
 );
 
 type Language =
@@ -271,6 +273,7 @@ function isLanguage(language: unknown): language is Language {
     'sql': true,
     'stylus': true,
     'tsx': true,
+    'ts': true,
     'typescript': true,
     'wasm': true,
     'yaml': true,
@@ -298,7 +301,7 @@ const Code: React.FC<{ className: string; children: string }> = ({
       <CodeBlock
         css={(theme) => css`
           width: 100%;
-          max-width: ${CONTENT_WIDTH};
+          max-width: 80ch;
           padding: 0;
           ${spacing(['huge', hPadding], 'padding')(theme)};
         `}
@@ -340,7 +343,7 @@ const Blockquote: React.FC = ({ children }) => (
 const Hr: React.FC = () => (
   <HorizontalRule
     css={(theme) => css`
-      margin: ${theme.spacings.giant} ${theme.spacings.huge};
+      margin: ${theme.spacings.giant} 0;
     `}
   />
 );
