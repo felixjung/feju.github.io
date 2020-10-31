@@ -141,7 +141,7 @@ function isPublished(publishDate) {
 
 function rewriteImageURLs(mdx) {
   const imgRegex = /\]\(images\//gi;
-  return mdx.replace(imgRegex, '](https://felixjungio.imgix.net/');
+  return mdx.replace(imgRegex, '](https://felixjung.imgix.net/');
 }
 
 async function main() {
