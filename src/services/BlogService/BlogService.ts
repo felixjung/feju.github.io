@@ -9,7 +9,7 @@ const { readFile } = fsPromises;
 const postsJSONPath = resolve('src/posts.json');
 
 // TODO: move to config
-const PAGE_SIZE = 10;
+const PAGE_SIZE = 20;
 
 type BlogPost = {
   slug: string;
