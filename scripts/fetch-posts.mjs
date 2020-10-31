@@ -56,8 +56,13 @@ async function fetchFiles(owner, repo, path) {
 
 function composePostData({ name: slug, ...entry }) {
   const subTree = entry.object.entries;
+
   const bodyMDX = getPostBody(subTree);
   const metaYAML = getPostMeta(subTree);
+
+  if (!bodyMDX || !metaYAML) {
+    return null
+  }
 
   const { summary, ...metadata } = getMetadata(metaYAML);
   const { body, title } = splitPost(bodyMDX);
@@ -75,7 +80,7 @@ function composePostData({ name: slug, ...entry }) {
 function getPostBody(entries) {
   const postEntry = getEntryByName('index.md', entries);
   if (!postEntry) {
-    throw Error('failed to get post body');
+    return null
   }
 
   return getEntryText(postEntry);
@@ -92,7 +97,7 @@ function getEntryText(entry) {
 function getPostMeta(entries) {
   const postMeta = getEntryByName('metadata.yaml', entries);
   if (!postMeta) {
-    throw Error('failed to get post body');
+    return null
   }
 
   return getEntryText(postMeta);
@@ -146,7 +151,7 @@ async function main() {
   const dest = join(resolve(), 'src/posts.json');
 
   const fileEntries = await fetchFiles(owner, repo, path);
-  const posts = fileEntries.map(composePostData);
+  const posts = fileEntries.map(composePostData).filter(p => !!p);
   await writeFile(dest, JSON.stringify(posts, null, 2));
 }
 
