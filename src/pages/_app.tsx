@@ -8,7 +8,7 @@ import {
   useRef,
 } from 'react';
 import Link from 'next/link';
-import { css, jsx } from '@emotion/core';
+import { css, jsx, Global } from '@emotion/core';
 import { AppProps } from 'next/app';
 import { ThemeProvider } from 'emotion-theming';
 import { transparentize } from 'polished';
@@ -67,8 +67,9 @@ const Footer: FunctionComponent = () => {
   );
 };
 
+const navHeight = 'huge';
+
 const Layout: React.FC = ({ children }) => {
-  const navHeight = 'huge';
   const ref = useRef<HTMLDivElement | null>(null);
   const onScreen = useOnScreen<HTMLDivElement>(ref);
 
@@ -97,7 +98,6 @@ const Layout: React.FC = ({ children }) => {
       <div ref={ref} />
       <div
         css={(theme: Theme) => css`
-          scroll-padding-top: ${theme.spacings[navHeight]};
           ${spacing(['huge', null])(theme)};
         `}
       >
@@ -112,6 +112,13 @@ function App({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider theme={themes.light}>
       <BaseStyles />
+      <Global<Theme>
+        styles={(theme) => css`
+          body {
+            scroll-padding-top: ${theme.spacings[navHeight]};
+          }
+        `}
+      />
       <Layout>
         <Component {...pageProps} />
       </Layout>
