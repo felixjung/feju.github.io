@@ -22,13 +22,13 @@ type BlogPost = {
   body: string;
 };
 
-export async function getPosts(onlyPublished = true): Promise<BlogPost[]> {
+export async function getPosts(filterPublished = true): Promise<BlogPost[]> {
   const postsJSON = await readPosts(postsJSONPath);
   const posts = parsePostsJSON(postsJSON);
 
   return posts
     .filter(
-      ({ isPublished }) => !onlyPublished || (onlyPublished && isPublished),
+      ({ isPublished }) => !filterPublished || (filterPublished && isPublished),
     )
     .sort(publishDateCompareFn)
     .map(({ publishDate, ...post }) => {
@@ -46,14 +46,14 @@ export async function getPosts(onlyPublished = true): Promise<BlogPost[]> {
 
 export async function getPost(
   slug: string,
-  onlyPublished = true,
+  filterPublished = true,
 ): Promise<BlogPost | undefined> {
-  const posts = await getPosts(onlyPublished);
+  const posts = await getPosts(filterPublished);
   return getPostBySlug(slug, posts);
 }
 
-export async function getPageRoutes(onlyPublished = true) {
-  const posts = await getPosts(onlyPublished);
+export async function getPageRoutes(filterPublished = true) {
+  const posts = await getPosts(filterPublished);
   const pageCount = Math.ceil(posts.length / PAGE_SIZE);
 
   return Array(pageCount)
@@ -72,7 +72,7 @@ type PostSummary = {
 
 export async function getPageData(
   page: string,
-  onlyPublished = true,
+  filterPublished = true,
 ): Promise<{
   posts: PostSummary[];
   page: number;
@@ -81,7 +81,7 @@ export async function getPageData(
   hasNext: boolean;
 }> {
   const pageNumber = Number(page);
-  const allPosts = await getPosts(onlyPublished);
+  const allPosts = await getPosts(filterPublished);
   const pages = chunk(PAGE_SIZE, allPosts);
   const pageIndex = pageNumber - 1;
   if (pageIndex < 0 || pageIndex >= pages.length) {

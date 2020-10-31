@@ -48,6 +48,7 @@ type PostParams = {
 
 export const getStaticProps: GetStaticProps<PostProps, PostParams> = async ({
   params = {},
+  preview,
 }) => {
   // TODO: introduce custom errors that can be thrown and then used by the custom error page.
 
@@ -57,8 +58,7 @@ export const getStaticProps: GetStaticProps<PostProps, PostParams> = async ({
     throw new PageError(HTTPStatusCode.NOT_FOUND, 'Page not found');
   }
 
-  // TODO: make this configurable via preview mode.
-  const filterPublished = true;
+  const filterPublished = !preview;
   const post = await BlogService.getPost(slug, filterPublished);
 
   if (!post) {
