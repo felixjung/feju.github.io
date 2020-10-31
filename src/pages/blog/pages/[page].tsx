@@ -44,7 +44,9 @@ export const getStaticProps: GetStaticProps<
   PostsPageProps,
   PostsPageParams
 > = async ({ params }) => {
-  const pageData = await getPageData(params?.page || '');
+  // TODO: make this configurable via preview mode.
+  const filterPublished = true;
+  const pageData = await getPageData(params?.page || '', filterPublished);
   const title = MetaService.getPageTitle();
   const path = `/blog/pages/${params?.page}`;
   const url = MetaService.getPageURL(path);
@@ -52,7 +54,9 @@ export const getStaticProps: GetStaticProps<
 };
 
 export const getStaticPaths: GetStaticPaths<PostsPageParams> = async () => {
-  const pageRoutes = await getPageRoutes(true);
+  // TODO: make this configurable via preview mode.
+  const filterPublished = true;
+  const pageRoutes = await getPageRoutes(filterPublished);
   const paths = pageRoutes.map((page) => ({ params: { page: `${page}` } }));
 
   return { paths, fallback: false };

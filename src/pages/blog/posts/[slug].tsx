@@ -57,7 +57,9 @@ export const getStaticProps: GetStaticProps<PostProps, PostParams> = async ({
     throw new PageError(HTTPStatusCode.NOT_FOUND, 'Page not found');
   }
 
-  const post = await BlogService.getPost(slug);
+  // TODO: make this configurable via preview mode.
+  const filterPublished = true;
+  const post = await BlogService.getPost(slug, filterPublished);
 
   if (!post) {
     throw new PageError(HTTPStatusCode.NOT_FOUND, 'Page not found');
@@ -89,8 +91,9 @@ export const getStaticProps: GetStaticProps<PostProps, PostParams> = async ({
 };
 
 export const getStaticPaths: GetStaticPaths<PostParams> = async () => {
-  // TODO: implement fetching
-  const posts = await BlogService.getPosts();
+  // TODO: make this configurable via preview mode.
+  const onlyPublished = true;
+  const posts = await BlogService.getPosts(onlyPublished);
 
   return {
     paths: posts.map(({ slug }) => ({ params: { slug } })),
