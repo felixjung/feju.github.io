@@ -107,7 +107,7 @@ const Post: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
   post,
 }) => (
   <Fragment>
-    <MetaTags url={url} title={title} />
+    <MetaTags url={url} description={post.summary} title={title} />
     <BlogPost {...post} />
   </Fragment>
 );
