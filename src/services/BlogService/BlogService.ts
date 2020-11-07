@@ -1,12 +1,4 @@
-import { promises as fsPromises } from 'fs';
-import { resolve } from 'path';
-
-import chunk from 'lodash/fp/chunk';
-
-const { readFile } = fsPromises;
-
-// TODO: move to config
-const postsJSONPath = resolve('src/posts.json');
+import { config } from '../../config';
 
 // TODO: move to config
 const PAGE_SIZE = 20;
@@ -18,89 +10,84 @@ type BlogPost = {
   category: string;
   tags: string[];
   publishDate?: string;
-  isPublished: boolean;
   body: string;
 };
 
-export async function getPosts(filterPublished = true): Promise<BlogPost[]> {
-  const postsJSON = await readPosts(postsJSONPath);
-  const posts = parsePostsJSON(postsJSON);
+function isBlogPost(something: unknown): something is BlogPost {
+  if (typeof something !== 'object') {
+    return false;
+  }
 
-  return posts
-    .filter(
-      ({ isPublished }) => !filterPublished || (filterPublished && isPublished),
-    )
-    .sort(publishDateCompareFn)
-    .map(({ publishDate, ...post }) => {
-      if (publishDate === undefined) {
-        return post;
-      }
+  const maybeBlogPost = something as BlogPost;
 
-      const formattedDate = formatDate(publishDate);
-      return {
-        ...post,
-        publishDate: formattedDate,
-      };
-    });
+  if (maybeBlogPost === null || typeof maybeBlogPost !== 'object') {
+    return false;
+  }
+
+  const hasSummary = typeof maybeBlogPost.summary === 'string';
+  const hasCategory = typeof maybeBlogPost.category === 'string';
+  const maybeTags = maybeBlogPost.tags;
+  const hasTags =
+    Array.isArray(maybeTags) &&
+    maybeTags.reduce(
+      (allStrings, value) => allStrings && typeof value === 'string',
+      true,
+    );
+  const hasPublishDate = ['undefined', 'string'].includes(
+    typeof maybeBlogPost.publishDate,
+  );
+  const hasBody =
+    typeof maybeBlogPost.body === 'string' && maybeBlogPost.body.length > 0;
+
+  const hasTitle =
+    typeof maybeBlogPost.title === 'string' && maybeBlogPost.title.length > 0;
+
+  return (
+    hasSummary &&
+    hasCategory &&
+    hasTags &&
+    hasPublishDate &&
+    hasBody &&
+    hasTitle
+  );
 }
 
-export async function getPost(
-  slug: string,
-  filterPublished = true,
-): Promise<BlogPost | undefined> {
-  const posts = await getPosts(filterPublished);
-  return getPostBySlug(slug, posts);
+export async function getPosts(
+  offset: number,
+  limit: number,
+): Promise<BlogPost[]> {
+  const url = `${config.cmsBaseURL}/posts?offset=${offset}&limit=${limit}`;
+  const resp = await fetch(url);
+  const respJSON = await resp.json();
+
+  const maybePosts: unknown = respJSON?.data;
+
+  if (typeof maybePosts === 'undefined' || !Array.isArray(maybePosts)) {
+    throw new Error('failed to fetch posts');
+  }
+
+  return maybePosts.filter(isBlogPost);
 }
 
-export async function getPageRoutes(filterPublished = true) {
-  const posts = await getPosts(filterPublished);
+export async function getPost(slug: string): Promise<BlogPost | undefined> {
+  const url = `${config.cmsBaseURL}/posts/${slug}`;
+  const post = await fetch(url);
+  const postJSON = await post.json();
+
+  if (typeof postJSON?.data === 'undefined') {
+    throw new Error('failed to fetch post');
+  }
+
+  return parsePostJSONObject(postJSON?.data);
+}
+
+export async function getPageRoutes() {
+  const posts = await getPosts(0, 1000);
   const pageCount = Math.ceil(posts.length / PAGE_SIZE);
 
   return Array(pageCount)
     .fill(0)
     .map((_, i) => i + 1);
-}
-
-type PostSummary = {
-  title: string;
-  category: string;
-  slug: string;
-  summary: string;
-  tags: string[];
-  publishDate?: string;
-};
-
-export async function getPageData(
-  page: string,
-  filterPublished = true,
-): Promise<{
-  posts: PostSummary[];
-  page: number;
-  totalPages: number;
-  hasPrevious: boolean;
-  hasNext: boolean;
-}> {
-  const pageNumber = Number(page);
-  const allPosts = await getPosts(filterPublished);
-  const pages = chunk(PAGE_SIZE, allPosts);
-  const pageIndex = pageNumber - 1;
-  if (pageIndex < 0 || pageIndex >= pages.length) {
-    throw new Error('page does not exist');
-  }
-
-  return {
-    totalPages: pages.length,
-    page: pageNumber,
-    posts: pages[pageIndex].map(
-      ({ summary, body, isPublished, category, ...post }) => ({
-        summary,
-        category: formatCategory(category),
-        ...post,
-      }),
-    ),
-    hasPrevious: pageIndex > 0,
-    hasNext: pageIndex < pages.length - 1,
-  };
 }
 
 export function formatDate(date: string): string {
@@ -126,71 +113,8 @@ export function getPostURL(slug: string): string {
   return `/blog/posts/${slug}`;
 }
 
-function getPostBySlug(slug: string, posts: BlogPost[]): BlogPost | undefined {
-  return posts.find(({ slug: postSlug }) => postSlug === slug);
-}
-
-async function readPosts(path: string): Promise<string> {
-  const postsJSON = await readFile(path, { encoding: 'utf-8' });
-  return postsJSON;
-}
-
-function parsePostsJSON(postsJSON: string): BlogPost[] {
-  const postObjects = JSON.parse(postsJSON);
-
-  if (!Array.isArray(postObjects)) {
-    throw new Error('failed to parse posts as array');
-  }
-
-  return postObjects.map(parsePostJSONObject).sort();
-}
-
 function parsePostJSONObject(postObject: unknown): BlogPost {
   // TODO: implement checks
   const post = postObject as BlogPost;
   return post;
-}
-
-function isUndefined(value: unknown): value is undefined {
-  if (typeof value === 'undefined') {
-    return true;
-  }
-
-  return false;
-}
-
-function publishDateCompareFn(
-  { publishDate: publishDateA }: BlogPost,
-  { publishDate: publishDateB }: BlogPost,
-): number {
-  if (isUndefined(publishDateA) && !isUndefined(publishDateB)) {
-    return 1;
-  }
-
-  if (!isUndefined(publishDateA) && isUndefined(publishDateB)) {
-    return -1;
-  }
-
-  if (isUndefined(publishDateA) && isUndefined(publishDateB)) {
-    return 0;
-  }
-
-  // This should never happen, but the compiler does not agree.
-  if (isUndefined(publishDateA) || isUndefined(publishDateB)) {
-    return 0;
-  }
-
-  const dateA = new Date(publishDateA);
-  const dateB = new Date(publishDateB);
-
-  // Somehow type guard for undefined is not working
-  if (dateA && dateB && dateA < dateB) {
-    return 1;
-  }
-
-  if (dateA && dateB && dateA > dateB) {
-    return -1;
-  }
-
-  return 0;
 }

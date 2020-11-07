@@ -10,6 +10,7 @@
     "@mdx-js/react": "^2.0.0-next.8",
     "@octokit/graphql": "^4.5.6",
     "@react-hook/intersection-observer": "^3.1.0",
+    "aws-sdk": "^2.783.0",
     "babel": "^6.23.0",
     "babel-preset-minify": "^0.5.1",
     "emotion-theming": "^10.0.27",
@@ -24,8 +25,7 @@
   },
   "scripts": {
     "dev": "next dev",
-    "fetch-posts": "node scripts/fetch-posts.mjs",
-    "build": "npm run fetch-posts && next build",
+    "build": "next build",
     "start": "next start",
     "lint": "foundry run eslint 'src/**/*.{js,ts,tsx}'",
     "lint:fix": "foundry run eslint --fix 'src/**/*.{js,ts,tsx}'",

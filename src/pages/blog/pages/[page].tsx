@@ -4,7 +4,12 @@ import * as React from 'react';
 import { jsx, css } from '@emotion/core';
 import { GetStaticProps, GetStaticPaths, InferGetStaticPropsType } from 'next';
 import NextLink from 'next/link';
-import { getPageData, getPageRoutes } from 'services/BlogService';
+import {
+  formatDate,
+  formatCategory,
+  getPosts,
+  getPageRoutes,
+} from 'services/BlogService';
 import {
   Heading,
   HorizontalRule,
@@ -44,19 +49,31 @@ export const getStaticProps: GetStaticProps<
   PostsPageProps,
   PostsPageParams
 > = async ({ params }) => {
-  // TODO: make this configurable via preview mode.
-  const filterPublished = true;
-  const pageData = await getPageData(params?.page || '', filterPublished);
+  const posts = (await getPosts(0, 100)).map(
+    ({ category, publishDate, ...post }) => ({
+      ...post,
+      publishDate: publishDate && formatDate(publishDate),
+      category: formatCategory(category),
+    }),
+  );
   const title = MetaService.getPageTitle();
   const path = `/blog/pages/${params?.page}`;
   const url = MetaService.getPageURL(path);
-  return { props: { ...pageData, title, url } };
+  return {
+    props: {
+      posts,
+      hasNext: false,
+      hasPrevious: false,
+      page: 1,
+      totalPages: 1,
+      title,
+      url,
+    },
+  };
 };
 
 export const getStaticPaths: GetStaticPaths<PostsPageParams> = async () => {
-  // TODO: make this configurable via preview mode.
-  const filterPublished = true;
-  const pageRoutes = await getPageRoutes(filterPublished);
+  const pageRoutes = await getPageRoutes();
   const paths = pageRoutes.map((page) => ({ params: { page: `${page}` } }));
 
   return { paths, fallback: false };
