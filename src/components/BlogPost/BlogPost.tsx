@@ -1,7 +1,7 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/core */
 
 import { MDXProvider } from '@mdx-js/react';
-import { jsx, css } from '@emotion/core';
+import { css } from '@emotion/core';
 import { TagList, HorizontalRule, spacing, Text } from '@felixjung/plastuiq';
 
 import { MDX } from '../MDX';

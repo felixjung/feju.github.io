@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { create, renderToHtml, axe, RenderFn } from '../../util/test-utils';
 
 import { MetaTags, MetaTagsProps } from './MetaTags';

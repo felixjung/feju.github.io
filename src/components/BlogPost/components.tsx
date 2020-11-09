@@ -1,6 +1,6 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/core */
 
-import { jsx, css } from '@emotion/core';
+import { css } from '@emotion/core';
 import { ComponentDictionary } from '@mdx-js/react';
 import {
   BlockQuote,

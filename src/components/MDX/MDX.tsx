@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import * as React from 'react';
 import {
   MDXProvider,
   ComponentDictionary,
@@ -30,7 +30,7 @@ export const MDX: React.FC<MDXProps> = ({
   const values = Object.values(fullScope);
 
   /* eslint-disable no-new-func, @typescript-eslint/no-implied-eval */
-  const fn = useMemo(
+  const fn = React.useMemo(
     () =>
       new Function(
         'React',
@@ -45,5 +45,5 @@ export const MDX: React.FC<MDXProps> = ({
   );
   /* eslint-enable no-new-func, @typescript-eslint/no-implied-eval */
 
-  return useMemo(() => fn(React, ...values), values);
+  return React.useMemo(() => fn(React, ...values), values);
 };

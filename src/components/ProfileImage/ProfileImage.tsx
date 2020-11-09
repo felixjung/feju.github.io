@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ImgHTMLAttributes } from 'react';
+import { FunctionComponent, ImgHTMLAttributes } from 'react';
 import Img from 'react-optimized-image';
 
 import profileImage from '../../images/profile.jpg';

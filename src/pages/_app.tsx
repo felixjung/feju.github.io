@@ -1,4 +1,4 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/core */
 
 import {
   FunctionComponent,
@@ -8,7 +8,7 @@ import {
   useRef,
 } from 'react';
 import Link from 'next/link';
-import { css, jsx, Global } from '@emotion/core';
+import { css, Global } from '@emotion/core';
 import { AppProps } from 'next/app';
 import { ThemeProvider } from 'emotion-theming';
 import { transparentize } from 'polished';

@@ -1,7 +1,7 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/core */
 
 import { Fragment, FunctionComponent, ImgHTMLAttributes } from 'react';
-import { css, jsx } from '@emotion/core';
+import { css } from '@emotion/core';
 
 type Config = {
   width: number;

@@ -1,7 +1,7 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/core */
 
 import { Fragment, FunctionComponent } from 'react';
-import { jsx, css } from '@emotion/core';
+import { css } from '@emotion/core';
 import { ProfileImage } from 'components/ProfileImage';
 import { Svg } from 'react-optimized-image';
 import { Theme, Link, Text, spacing, UnorderedList } from '@felixjung/plastuiq';

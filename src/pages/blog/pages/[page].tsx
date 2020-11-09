@@ -1,7 +1,7 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/core */
 
 import * as React from 'react';
-import { jsx, css } from '@emotion/core';
+import { css } from '@emotion/core';
 import { GetStaticProps, GetStaticPaths, InferGetStaticPropsType } from 'next';
 import NextLink from 'next/link';
 import {

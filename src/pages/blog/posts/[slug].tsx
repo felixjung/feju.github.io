@@ -1,8 +1,5 @@
-/** @jsx jsx */
-
-import { Fragment } from 'react';
+import * as React from 'react';
 import { GetStaticProps, GetStaticPaths, InferGetStaticPropsType } from 'next';
-import { jsx } from '@emotion/core';
 import * as BlogService from 'services/BlogService';
 import * as MDXService from 'services/MDXService';
 import { BlogPost } from 'components/BlogPost';
@@ -102,10 +99,10 @@ const Post: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
   title,
   post,
 }) => (
-  <Fragment>
+  <React.Fragment>
     <MetaTags url={url} description={post.summary} title={title} />
     <BlogPost {...post} />
-  </Fragment>
+  </React.Fragment>
 );
 
 export default Post;
