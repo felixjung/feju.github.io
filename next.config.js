@@ -33,6 +33,11 @@ module.exports = withPlugins([
         permanent: true,
       },
       {
+         source: '/posts/upgrading-to-webpack-2',
+         destination: '/blog/posts/upgrading-to-webpack-2',
+         permanent: true,
+      },
+      {
         source: '/feeling-good-about-side-projects-and-experiments-47caeb1fa8c6',
         destination: '/blog/posts/feeling-good-about-side-projects-and-experiments',
         permanent: true,
