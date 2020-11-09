@@ -174,7 +174,7 @@ const Ul: React.FC = ({ children }) => (
         width: 100%;
         max-width: ${CONTENT_WIDTH};
         ${spacing([null, hPadding], 'padding')(theme)};
-        ${spacing({ bottom: 'large' })(theme)};
+        ${spacing({ left: 'auto', right: 'auto', bottom: 'large' })(theme)};
       `
     }
   >
@@ -188,7 +188,7 @@ const Ol: React.FC = ({ children }) => (
         width: 100%;
         max-width: ${CONTENT_WIDTH};
         ${spacing([null, hPadding], 'padding')(theme)};
-        ${spacing({ bottom: 'large' })(theme)};
+        ${spacing({ left: 'auto', right: 'auto', bottom: 'large' })(theme)};
       `
     }
   >
@@ -316,10 +316,17 @@ const Code: React.FC<{ className: string; children: string }> = ({
 const Blockquote: React.FC = ({ children }) => (
   <BlockQuote
     css={(theme) => css`
-      margin: ${spacing(['large', 'giant', 'giant'])(theme)};
+      ${spacing({ bottom: 'large' })(theme)};
+
       padding: ${theme.spacings.large};
-      width: 100%;
-      max-width: calc(${CONTENT_WIDTH} + ${theme.spacings.giant});
+
+      ${mq('large')} {
+        padding: ${theme.spacings.large}
+          calc(${theme.spacings.giant} + ${theme.spacings.small})
+          ${theme.spacings.large} ${theme.spacings.giant};
+        max-width: calc(${CONTENT_WIDTH} + ${theme.spacings.colossal});
+        width: 100%;
+      }
 
       li,
       p {
@@ -331,7 +338,9 @@ const Blockquote: React.FC = ({ children }) => (
         }
       }
 
-      > * {
+      > p,
+      > ul,
+      > ol {
         margin-bottom: 0;
       }
     `}
