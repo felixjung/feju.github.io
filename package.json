@@ -14,7 +14,7 @@
     "babel-preset-minify": "^0.5.1",
     "emotion-theming": "^10.0.27",
     "env-var": "^6.3.0",
-    "lodash": "^4.17.20",
+    "lodash": "^4.17.21",
     "next": "^10.0.1",
     "polished": "^4.0.3",
     "react": "^17.0.1",
